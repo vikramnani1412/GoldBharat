@@ -2,28 +2,28 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-10-08T11:49:28 IST" name="Default suite" finished-at="2026-10-08T11:52:14 IST" duration-ms="166012">
+  <suite started-at="2026-10-08T15:59:13 IST" name="Default suite" finished-at="2026-10-08T16:00:22 IST" duration-ms="68964">
     <groups>
     </groups>
-    <test started-at="2026-10-08T11:49:28 IST" name="Default test" finished-at="2026-10-08T11:52:14 IST" duration-ms="166012">
+    <test started-at="2026-10-08T15:59:13 IST" name="Default test" finished-at="2026-10-08T16:00:22 IST" duration-ms="68964">
       <class name="sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest">
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest@63f259c3]" started-at="2026-10-08T11:49:28 IST" name="launchBrowser" finished-at="2026-10-08T11:49:36 IST" duration-ms="7616" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest@63f259c3]" started-at="2026-10-08T15:59:13 IST" name="launchBrowser" finished-at="2026-10-08T15:59:18 IST" duration-ms="5058" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method is-config="true" signature="loginToDoctorApp()[pri:0, instance:sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest@63f259c3]" started-at="2026-10-08T11:49:36 IST" name="loginToDoctorApp" finished-at="2026-10-08T11:49:44 IST" duration-ms="8316" status="PASS">
+        <test-method is-config="true" signature="loginToDoctorApp()[pri:0, instance:sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest@63f259c3]" started-at="2026-10-08T15:59:18 IST" name="loginToDoctorApp" finished-at="2026-10-08T15:59:27 IST" duration-ms="8341" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginToDoctorApp -->
-        <test-method signature="DistributorBuyingGoldBarsTest()[pri:0, instance:sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest@63f259c3]" started-at="2026-10-08T11:49:44 IST" name="DistributorBuyingGoldBarsTest" finished-at="2026-10-08T11:49:44 IST" duration-ms="6" status="PASS">
+        <test-method signature="DistributorBuyingGoldBarsTest()[pri:0, instance:sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest@63f259c3]" started-at="2026-10-08T15:59:27 IST" name="DistributorBuyingGoldBarsTest" finished-at="2026-10-08T15:59:51 IST" duration-ms="23917" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- DistributorBuyingGoldBarsTest -->
-        <test-method is-config="true" signature="logoutFromDoctorApp()[pri:0, instance:sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest@63f259c3]" started-at="2026-10-08T11:49:44 IST" name="logoutFromDoctorApp" finished-at="2026-10-08T11:52:14 IST" duration-ms="149749" status="PASS">
+        <test-method is-config="true" signature="logoutFromDoctorApp()[pri:0, instance:sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest@63f259c3]" started-at="2026-10-08T15:59:51 IST" name="logoutFromDoctorApp" finished-at="2026-10-08T16:00:22 IST" duration-ms="31607" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- logoutFromDoctorApp -->
-        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest@63f259c3]" started-at="2026-10-08T11:52:14 IST" name="closeBrowser" finished-at="2026-10-08T11:52:14 IST" duration-ms="289" status="PASS">
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest@63f259c3]" started-at="2026-10-08T16:00:22 IST" name="closeBrowser" finished-at="2026-10-08T16:00:22 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->

@@ -415,8 +415,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
   * This SAME number will be used in the next tests.
   */
  @Test(priority = 1, dataProvider = "mobileNumbers")
- public void RegisteringToGoldbharathTest(
-         List<String> mobileNumbers) throws Exception {
+ public void RegisteringToGoldbharathTest(List<String> mobileNumbers) throws Exception {
 
 
      System.out.println(
@@ -489,7 +488,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
      // ========================================================
 
      String userUrl =
-             pUtil.readDataFromPropertyFile("userUrl");
+             pUtil.readDataFromPropertyFile("userurl");
 
 
      // ========================================================
@@ -713,7 +712,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
      // ========================================================
 
      String userUrl =
-             pUtil.readDataFromPropertyFile("userUrl");
+             pUtil.readDataFromPropertyFile("userurl");
 
 
      String OTP = pUtil.readDataFromPropertyFile("userotp");
@@ -921,7 +920,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
 
 
      String password =
-             pUtil.readDataFromPropertyFile("adminpassword");
+             pUtil.readDataFromPropertyFile("adminotp");
 
 
      // ========================================================
@@ -1318,9 +1317,9 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
      	    // STEP 4 : READ USER URL
      	    // ========================================================
 
-     	    String userUrl = pUtil.readDataFromPropertyFile("userUrl");
+     	    String userUrl = pUtil.readDataFromPropertyFile("userurl");
 
-     	   String OTP = pUtil.readDataFromPropertyFile("userotp");
+     	    String OTP = pUtil.readDataFromPropertyFile("userotp");
      	    // ========================================================
      	    // STEP 5 : START CHROME BROWSER
      	    // ========================================================
@@ -1412,7 +1411,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
 		System.out.println("REGISTERED MOBILE NUMBER : " + registeredMobileNumber);
 
 		String OTP = pUtil.readDataFromPropertyFile("userotp");
-		String userUrl = pUtil.readDataFromPropertyFile("userUrl");
+		String userUrl = pUtil.readDataFromPropertyFile("userurl");
 		driver = createChromeDriver();
 
 		try {
@@ -1523,7 +1522,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
 
 		String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
 		String username = pUtil.readDataFromPropertyFile("adminusername");
-		String password = pUtil.readDataFromPropertyFile("adminpassword");
+		String password = pUtil.readDataFromPropertyFile("adminotp");
 
 		driver = createChromeDriver();
 

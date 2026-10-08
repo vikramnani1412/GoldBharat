@@ -30,21 +30,25 @@ public class GoldCoinsOrdersPage {
 	
 	@FindBy(xpath="(//td)[10]")private WebElement OrderStatusEle;
 	
-	@FindBy(xpath="(//td)[1]/following-sibling::td")private WebElement OrderIdBasedOnSerialNumEle;
+	@FindBy(xpath="((//td)[1]/following-sibling::td)[1]")private WebElement OrderIdBasedOnSerialNumEle;
 	
-	@FindBy(xpath="(//td)[1]/following-sibling::td/following-sibling::td/following-sibling::td")private WebElement TotalCoinsWeightAndQuantityBasedOnSerialNumEle;
 	
-	@FindBy(xpath="(//td)[1]/following-sibling::td/following-sibling::td/following-sibling::td/following-sibling::td/following-sibling::td/following-sibling::td/following-sibling::td")private WebElement TotalPriceBasedOnSerialNumEle;
+	// Want to make it Dynamic From Here
+	@FindBy(xpath="(//td[.='GB-56646']/following-sibling::td/following-sibling::td)[1]")private WebElement TotalCoinsWeightAndQuantityBasedOnOrderIDEle;
 	
-	@FindBy(xpath="//p[normalize-space()='Update Payment Document']")private WebElement UpdatePaymentDocumentBtn;
+	@FindBy(xpath="//td[normalize-space()='GB-56646']/following-sibling::td[6]")private WebElement TotalPriceBasedOnOrderIDEle;
 	
-	// Order ID needs to make Dynamic
+	@FindBy(xpath="//td[normalize-space()='GB-43827']/following-sibling::td[.=' Update Payment Document ']")private WebElement UpdatePaymentDocumentBtn;
+	
 	@FindBy(xpath="//tr[td[normalize-space()='GB-93537']]//p[normalize-space()='Update Payment Document']")private WebElement UpdatePaymentDocumentBtnBasedOnOrderId;
 	
-    @FindBy(xpath="(//td[.='1']/following-sibling::td[contains(.,'g')])[1]")private WebElement OrderHistoryEle;
+    @FindBy(xpath="//td[.='GB-56646']/..")private WebElement OrderHistoryRowBasedOnOrderID;
     
-    // Success Msg
-    @FindBy(xpath="//td[normalize-space()='GB-92649']/following-sibling::td/p[normalize-space()='Document Submitted']")private WebElement SuccessmsgEle;
+    // Documents Submitted Msg
+    @FindBy(xpath="//tr[td[normalize-space()='GB-92649']]//p[normalize-space()='Document Submitted']")private WebElement DocumentsSubmittedMsg;
+    
+    // Order Status Msg
+    @FindBy(xpath="//tr[td[normalize-space()='GB-56646']]//p[normalize-space()='Order Accepted']")private WebElement OrderAcceptedMsg;
     
     
 	//Rule-2:Create a constructor to initilise these elements
@@ -81,6 +85,31 @@ public class GoldCoinsOrdersPage {
 	}
 
 
+	public WebElement getTotalCoinsWeightAndQuantityBasedOnOrderIDEle() {
+		return TotalCoinsWeightAndQuantityBasedOnOrderIDEle;
+	}
+
+
+	public WebElement getTotalPriceBasedOnOrderIDEle() {
+		return TotalPriceBasedOnOrderIDEle;
+	}
+
+
+	public WebElement getOrderHistoryRowBasedOnOrderID() {
+		return OrderHistoryRowBasedOnOrderID;
+	}
+
+
+	public WebElement getDocumentsSubmittedMsg() {
+		return DocumentsSubmittedMsg;
+	}
+
+
+	public WebElement getOrderAcceptedMsg() {
+		return OrderAcceptedMsg;
+	}
+
+
 	public WebElement getTotalWeightInGramsEle() {
 		return TotalWeightInGramsEle;
 	}
@@ -111,16 +140,6 @@ public class GoldCoinsOrdersPage {
 	}
 
 
-	public WebElement getTotalCoinsWeightAndQuantityBasedOnSerialNumEle() {
-		return TotalCoinsWeightAndQuantityBasedOnSerialNumEle;
-	}
-
-
-	public WebElement getTotalPriceBasedOnSerialNumEle() {
-		return TotalPriceBasedOnSerialNumEle;
-	}
-
-
 	public WebElement getUpdatePaymentDocumentBtn() {
 		return UpdatePaymentDocumentBtn;
 	}
@@ -130,15 +149,6 @@ public class GoldCoinsOrdersPage {
 		return UpdatePaymentDocumentBtnBasedOnOrderId;
 	}
 
-
-	public WebElement getSuccessmsgEle() {
-		return SuccessmsgEle;
-	}
-
-
-	public WebElement getOrderHistoryEle() {
-		return OrderHistoryEle;
-	}
 	
 	
 	// Business Library
@@ -181,10 +191,10 @@ public class GoldCoinsOrdersPage {
 		System.out.println(OrderId+"------->"+Quantity+"------->"+TotalPrice);
 	}
 	
-	public void getTotalGoldHistoryWhatWeBuyed() throws Exception
+	public void getTotalGoldHistoryWhatWeBuyedBasedOnOnlyOrderID(WebDriver driver, String OrderID) throws Exception
 	{
 		Thread.sleep(2000);
-		String History = OrderHistoryEle.getText();
+		String History = driver.findElement(By.xpath("//td[.='"+OrderID+"']/..")).getText();
 		System.out.println(History);
 	}
 	

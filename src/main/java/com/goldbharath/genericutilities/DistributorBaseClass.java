@@ -32,7 +32,7 @@ public class DistributorBaseClass extends CommonBaseClass {
     public void launchBrowser() throws IOException {
 
         String browser = pUtil.readDataFromPropertyFile("browser1");
-        String url = pUtil.readDataFromPropertyFile("userUrl");
+        String url = pUtil.readDataFromPropertyFile("userurl");
 
         // Used by Extent Report
         System.setProperty("browser", browser);
@@ -106,9 +106,9 @@ public class DistributorBaseClass extends CommonBaseClass {
     @AfterClass(alwaysRun = true)
     public void closeBrowser() {
 
-        if (driver != null) {
-            driver.quit();
-        }
+//        if (driver != null) {
+//            driver.quit();
+//        }
 
         CommonBaseClass.unloadDriver();
     }

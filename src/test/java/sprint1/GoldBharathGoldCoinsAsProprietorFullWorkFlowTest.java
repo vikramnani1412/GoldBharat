@@ -489,7 +489,7 @@ public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
         // ========================================================
 
         String userUrl =
-                pUtil.readDataFromPropertyFile("userUrl");
+                pUtil.readDataFromPropertyFile("userurl");
 
 
         // ========================================================
@@ -919,7 +919,7 @@ public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 
 
         String password =
-                pUtil.readDataFromPropertyFile("adminpassword");
+                pUtil.readDataFromPropertyFile("adminotp");
 
 
         // ========================================================
@@ -1318,7 +1318,7 @@ public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 
         	    String userUrl = pUtil.readDataFromPropertyFile("userurl");
         	    
-        	    String OTP = pUtil.readDataFromPropertyFile("otp");
+        	    String OTP = pUtil.readDataFromPropertyFile("userotp");
 
         	    // ========================================================
         	    // STEP 5 : START CHROME BROWSER
@@ -1409,7 +1409,7 @@ public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 
 		System.out.println("REGISTERED MOBILE NUMBER : " + registeredMobileNumber);
 
-		String userUrl = pUtil.readDataFromPropertyFile("userUrl");
+		String userUrl = pUtil.readDataFromPropertyFile("userurl");
 		String OTP = pUtil.readDataFromPropertyFile("userotp");
 		driver = createChromeDriver();
 
@@ -1521,7 +1521,7 @@ public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 
 		String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
 		String username = pUtil.readDataFromPropertyFile("adminusername");
-		String password = pUtil.readDataFromPropertyFile("adminpassword");
+		String password = pUtil.readDataFromPropertyFile("adminotp");
 
 		driver = createChromeDriver();
 
