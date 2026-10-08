@@ -175,6 +175,8 @@ public class RegisteringToApplicationTest {
                     );
 
 
+            String OTP = pUtil.readDataFromPropertyFile("userotp");
+            
             // ----------------------------------------------------
             // Print the mobile number accepted by application
             // ----------------------------------------------------
@@ -195,7 +197,7 @@ public class RegisteringToApplicationTest {
             Thread.sleep(2000);
             
             LoginPage lPage = new LoginPage(driver);
-            lPage.LoginToApplication(driver, uniqueMobileNumber);
+            lPage.LoginToApplication(driver, uniqueMobileNumber, OTP);
             
             Thread.sleep(2000);
             
@@ -263,7 +265,7 @@ public class RegisteringToApplicationTest {
     		Thread.sleep(2000);
     		
     		LoginPage lpage = new LoginPage(driver);
-    		lpage.LoginToApplication(driver, "9999999999");
+    		lpage.LoginToApplication(driver, "9999999999", "123456");
     		Thread.sleep(2000);
     		
     		DashboardPage dbPage = new DashboardPage(driver);

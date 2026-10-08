@@ -716,6 +716,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
              pUtil.readDataFromPropertyFile("userUrl");
 
 
+     String OTP = pUtil.readDataFromPropertyFile("userotp");
      // ========================================================
      // STEP 4 : START CHROME
      // ========================================================
@@ -753,7 +754,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
 
          loginPage.LoginToApplication(
                  driver,
-                 registeredMobileNumber
+                 registeredMobileNumber, OTP
          );
 
 
@@ -1319,6 +1320,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
 
      	    String userUrl = pUtil.readDataFromPropertyFile("userUrl");
 
+     	   String OTP = pUtil.readDataFromPropertyFile("userotp");
      	    // ========================================================
      	    // STEP 5 : START CHROME BROWSER
      	    // ========================================================
@@ -1346,7 +1348,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
      	        // ====================================================
 
      	        LoginPage loginPage = new LoginPage(driver);
-     	        loginPage.LoginToApplication(driver, registeredMobileNumber);
+     	        loginPage.LoginToApplication(driver, registeredMobileNumber, OTP);
 
      	        // ====================================================
      	        // STEP 9 : WAIT FOR DASHBOARD
@@ -1392,8 +1394,9 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
      	}
      	
      	
-     		@Test(priority = 5, dependsOnMethods = "distributorBookingGoldTest")
-	public void distributorBuyingGoldTest() throws Exception {
+    @Test(priority = 5, dependsOnMethods = "distributorBookingGoldTest")
+	public void distributorBuyingGoldTest() throws Exception
+    {
 		final String serialNo = "1";
 		final String transactionImage = System.getProperty("user.dir") + "/src/test/resources/assets/Customer_Transaction_History_Report_Example.png";
 		final String transactionIdNum = eUtil.readDataFromExcel("User", 1, 0);
@@ -1408,6 +1411,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
 
 		System.out.println("REGISTERED MOBILE NUMBER : " + registeredMobileNumber);
 
+		String OTP = pUtil.readDataFromPropertyFile("userotp");
 		String userUrl = pUtil.readDataFromPropertyFile("userUrl");
 		driver = createChromeDriver();
 
@@ -1419,7 +1423,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
 			welcomePage.clickOnLoginLink();
 
 			LoginPage loginPage = new LoginPage(driver);
-			loginPage.LoginToApplication(driver, registeredMobileNumber);
+			loginPage.LoginToApplication(driver, registeredMobileNumber, OTP);
 			waitForPageLoad();
 
 			System.out.println("Distributor Login Successful");

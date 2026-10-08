@@ -713,7 +713,8 @@ public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
         // ========================================================
 
         String userUrl =
-                pUtil.readDataFromPropertyFile("userUrl");
+                pUtil.readDataFromPropertyFile("userurl");
+        
 
 
         // ========================================================
@@ -748,13 +749,11 @@ public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
             // STEP 7 : LOGIN USING REGISTERED MOBILE
             // ====================================================
 
-            LoginPage loginPage =
-                    new LoginPage(driver);
+            LoginPage loginPage =  new LoginPage(driver);
 
-            loginPage.LoginToApplication(
-                    driver,
-                    registeredMobileNumber
-            );
+            String OTP = pUtil.readDataFromPropertyFile("userotp");
+            
+            loginPage.LoginToApplication(driver, registeredMobileNumber, OTP);
 
 
             // ====================================================
@@ -1317,7 +1316,9 @@ public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
         	    // STEP 4 : READ USER URL
         	    // ========================================================
 
-        	    String userUrl = pUtil.readDataFromPropertyFile("userUrl");
+        	    String userUrl = pUtil.readDataFromPropertyFile("userurl");
+        	    
+        	    String OTP = pUtil.readDataFromPropertyFile("otp");
 
         	    // ========================================================
         	    // STEP 5 : START CHROME BROWSER
@@ -1346,7 +1347,7 @@ public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
         	        // ====================================================
 
         	        LoginPage loginPage = new LoginPage(driver);
-        	        loginPage.LoginToApplication(driver, registeredMobileNumber);
+        	        loginPage.LoginToApplication(driver, registeredMobileNumber, OTP);
 
         	        // ====================================================
         	        // STEP 9 : WAIT FOR DASHBOARD
@@ -1409,6 +1410,7 @@ public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 		System.out.println("REGISTERED MOBILE NUMBER : " + registeredMobileNumber);
 
 		String userUrl = pUtil.readDataFromPropertyFile("userUrl");
+		String OTP = pUtil.readDataFromPropertyFile("userotp");
 		driver = createChromeDriver();
 
 		try {
@@ -1419,7 +1421,7 @@ public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 			welcomePage.clickOnLoginLink();
 
 			LoginPage loginPage = new LoginPage(driver);
-			loginPage.LoginToApplication(driver, registeredMobileNumber);
+			loginPage.LoginToApplication(driver, registeredMobileNumber, OTP);
 			waitForPageLoad();
 
 			System.out.println("Distributor Login Successful");

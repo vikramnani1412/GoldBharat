@@ -27,7 +27,7 @@ public class LoginToGoldBharath {
 		wPage.clickOnLoginLink();
 		
 		LoginPage lpage = new LoginPage(driver);
-		lpage.LoginToApplication(driver, "9999999999");
+		lpage.LoginToApplication(driver, "9999999999", "123456");
 	}
 	
 }

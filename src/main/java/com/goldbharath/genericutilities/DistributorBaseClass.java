@@ -74,10 +74,11 @@ public class DistributorBaseClass extends CommonBaseClass {
     @BeforeMethod
     public void loginToDoctorApp() throws Throwable
     {
-        String MOBILE_NUMBER = pUtil.readDataFromPropertyFile("userMobilenumber");
+        String MOBILE_NUMBER = pUtil.readDataFromPropertyFile("usermobilenumber");
+        String OTP = pUtil.readDataFromPropertyFile("userotp");
     	
         LoginPage lPage = new LoginPage(driver);
-        lPage.LoginToApplication(driver, MOBILE_NUMBER);
+        lPage.LoginToApplication(driver, MOBILE_NUMBER, OTP);
 
     }
     

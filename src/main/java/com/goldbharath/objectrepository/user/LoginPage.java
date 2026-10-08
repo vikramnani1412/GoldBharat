@@ -69,7 +69,7 @@ public class LoginPage {
 
 	// Business Library
 	
-	public void LoginToApplication(WebDriver driver, String MobileNumber) throws Exception
+	public void LoginToApplication(WebDriver driver, String MobileNumber, String OTP) throws Exception
 	{
 		WebDriverUtility wUtil = new WebDriverUtility();
 		
@@ -81,8 +81,8 @@ public class LoginPage {
 		Thread.sleep(2000);
 		LoginBtn.click();
 		Thread.sleep(2000);
-		wUtil.waitForElementToBeClickable(null, OTPfrstBox);
-		OTPfrstBox.sendKeys("123456");
+		wUtil.waitForElementToBeClickable(driver, OTPfrstBox);
+		OTPfrstBox.sendKeys(OTP);
 		
 	}
 	
