@@ -3,15 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest">
+      <class name="sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest">
         <methods>
           <include name="closeBrowser"/>
+          <include name="DistributorBuyingGoldBarsTest"/>
           <include name="launchBrowser"/>
           <include name="logoutFromDoctorApp"/>
           <include name="loginToDoctorApp"/>
-          <include name="DistributorBuyingGoldBarsTest"/>
         </methods>
-      </class> <!-- sprint1.GoldBharathBuyingGoldBarsAsProprietorFullWorkFlowTest -->
+      </class> <!-- sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

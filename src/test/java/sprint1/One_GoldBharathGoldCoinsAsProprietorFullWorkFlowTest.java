@@ -90,7 +90,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  *
  * ============================================================
  */
-public class GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
+public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 
     // ============================================================
     // OBJECT CREATION FOR GENERIC UTILITIES

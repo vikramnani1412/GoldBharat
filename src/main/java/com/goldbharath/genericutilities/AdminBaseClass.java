@@ -14,6 +14,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
+import com.goldbharath.objectrepository.admin.LoginPage;
+import com.goldbharath.objectrepository.admin.LogoutPage;
+
 public class AdminBaseClass extends CommonBaseClass {
 
     protected WebDriver driver;
@@ -28,7 +31,7 @@ public class AdminBaseClass extends CommonBaseClass {
     public void launchBrowser() throws IOException {
 
         String browser = pUtil.readDataFromPropertyFile("browser1");
-        String url = pUtil.readDataFromPropertyFile("adminUrl");
+        String url = pUtil.readDataFromPropertyFile("adminurl");
 
         // Used by Extent Report
         System.setProperty("browser", browser);
@@ -69,12 +72,12 @@ public class AdminBaseClass extends CommonBaseClass {
     @BeforeMethod
     public void loginToAdminApp() throws Throwable
     {
-    	String username = pUtil.readDataFromPropertyFile("adminUsername");
-        String password = pUtil.readDataFromPropertyFile("adminPassword");
+    	String username = pUtil.readDataFromPropertyFile("adminusername");
+        String password = pUtil.readDataFromPropertyFile("adminpassword");
 
-//        AdminLoginPage loginPage = new AdminLoginPage(driver);
-//
-//        loginPage.loginToAdmin(driver, username, password);
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.loginToAdmin(username, password);
 
         System.out.println("Admin Login Successful");
     }
@@ -84,10 +87,8 @@ public class AdminBaseClass extends CommonBaseClass {
     {
     	try {
 
-//            AdminDashboardPage dashboardPage =
-//                    new AdminDashboardPage(driver);
-//
-//            dashboardPage.logoutOfApplication();
+            LogoutPage lPage = new LogoutPage(driver);
+            lPage.logoutOfApplication();
 
             System.out.println("Admin Logout Successful");
 

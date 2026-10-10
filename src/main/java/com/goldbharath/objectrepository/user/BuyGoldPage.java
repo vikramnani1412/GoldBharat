@@ -19,7 +19,9 @@ public class BuyGoldPage {
     
     @FindBy(xpath="//h5[.='Buy Gold']/../following-sibling::div//select[@formcontrolname='quantity_purchased']")private WebElement QuantityDrpDwn;
   
-    @FindBy(xpath="//h5[.='Buy Gold']/../following-sibling::div//button[.='Buy']")private WebElement BuyBtn;  
+    @FindBy(xpath="//h5[.='Buy Gold']/../following-sibling::div//button[.='Buy']")private WebElement BuyBtn;
+    
+    @FindBy(xpath="//p[.='Success!']/following-sibling::p")private WebElement SuccessMsg;
     
     
 	//Rule-2:Create a constructor to initilise these elements
@@ -53,6 +55,11 @@ public class BuyGoldPage {
 	}
 
 
+	public WebElement getSuccessMsg() {
+		return SuccessMsg;
+	}
+
+
 	public WebElement getBuyBtn() {
 		return BuyBtn;
 	}
@@ -61,7 +68,7 @@ public class BuyGoldPage {
 	
 	public void buyGold(int DropDownIndex) throws Exception
 	{
-		WebDriverUtility wUtil= new WebDriverUtility();
+		WebDriverUtility wUtil = new WebDriverUtility();
 		
 		Thread.sleep(2000);
 		String Price = CurrentLivePriceEle.getText();
@@ -73,7 +80,9 @@ public class BuyGoldPage {
 		wUtil.handleDropdownByIndex(QuantityDrpDwn, DropDownIndex);
 		Thread.sleep(2000);
 		BuyBtn.click();
-		
+		Thread.sleep(2000);
+		String Success = SuccessMsg.getText();
+		System.out.println(Success);
 		
 	}
 	
