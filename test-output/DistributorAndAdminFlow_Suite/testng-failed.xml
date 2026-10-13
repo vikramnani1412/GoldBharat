@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="1" parallel="tests" name="Failed suite [DistributorAndAdminFlow_Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="1" parallel="tests" name="Test(failed)">
+    <classes>
+      <class name="sprint1.Two_AdminConfirmingFullWorkFlowTest">
+        <methods>
+          <include name="loginToAdminApp"/>
+          <include name="adminConfirmingPaymentAndVerifyingOrder"/>
+          <include name="closeBrowser"/>
+          <include name="logoutFromAdminApp"/>
+          <include name="launchBrowser"/>
+        </methods>
+      </class> <!-- sprint1.Two_AdminConfirmingFullWorkFlowTest -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [DistributorAndAdminFlow_Suite] -->

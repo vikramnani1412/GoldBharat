@@ -1,4 +1,4 @@
-package sprint1;
+package gvc;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -79,7 +79,7 @@ public class LoginCompletingKYC extends DistributorBaseClass {
 		ltd.LtdKyc(FirstDirectorName, LTDDirectorMobileNumber, FirstDirectorCompanyAadharNumber, FirstDirectorCompanyPANNumber, SecondDirectorName, CompanyGSTNumber, CompanyCINNumber, LTDBankName, LTdACNumber, LTDIFSCCode, LTDAccountHolderName);
 	
 		KycAsLLpPage llp = new KycAsLLpPage(driver);
-		llp.LLpKyc(DirectorName, DirectorMobileNumber, DirectorAadharNumber, CompanyPanNumber, "Gangavarapu V", CompanyGstNumber, DirectorCINNumber, LLPBankName, ACNumber, LLPIFSCCode, LLPAccountHolderName);
+		llp.LLpKyc(driver, DirectorName, DirectorMobileNumber, DirectorAadharNumber, CompanyPanNumber, CompanyGstNumber, DirectorCINNumber, LLPBankName, ACNumber, LLPIFSCCode, LLPAccountHolderName);
 		
 		
 	}

@@ -106,9 +106,9 @@ public class DistributorBaseClass extends CommonBaseClass {
     @AfterClass(alwaysRun = true)
     public void closeBrowser() {
 
-//        if (driver != null) {
-//            driver.quit();
-//        }
+        if (driver != null) {
+            driver.quit();
+        }
 
         CommonBaseClass.unloadDriver();
     }

@@ -75,6 +75,16 @@ public class ManageOrdersPage {
     
     @FindBy(xpath="//button[.='No']")private WebElement NoBtn;
     
+    ////////////////////////////// Last Verify Order Button In Confirm Dispatch Page
+    
+    @FindBy(xpath="//td[.='GB-16679']/following-sibling::td/button[.=' Verify Order ']")private WebElement VerifyOrderBtn;
+    
+    @FindBy(xpath="//input[@placeholder='Enter delivery message']")private WebElement DeliveryMessageEdt;
+    
+    @FindBy(xpath="//input[@placeholder='Enter delivery time']")private WebElement DeliveryDateTimeEdt;
+    
+    // Confirm Dispatch Page No Btn
+    @FindBy(xpath="//button[normalize-space()='No']")private WebElement ConfirmDispatchNoBtn;
     
     //Rule-3:Create a constructor to initilise these elements
     
@@ -138,6 +148,26 @@ public class ManageOrdersPage {
 		return SearchEdt;
 	}
 
+
+
+	public WebElement getVerifyOrderBtn() {
+		return VerifyOrderBtn;
+	}
+
+
+	public WebElement getDeliveryMessageEdt() {
+		return DeliveryMessageEdt;
+	}
+
+
+	public WebElement getDeliveryDateTimeEdt() {
+		return DeliveryDateTimeEdt;
+	}
+
+
+	public WebElement getConfirmDispatchNoBtn() {
+		return ConfirmDispatchNoBtn;
+	}
 
 
 	public WebElement getExportToExcelBtn() {
@@ -263,7 +293,20 @@ public class ManageOrdersPage {
   	    System.out.println("Order Details is "+Details);
   		Thread.sleep(2000);
   		AcceptBtn.click();
+  	    
+  	}
+  	
+  	public void allActionsInConfirmDispatchPageInLLpPage(String DeliveryMsg, int HowManyDaysYouWantToDeliver) throws Exception
+  	{
+  		WebDriverUtility wUtil = new WebDriverUtility();
+  		String Date = wUtil.generateNextDaysDateAndTimeBasedOnIndex(HowManyDaysYouWantToDeliver);
   		
+  		Thread.sleep(2000);
+  		DeliveryMessageEdt.sendKeys(DeliveryMsg);
+  		Thread.sleep(2000);
+  		DeliveryDateTimeEdt.sendKeys(Date);
+  		Thread.sleep(2000);
+  		YesBtn.click();
   	}
   	
 }

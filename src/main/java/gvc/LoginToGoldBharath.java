@@ -1,4 +1,4 @@
-package sprint1;
+package gvc;
 
 import java.time.Duration;
 

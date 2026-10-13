@@ -65,17 +65,42 @@ public class BusinessInformationPage {
  	
     @FindBy(xpath="//input[@formcontrolname='silver_max_limit']")private WebElement SilverMaxLimitEdt;
     
-    
     ///////////////////////////////
     //      Gold   Details
     ///////////////////////////////
-    
     
     @FindBy(xpath="//label[.='Gold Max Limit (In Grams)']/following-sibling::input[@formcontrolname='max_limit']")private WebElement GoldMaxLimitEdt;
     
     @FindBy(xpath="//button[@type='submit']")private WebElement SubmitBtn;
     
+    /////////////////////////
+    /// As LLP
+    /////////////////////////
     
+    @FindBy(xpath="//input[@name='director_name']")private WebElement DirectorNameEdt;
+    
+    @FindBy(xpath="//input[@name='director_mobile']")private WebElement DirectorMobileEdt;
+    
+    @FindBy(xpath="//input[@name='director_aadhar']")private WebElement DirectorAadharEdt;
+    
+    @FindBy(xpath="//input[@name='director_pan']")private WebElement DirectorPanEdt;
+    
+    @FindBy(xpath="//input[@name='director_gst']")private WebElement DirectorGstEdt;
+    
+    @FindBy(xpath="//label[.='Director GST img']/following-sibling::input[@type='file']")private WebElement DirectorGstChooseFileBtn;
+    
+    @FindBy(xpath="//input[@name='director_cin']")private WebElement DirectorCinEdt;
+    
+    @FindBy(xpath="//label[.='Director Adhar front img']/following-sibling::input[@type='file']")private WebElement DirectorAadharFrontChooseFileBtn;
+    
+@FindBy(xpath="//label[.='Director Adhar Back img']/following-sibling::input[@type='file']")private WebElement DirectorAadharBackChooseFileBtn;
+    
+    @FindBy(xpath="//label[.=' CIN Image']/following-sibling::input[@type='file']")private WebElement DirectorCinChooseFileBtn;
+    
+    @FindBy(xpath=" Director PAN Image")private WebElement DirectorPanChooseFileBtn;
+  
+  
+  //label[.=' CIN Image']/following-sibling::input[@type='file']
 	//Rule-2:Create a constructor to initilise these elements
     
 	public BusinessInformationPage(WebDriver driver)
@@ -124,6 +149,61 @@ public class BusinessInformationPage {
 
 	public WebElement getRegisteredMobileNumberEdt() {
 		return RegisteredMobileNumberEdt;
+	}
+
+
+	public WebElement getDirectorNameEdt() {
+		return DirectorNameEdt;
+	}
+
+
+	public WebElement getDirectorMobileEdt() {
+		return DirectorMobileEdt;
+	}
+
+
+	public WebElement getDirectorAadharEdt() {
+		return DirectorAadharEdt;
+	}
+
+
+	public WebElement getDirectorPanEdt() {
+		return DirectorPanEdt;
+	}
+
+
+	public WebElement getDirectorGstEdt() {
+		return DirectorGstEdt;
+	}
+
+
+	public WebElement getDirectorGstChooseFileBtn() {
+		return DirectorGstChooseFileBtn;
+	}
+
+
+	public WebElement getDirectorCinEdt() {
+		return DirectorCinEdt;
+	}
+
+
+	public WebElement getDirectorAadharFrontChooseFileBtn() {
+		return DirectorAadharFrontChooseFileBtn;
+	}
+
+
+	public WebElement getDirectorAadharBackChooseFileBtn() {
+		return DirectorAadharBackChooseFileBtn;
+	}
+
+
+	public WebElement getDirectorCinChooseFileBtn() {
+		return DirectorCinChooseFileBtn;
+	}
+
+
+	public WebElement getDirectorPanChooseFileBtn() {
+		return DirectorPanChooseFileBtn;
 	}
 
 
@@ -338,7 +418,157 @@ public class BusinessInformationPage {
 	    SubmitBtn.click();
 	}
 	
-	
+	public void editingAndGivingSilverAndGoldLimitForLLP(String SilverLimit, String GoldLimit) throws Exception
+	{
+//	    BusinessNameEdt.clear();
+//	    Thread.sleep(2000);
+//	    BusinessNameEdt.sendKeys("Ai Solutions");
+//	    Thread.sleep(2000);
+
+		Thread.sleep(2000);
+	    AccountHolderNameEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    AccountHolderNameEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    AccountHolderNameEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+
+	    IfscNumberEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    IfscNumberEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    IfscNumberEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+
+	    AccountNumberEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    AccountNumberEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    AccountNumberEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+
+	    BankNameEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    BankNameEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    BankNameEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+
+	    AddressLine1Edt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    AddressLine1Edt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    AddressLine1Edt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+
+	    AddressLine2Edt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    AddressLine2Edt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    AddressLine2Edt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+
+	    RegisteredMobileNumberEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    RegisteredMobileNumberEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    RegisteredMobileNumberEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+
+	    EmailEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    EmailEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    EmailEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+
+	    StateEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    StateEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    StateEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+
+	    CityEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    CityEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    CityEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+
+	    PinCodeEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    PinCodeEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    PinCodeEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+
+	    DirectorNameEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    DirectorNameEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    DirectorNameEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+	    
+	    DirectorMobileEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    DirectorMobileEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    DirectorMobileEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+	    
+	    DirectorAadharEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    DirectorAadharEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    DirectorAadharEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+	    
+	    DirectorPanEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    DirectorPanEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    DirectorPanEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+	    
+	    DirectorGstEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    DirectorGstEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    DirectorGstEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+	    
+	    DirectorCinEdt.sendKeys(Keys.CONTROL, "a");
+	    Thread.sleep(2000);
+	    DirectorCinEdt.sendKeys(Keys.CONTROL, "x");
+	    Thread.sleep(2000);
+	    DirectorCinEdt.sendKeys(Keys.CONTROL, "v");
+	    Thread.sleep(2000);
+	    
+	    
+	    
+//	    BusinessTypeEdt.sendKeys(Keys.CONTROL, "a");
+//	    Thread.sleep(2000);
+//	    BusinessTypeEdt.sendKeys(Keys.CONTROL, "x");
+//	    Thread.sleep(2000);
+//	    BusinessTypeEdt.sendKeys(Keys.CONTROL, "v");
+//	    Thread.sleep(2000);
+
+	    // Silver Limit
+	    Thread.sleep(2000);
+	    SilverMaxLimitEdt.clear();
+	    Thread.sleep(2000);
+	    SilverMaxLimitEdt.sendKeys(SilverLimit);
+
+	    // Gold Limit
+	    Thread.sleep(2000);
+	    GoldMaxLimitEdt.clear();
+	    Thread.sleep(2000);
+	    GoldMaxLimitEdt.sendKeys(GoldLimit);
+
+	    Thread.sleep(2000);
+	    SubmitBtn.click();
+	}
 	
 	
 	

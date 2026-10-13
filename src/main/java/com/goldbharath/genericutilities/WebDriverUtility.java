@@ -281,28 +281,64 @@ public class WebDriverUtility {
 		return driver.switchTo().alert().getText();
 	}
 
-	/**
-	 * This method will take screenshot and store it in the Screenshots folder.
-	 * Creates the folder automatically if it does not already exist.
-	 * @param driver
-	 * @param methodName
-	 * @return absolute path of the saved screenshot
-	 * @throws IOException
-	 */
-	public String takeScreenShot(WebDriver driver, String methodName) throws IOException {
-		TakesScreenshot ts = (TakesScreenshot) driver;
-		File sshotType = ts.getScreenshotAs(OutputType.FILE);
+//	This is correct but changing to upgrade
+//	/**
+//	 * This method will take screenshot and store it in the Screenshots folder.
+//	 * Creates the folder automatically if it does not already exist.
+//	 * @param driver
+//	 * @param methodName
+//	 * @return absolute path of the saved screenshot
+//	 * @throws IOException
+//	 */
+//	public String takeScreenShot(WebDriver driver, String methodName) throws IOException {
+//		TakesScreenshot ts = (TakesScreenshot) driver;
+//		File sshotType = ts.getScreenshotAs(OutputType.FILE);
+//
+//		File folder = new File(".\\Screenshots\\");
+//		if (!folder.exists()) {
+//			folder.mkdirs();
+//		}
+//
+//		File storingFolder = new File(folder, methodName + ".png");
+//		FileUtils.copyFile(sshotType, storingFolder);
+//
+//		return storingFolder.getAbsolutePath();
+//	}
+	
+	
+	public String takeScreenShot(WebDriver driver, String methodName)
+	        throws IOException {
 
-		File folder = new File(".\\Screenshots\\");
-		if (!folder.exists()) {
-			folder.mkdirs();
-		}
+	    if (driver == null) {
+	        throw new IllegalArgumentException(
+	                "WebDriver is null. Cannot capture screenshot.");
+	    }
 
-		File storingFolder = new File(folder, methodName + ".png");
-		FileUtils.copyFile(sshotType, storingFolder);
+	    // Capture screenshot
+	    TakesScreenshot ts = (TakesScreenshot) driver;
+	    File sourceFile = ts.getScreenshotAs(OutputType.FILE);
 
-		return storingFolder.getAbsolutePath();
+	    // Create Screenshots folder
+	    File folder = new File("Screenshots");
+
+	    if (!folder.exists() && !folder.mkdirs()) {
+	        throw new IOException(
+	                "Unable to create Screenshots folder: "
+	                        + folder.getAbsolutePath());
+	    }
+
+	    // Save screenshot
+	    File destinationFile = new File(folder, methodName + ".png");
+	    FileUtils.copyFile(sourceFile, destinationFile);
+
+	    System.out.println("Screenshot saved: "
+	            + destinationFile.getAbsolutePath());
+
+	    return destinationFile.getAbsolutePath();
 	}
+	
+	
+	
 
 	/**
 	 * This method will take a screenshot of the page, intended for capturing
@@ -401,6 +437,69 @@ public class WebDriverUtility {
 	    // Click the element
 	    element.click();
 	}
+	
+//	/**
+//	 * Returns the date after adding the specified number of days,
+//	 * along with the time formatted as dd/MM/yyyy HHmm.
+//	 *
+//	 * @param days number of days to add to the current date
+//	 * @return formatted date and time string
+//	 */
+//	public String generateNextDaysDateAndTimeBasedOnIndex(int days) {
+//	    Calendar cal = Calendar.getInstance();
+//	    cal.add(Calendar.DAY_OF_MONTH, days);
+//
+//	    // Set time to 12:30
+//	    cal.set(Calendar.HOUR_OF_DAY, 12);
+//	    cal.set(Calendar.MINUTE, 30);
+//	    cal.set(Calendar.SECOND, 0);
+//	    cal.set(Calendar.MILLISECOND, 0);
+//
+//	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+//
+//	    return sdf.format(cal.getTime());
+//	}
+	
+	
+//	/**
+//	 * Returns the date after adding the specified number of days,
+//	 * along with the time formatted as dd/MM/yyyyyy HHmm.
+//	 *
+//	 * @param days number of days to add to the current date
+//	 * @return formatted date and time string
+//	 */
+//	public String generateNextDaysDateAndTimeBasedOnIndex(int days) {
+//	    Calendar cal = Calendar.getInstance();
+//	    cal.add(Calendar.DAY_OF_MONTH, days);
+//
+//	    // Set time to 12:30
+//	    cal.set(Calendar.HOUR_OF_DAY, 12);
+//	    cal.set(Calendar.MINUTE, 30);
+//	    cal.set(Calendar.SECOND, 0);
+//	    cal.set(Calendar.MILLISECOND, 0);
+//
+//	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyyyy HHmm");
+//
+//	    return sdf.format(cal.getTime());
+//	}
+	
+	
+	public String generateNextDaysDateAndTimeBasedOnIndex(int days) {
+	    Calendar cal = Calendar.getInstance();
+	    cal.add(Calendar.DAY_OF_MONTH, days);
+	    
+	    // Set time to 12:30
+	    cal.set(Calendar.HOUR_OF_DAY, 12);
+	    cal.set(Calendar.MINUTE, 30);
+	    cal.set(Calendar.SECOND, 0);
+	    cal.set(Calendar.MILLISECOND, 0);
+	    
+	    // Fixed: changed slashes to hyphens, fixed year to 4 digits, added colon for time
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+	    return sdf.format(cal.getTime());
+	}
+	
+	
 	
 	/**
 	 * This method will return current date formatted as dd/MM/yyyy

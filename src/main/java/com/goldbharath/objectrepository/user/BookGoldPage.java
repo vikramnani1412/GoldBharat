@@ -1,5 +1,6 @@
 package com.goldbharath.objectrepository.user;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -45,6 +46,7 @@ public class BookGoldPage {
 	    Thread.sleep(2000);
 	    String CurrentLockedPrice = CurrentLivePriceEle.getText();
 	    System.out.println(CurrentLockedPrice);
+	    
 	    
 	    // Clean the price text: strip currency symbols, commas, spaces
 	    String cleanedPrice = CurrentLockedPrice.replaceAll("[^0-9.]", "");

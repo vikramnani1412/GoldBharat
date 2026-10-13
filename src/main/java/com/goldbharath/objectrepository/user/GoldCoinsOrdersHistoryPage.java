@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class GoldCoinsOrdersPage {
+public class GoldCoinsOrdersHistoryPage {
 
 	//Finding WebElements Using @FindBy Annotations
 
@@ -50,9 +50,29 @@ public class GoldCoinsOrdersPage {
     // Order Status Msg
     @FindBy(xpath="//tr[td[normalize-space()='GB-56646']]//p[normalize-space()='Order Accepted']")private WebElement OrderAcceptedMsg;
     
+    // Updating Delivery Details
+    @FindBy(xpath="//p[.=' Update Delivery Details ']")private WebElement UpdateDeliveryDetailsBtn;
+    
+    @FindBy(xpath="//h3[.=' Update Delivery Details ']/following-sibling::button[@class='btn-close']")private WebElement UpdateDeliveryDetailsPageCloseBtn;
+    
+    @FindBy(xpath="//select[@class='input-filed']")private WebElement OrderPickedByDrpDwn;
+    
+    @FindBy(xpath="//button[.=' Submit ']")private WebElement SubmitBtn;
+    
+    // If we Select Other This Details Will Visible
+    @FindBy(xpath="//input[@placeholder=' Enter Your Name']")private WebElement NameEdt;
+    
+    @FindBy(xpath="//input[@placeholder=' Enter Your Number']")private WebElement PhoneEdt;
+    
+    @FindBy(xpath="//input[@placeholder='Ex:Aadhar/Pan/License']")private WebElement IDnumberEdt;
+    
+    @FindBy(xpath="//label[.='Upload Id Card']/following-sibling::input[@type='file']")private WebElement ChooseFileBtn;
+  
+    @FindBy(xpath="//button[.=' Submit ']")private WebElement UpdateDeliveryDetailsSubmitBtn;
+  
     
 	//Rule-2:Create a constructor to initilise these elements
-	public GoldCoinsOrdersPage(WebDriver driver)
+	public GoldCoinsOrdersHistoryPage(WebDriver driver)
 	{
 		PageFactory.initElements(driver, this);
 	}
@@ -122,6 +142,51 @@ public class GoldCoinsOrdersPage {
 
 	public WebElement getMakingChargesEle() {
 		return MakingChargesEle;
+	}
+
+
+	public WebElement getUpdateDeliveryDetailsBtn() {
+		return UpdateDeliveryDetailsBtn;
+	}
+
+
+	public WebElement getUpdateDeliveryDetailsPageCloseBtn() {
+		return UpdateDeliveryDetailsPageCloseBtn;
+	}
+
+
+	public WebElement getOrderPickedByDrpDwn() {
+		return OrderPickedByDrpDwn;
+	}
+
+
+	public WebElement getSubmitBtn() {
+		return SubmitBtn;
+	}
+
+
+	public WebElement getNameEdt() {
+		return NameEdt;
+	}
+
+
+	public WebElement getPhoneEdt() {
+		return PhoneEdt;
+	}
+
+
+	public WebElement getIDnumberEdt() {
+		return IDnumberEdt;
+	}
+
+
+	public WebElement getChooseFileBtn() {
+		return ChooseFileBtn;
+	}
+
+
+	public WebElement getUpdateDeliveryDetailsSubmitBtn() {
+		return UpdateDeliveryDetailsSubmitBtn;
 	}
 
 

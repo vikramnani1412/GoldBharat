@@ -1,33 +1,17 @@
 package sprint1;
 
-// ============================================================
-// JAVA IMPORTS
-// ============================================================
-
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-
-// ============================================================
-// SELENIUM IMPORTS
-// ============================================================
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-// ============================================================
-// TESTNG IMPORTS
-// ============================================================
-
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import com.goldbharath.genericutilities.ExcelFileUtility;
 import com.goldbharath.genericutilities.PropertyFileUtility;
 import com.goldbharath.genericutilities.WebDriverUtility;
@@ -38,7 +22,7 @@ import com.goldbharath.objectrepository.admin.ManageDistributorPage;
 import com.goldbharath.objectrepository.user.BookGoldPage;
 import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 import com.goldbharath.objectrepository.user.DashboardPage;
-import com.goldbharath.objectrepository.user.GoldCoinsOrdersPage;
+import com.goldbharath.objectrepository.user.GoldCoinsOrdersHistoryPage;
 import com.goldbharath.objectrepository.user.KycAsProprietorPage;
 import com.goldbharath.objectrepository.user.LoginPage;
 import com.goldbharath.objectrepository.user.RegisterPage;
@@ -47,11 +31,6 @@ import com.goldbharath.objectrepository.user.UploadTransactionDetailsForGoldCoin
 import com.goldbharath.objectrepository.user.UserProfilePage;
 import com.goldbharath.objectrepository.user.WelcomePage;
 import com.goldbharath.objectrepository.user.whatWouldYouLikeToBuyPage;
-
-// ============================================================
-// WEBDRIVER MANAGER
-// ============================================================
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
@@ -90,11 +69,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  *
  * ============================================================
  */
-public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
-
-    // ============================================================
-    // OBJECT CREATION FOR GENERIC UTILITIES
-    // ============================================================
+public class One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest {
 
     /**
      * WebDriverUtility
@@ -128,21 +103,11 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
      * - Mobile numbers
      */
     ExcelFileUtility eUtil = new ExcelFileUtility();
-
-
-    // ============================================================
-    // WEBDRIVER OBJECT
-    // ============================================================
-
+    
     /**
      * WebDriver instance used by the current test.
      */
     private WebDriver driver;
-
-
-    // ============================================================
-    // REGISTERED MOBILE NUMBER
-    // ============================================================
 
     /**
      * This variable stores the mobile number successfully
@@ -161,10 +126,6 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 
     private static String OrderID;
 
-    // ============================================================
-    // CONSTANTS
-    // ============================================================
-
     /**
      * Excel sheet name.
      */
@@ -176,12 +137,6 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
      */
     private static final int WAIT_TIME = 20;
 
-
-    // ============================================================
-    // COMMON METHOD
-    // CREATE CHROME DRIVER
-    // ============================================================
-
     /**
      * This method creates and returns a ChromeDriver.
      *
@@ -190,23 +145,9 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
      */
     private WebDriver createChromeDriver() {
 
-        // --------------------------------------------------------
-        // Setup ChromeDriver automatically using WebDriverManager
-        // --------------------------------------------------------
-
         WebDriverManager.chromedriver().setup();
 
-
-        // --------------------------------------------------------
-        // Create ChromeOptions object
-        // --------------------------------------------------------
-
         ChromeOptions options = new ChromeOptions();
-
-
-        // --------------------------------------------------------
-        // Chrome browser configuration
-        // --------------------------------------------------------
 
         // Disable GPU related issues.
         options.addArguments("--disable-gpu");
@@ -223,50 +164,16 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
         // Disable Chrome information bars.
         options.addArguments("--disable-infobars");
 
-        /*
-         * NOTE:
-         *
-         * --headless=new is intentionally NOT added because
-         * your GoldBharath application was working correctly
-         * without headless mode.
-         */
-
-
-        // --------------------------------------------------------
-        // Create ChromeDriver
-        // --------------------------------------------------------
-
         WebDriver webDriver = new ChromeDriver(options);
 
-
-        // --------------------------------------------------------
-        // Maximize browser
-        // --------------------------------------------------------
-
         webDriver.manage().window().maximize();
-
-
-        // --------------------------------------------------------
-        // Set implicit wait
-        // --------------------------------------------------------
 
         webDriver.manage()
                   .timeouts()
                   .implicitlyWait(Duration.ofSeconds(5));
 
-
-        // --------------------------------------------------------
-        // Return driver
-        // --------------------------------------------------------
-
         return webDriver;
     }
-
-
-    // ============================================================
-    // COMMON METHOD
-    // WAIT FOR PAGE TO LOAD
-    // ============================================================
 
     /**
      * Waits until the browser document is completely loaded.
@@ -278,39 +185,21 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
         WebDriverWait wait =
                 new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME));
 
-        wait.until(webDriver ->
-                ((org.openqa.selenium.JavascriptExecutor) webDriver)
-                        .executeScript("return document.readyState")
-                        .equals("complete"));
+        wait.until(webDriver -> ((org.openqa.selenium.JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
-
-
-    // ============================================================
-    // COMMON METHOD
-    // CLICK REGISTER BUTTON
-    // ============================================================
 
     /**
      * Waits for Register button and clicks it.
      */
-    private void clickRegisterButton() {
+    private void clickRegisterButton() 
+    {
 
-        WebDriverWait wait =
-                new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME));
 
-        By registerButton =
-                By.xpath("//button[normalize-space()='Register']");
+        By registerButton = By.xpath("//button[normalize-space()='Register']");
 
-        wait.until(
-                ExpectedConditions.elementToBeClickable(registerButton)
-        ).click();
+        wait.until(ExpectedConditions.elementToBeClickable(registerButton)).click();
     }
-
-
-    // ============================================================
-    // DATA PROVIDER
-    // READ MOBILE NUMBERS FROM EXCEL
-    // ============================================================
 
     /**
      * Reads mobile numbers from Excel.
@@ -333,34 +222,18 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
     @DataProvider(name = "mobileNumbers")
     public Object[][] mobileNumbers() throws Exception {
 
-        // --------------------------------------------------------
-        // Create list to store mobile numbers
-        // --------------------------------------------------------
-
         List<String> mobileNumbers = new ArrayList<>();
-
-
-        // --------------------------------------------------------
-        // Read mobile numbers from Excel
-        // --------------------------------------------------------
 
         for (int row = 10; row <= 29; row++) {
 
             // Read mobile number from Excel.
-            String mobileNumber =
-                    eUtil.readDataFromExcel(
-                            SHEET_NAME,
-                            row,
-                            1
-                    );
-
+            String mobileNumber = eUtil.readDataFromExcel(SHEET_NAME, row, 1);
 
             // ----------------------------------------------------
             // Validate mobile number
             // ----------------------------------------------------
 
-            if (mobileNumber != null &&
-                    !mobileNumber.trim().isEmpty()) {
+            if (mobileNumber != null && !mobileNumber.trim().isEmpty()) {
 
                 // Remove unwanted spaces.
                 mobileNumber = mobileNumber.trim();
@@ -369,10 +242,7 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
                 mobileNumbers.add(mobileNumber);
 
                 // Print Excel data in console.
-                System.out.println(
-                        "Excel Row " + row +
-                        " : " + mobileNumber
-                );
+                System.out.println("Excel Row " + row + " : " + mobileNumber);
             }
         }
 
@@ -381,28 +251,13 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
         // Validate Excel data
         // --------------------------------------------------------
 
-        if (mobileNumbers.isEmpty()) {
-
-            throw new Exception(
-                    "No mobile numbers found in Excel rows 10 to 29."
-            );
+        if (mobileNumbers.isEmpty()) 
+        {
+            throw new Exception("No mobile numbers found in Excel rows 10 to 29.");
         }
 
-
-        // --------------------------------------------------------
-        // Return DataProvider data
-        // --------------------------------------------------------
-
-        return new Object[][]{
-                {mobileNumbers}
-        };
+        return new Object[][]{{mobileNumbers}};
     }
-
-
-    // ============================================================
-    // TEST 1
-    // USER REGISTRATION
-    // ============================================================
 
     /**
      * TEST 1:
@@ -415,89 +270,39 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
      * This SAME number will be used in the next tests.
      */
     @Test(priority = 1, dataProvider = "mobileNumbers")
-    public void RegisteringToGoldbharathTest(
-            List<String> mobileNumbers) throws Exception {
-
-
-        System.out.println(
-                "\n=================================================="
-        );
-
-        System.out.println(
-                "TEST 1 : GOLDBHARATH USER REGISTRATION"
-        );
-
-        System.out.println(
-                "=================================================="
-        );
-
+    public void RegisteringToGoldbharathTest(List<String> mobileNumbers) throws Exception 
+    {
+        System.out.println("\n==================================================");
+        System.out.println("TEST 1 : GOLDBHARATH USER REGISTRATION");
+        System.out.println("==================================================");
 
         // ========================================================
         // STEP 1 : READ REGISTRATION DATA FROM EXCEL
         // ========================================================
 
-        String businessName =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        1,
-                        1
-                );
+        String businessName = eUtil.readDataFromExcel(SHEET_NAME, 1, 1);
 
+        String personName = eUtil.readDataFromExcel(SHEET_NAME, 2, 1);
 
-        String personName =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        2,
-                        1
-                );
+        String email = eUtil.readDataFromExcel(SHEET_NAME, 3, 1);
 
+        String date = eUtil.readDataFromExcel(SHEET_NAME, 5, 1);
 
-        String email =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        3,
-                        1
-                );
+        String pincode = eUtil.readDataFromExcel(SHEET_NAME, 6, 1);
 
-
-        String date =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        5,
-                        1
-                );
-
-
-        String pincode =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        6,
-                        1
-                );
-
-
-        String address =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        7,
-                        1
-                );
-
+        String address = eUtil.readDataFromExcel(SHEET_NAME, 7, 1);
 
         // ========================================================
         // STEP 2 : READ USER URL
         // ========================================================
 
-        String userUrl =
-                pUtil.readDataFromPropertyFile("userurl");
-
+        String userUrl = pUtil.readDataFromPropertyFile("userurl");
 
         // ========================================================
         // STEP 3 : START CHROME BROWSER
         // ========================================================
 
         driver = createChromeDriver();
-
 
         try {
 
@@ -507,9 +312,7 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 
             driver.get(userUrl);
 
-            // Wait until page is loaded.
             waitForPageLoad();
-
 
             // ====================================================
             // STEP 5 : CLICK REGISTER
@@ -517,13 +320,11 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 
             clickRegisterButton();
 
-
             // ====================================================
             // STEP 6 : CREATE REGISTER PAGE OBJECT
             // ====================================================
 
             RegisterPage registerPage = new RegisterPage(driver);
-
 
             // ====================================================
             // STEP 7 : REGISTER USER
@@ -539,64 +340,37 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
              * 5. Return successfully registered mobile number
              */
 
-            registeredMobileNumber =
-                    registerPage.registeringToGoldbharathApplication(
-                            driver,
-                            businessName,
-                            personName,
-                            email,
-                            mobileNumbers,
-                            date,
-                            pincode,
-                            address
-                    );
-
+            registeredMobileNumber = registerPage.registeringToGoldbharathApplication(driver, businessName, personName, email, mobileNumbers, date, pincode, address);
 
             // ====================================================
             // STEP 8 : VALIDATE REGISTERED MOBILE NUMBER
             // ====================================================
 
-            Assert.assertNotNull(
-                    registeredMobileNumber,
-                    "Registration failed - mobile number is NULL."
-            );
+            Assert.assertNotNull(registeredMobileNumber, "Registration failed - mobile number is NULL.");
 
-
-            Assert.assertFalse(
-                    registeredMobileNumber.trim().isEmpty(),
-                    "Registration failed - mobile number is EMPTY."
-            );
-
+            Assert.assertFalse(registeredMobileNumber.trim().isEmpty(), "Registration failed - mobile number is EMPTY.");
 
             // ====================================================
             // STEP 9 : PRINT REGISTERED MOBILE
             // ====================================================
 
-            System.out.println(
-                    "--------------------------------------------------"
-            );
+            System.out.println("--------------------------------------------------");
 
-            System.out.println(
-                    "REGISTRATION SUCCESSFUL"
-            );
+            System.out.println("REGISTRATION SUCCESSFUL");
 
-            System.out.println(
-                    "REGISTERED MOBILE : "
-                            + registeredMobileNumber
-            );
+            System.out.println("REGISTERED MOBILE : "+ registeredMobileNumber);
 
-            System.out.println(
-                    "--------------------------------------------------"
-            );
+            System.out.println("--------------------------------------------------");
 
-
-        } finally {
-            if (driver != null) {
+        } 
+        finally 
+        {
+            if (driver != null) 
+            {
                 driver.quit();
             }
         }
     }
-
 
     // ============================================================
     // TEST 2
@@ -615,37 +389,20 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
     @Test(priority = 2, dependsOnMethods = "RegisteringToGoldbharathTest")
     public void loginUpdatingKYC() throws Exception {
 
-
-        System.out.println(
-                "\n=================================================="
-        );
-
-        System.out.println(
-                "TEST 2 : LOGIN + PROPRIETOR KYC"
-        );
-
-        System.out.println(
-                "=================================================="
-        );
-
+        System.out.println("\n==================================================");
+        System.out.println("TEST 2 : LOGIN + PROPRIETOR KYC");
+        System.out.println("==================================================");
 
         // ========================================================
         // STEP 1 : VALIDATE REGISTERED MOBILE
         // ========================================================
 
-        if (registeredMobileNumber == null ||
-                registeredMobileNumber.trim().isEmpty()) {
-
-            throw new Exception(
-                    "Registered mobile number is not available."
-            );
+        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) 
+        {
+            throw new Exception("Registered mobile number is not available.");
         }
 
-
-        System.out.println(
-                "LOGIN MOBILE : "
-                        + registeredMobileNumber
-        );
+        System.out.println("LOGIN MOBILE : "+ registeredMobileNumber);
 
 
         // ========================================================
@@ -919,7 +676,7 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 
 
         String password =
-                pUtil.readDataFromPropertyFile("adminotp");
+                pUtil.readDataFromPropertyFile("adminpassword");
 
 
         // ========================================================
@@ -1458,7 +1215,7 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 			rPage.takeAllDetailsAndClickProceedBtn(driver);
 			Thread.sleep(2000);
 
-			GoldCoinsOrdersPage gPage = new GoldCoinsOrdersPage(driver);
+			GoldCoinsOrdersHistoryPage gPage = new GoldCoinsOrdersHistoryPage(driver);
 			gPage.GetAllOrderDetailsBasedOnSerialNo(driver, serialNo);
 			Thread.sleep(2000);
 
@@ -1521,7 +1278,7 @@ public class One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest {
 
 		String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
 		String username = pUtil.readDataFromPropertyFile("adminusername");
-		String password = pUtil.readDataFromPropertyFile("adminotp");
+		String password = pUtil.readDataFromPropertyFile("adminpassword");
 
 		driver = createChromeDriver();
 

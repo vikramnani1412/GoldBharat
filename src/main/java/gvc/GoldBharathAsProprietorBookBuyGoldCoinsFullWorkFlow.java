@@ -38,7 +38,7 @@ import com.goldbharath.objectrepository.admin.ManageDistributorPage;
 import com.goldbharath.objectrepository.user.BookGoldPage;
 import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 import com.goldbharath.objectrepository.user.DashboardPage;
-import com.goldbharath.objectrepository.user.GoldCoinsOrdersPage;
+import com.goldbharath.objectrepository.user.GoldCoinsOrdersHistoryPage;
 import com.goldbharath.objectrepository.user.KycAsProprietorPage;
 import com.goldbharath.objectrepository.user.LoginPage;
 import com.goldbharath.objectrepository.user.RegisterPage;
@@ -1459,7 +1459,7 @@ public class GoldBharathAsProprietorBookBuyGoldCoinsFullWorkFlow {
 			rPage.takeAllDetailsAndClickProceedBtn(driver);
 			Thread.sleep(2000);
 
-			GoldCoinsOrdersPage gPage = new GoldCoinsOrdersPage(driver);
+			GoldCoinsOrdersHistoryPage gPage = new GoldCoinsOrdersHistoryPage(driver);
 			gPage.GetAllOrderDetailsBasedOnSerialNo(driver, serialNo);
 			Thread.sleep(2000);
 
