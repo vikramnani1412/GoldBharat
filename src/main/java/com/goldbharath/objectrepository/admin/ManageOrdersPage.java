@@ -1,10 +1,14 @@
 package com.goldbharath.objectrepository.admin;
 
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import com.goldbharath.genericutilities.WebDriverUtility;
 
@@ -84,7 +88,11 @@ public class ManageOrdersPage {
     @FindBy(xpath="//input[@placeholder='Enter delivery time']")private WebElement DeliveryDateTimeEdt;
     
     // Confirm Dispatch Page No Btn
-    @FindBy(xpath="//button[normalize-space()='No']")private WebElement ConfirmDispatchNoBtn;
+    @FindBy(xpath="//button[normalize-space()='No']")private WebElement InConfirmDispatchPageNoBtn;
+    
+    // After Dispatch
+    @FindBy(xpath="//td[.='GB-66957']/following-sibling::td/button[.=' Dispatched ']")private WebElement DispatchedConfirmText;
+  
     
     //Rule-3:Create a constructor to initilise these elements
     
@@ -165,8 +173,8 @@ public class ManageOrdersPage {
 	}
 
 
-	public WebElement getConfirmDispatchNoBtn() {
-		return ConfirmDispatchNoBtn;
+	public WebElement getInConfirmDispatchPageNoBtn() {
+		return InConfirmDispatchPageNoBtn;
 	}
 
 
@@ -209,6 +217,11 @@ public class ManageOrdersPage {
 		return RejectOrderBtnBasedOnOrderId;
 	}
 
+
+
+	public WebElement getDispatchedConfirmText() {
+		return DispatchedConfirmText;
+	}
 
 
 	public WebElement getPreviousPageLnk() {
@@ -296,17 +309,68 @@ public class ManageOrdersPage {
   	    
   	}
   	
-  	public void allActionsInConfirmDispatchPageInLLpPage(String DeliveryMsg, int HowManyDaysYouWantToDeliver) throws Exception
+  	public void allActionsInConfirmDispatchPageInLLpPage(String DeliveryMsg, String DeliveryDateTime) throws Exception 
   	{
-  		WebDriverUtility wUtil = new WebDriverUtility();
-  		String Date = wUtil.generateNextDaysDateAndTimeBasedOnIndex(HowManyDaysYouWantToDeliver);
-  		
   		Thread.sleep(2000);
-  		DeliveryMessageEdt.sendKeys(DeliveryMsg);
+  	    DeliveryMessageEdt.sendKeys(DeliveryMsg);
+  	    Thread.sleep(2000);
+  	    DeliveryDateTimeEdt.sendKeys(DeliveryDateTime);
+  	    Thread.sleep(2000);
+  	  Robot r = new Robot();
+
+  	// Press and release TAB 3 times
+  	for (int i = 0; i < 3; i++) {
+  	    r.keyPress(KeyEvent.VK_TAB);
+  	    r.keyRelease(KeyEvent.VK_TAB);
+  	    Thread.sleep(1000);
+  	}
+
+  	// Press and release DOWN ARROW 3 times
+  	for (int i = 0; i < 3; i++) {
+  	    r.keyPress(KeyEvent.VK_DOWN);
+  	    r.keyRelease(KeyEvent.VK_DOWN);
+  	    Thread.sleep(1000);
+  	}
+
+  	// Press and release TAB once
+  	r.keyPress(KeyEvent.VK_TAB);
+  	r.keyRelease(KeyEvent.VK_TAB);
+  	Thread.sleep(1000);
+
+  	// Press and release DOWN ARROW 3 times
+  	for (int i = 0; i < 3; i++) {
+  	    r.keyPress(KeyEvent.VK_DOWN);
+  	    r.keyRelease(KeyEvent.VK_DOWN);
+  	    Thread.sleep(1000);
+  	}
+
+  	// Press and release ENTER
+  	r.keyPress(KeyEvent.VK_ENTER);
+  	r.keyRelease(KeyEvent.VK_ENTER);
+  	
+  	    Thread.sleep(2000);
+  	    YesBtn.click();
+  	}
+  	
+  	
+  	
+  	public void clickOnVerifyOrderBtnBasedOnOrderID(WebDriver driver, String OrderID) throws Exception
+  	{
   		Thread.sleep(2000);
-  		DeliveryDateTimeEdt.sendKeys(Date);
+  		driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/button[.=' Verify Order ']")).click();
   		Thread.sleep(2000);
-  		YesBtn.click();
+  	    
+  	}
+  	
+  	public void confirmingOrderStatus(WebDriver driver, String OrderID) throws Exception
+  	{
+  		Thread.sleep(2000);
+  		WebElement DispatchedConfirmMsg = driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/button[.=' Dispatched ']"));
+  		Thread.sleep(2000);
+        Assert.assertTrue(DispatchedConfirmMsg.isDisplayed(),
+                "Problem occurred while dispatching the order.");
+
+        System.out.println("Order dispatched successfully. Order ID: " + OrderID);
   	}
   	
 }

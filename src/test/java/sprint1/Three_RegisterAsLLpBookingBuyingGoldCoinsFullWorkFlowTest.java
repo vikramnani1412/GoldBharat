@@ -29,6 +29,7 @@ import com.goldbharath.objectrepository.user.KycAsLLpPage;
 import com.goldbharath.objectrepository.user.LoginPage;
 import com.goldbharath.objectrepository.user.RegisterPage;
 import com.goldbharath.objectrepository.user.ReviewYourGoldOrderPage;
+import com.goldbharath.objectrepository.user.UpdateDeliveryDetailsPage;
 import com.goldbharath.objectrepository.user.UploadTransactionDetailsForGoldCoinsPage;
 import com.goldbharath.objectrepository.user.UserProfilePage;
 import com.goldbharath.objectrepository.user.WelcomePage;
@@ -137,7 +138,7 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
             System.out.println("REGISTERED MOBILE : " + registeredMobileNumber);
             System.out.println("--------------------------------------------------");
         } finally {
-//            if (driver != null) driver.quit();
+            if (driver != null) driver.quit();
         }
     }
 
@@ -199,8 +200,7 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
         } 
         finally 
         {
-//            if (driver != null) 
-//            	driver.quit();
+            if (driver != null) driver.quit();
         }
     }
 
@@ -275,7 +275,7 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
             LogoutPage loPage = new LogoutPage(driver);
             loPage.logoutOfApplication();
         } finally {
-//            if (driver != null) driver.quit();
+            if (driver != null) driver.quit();
         }
     }
 
@@ -323,7 +323,7 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
             System.out.println("REGISTERED MOBILE : " + registeredMobileNumber);
             System.out.println("==================================================");
         } finally {
-//            if (driver != null) driver.quit();
+            if (driver != null) driver.quit();
         }
     }
 
@@ -394,7 +394,7 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
             rPage.takeAllDetailsAndClickProceedBtn(driver);
             Thread.sleep(2000);
 
-            Want to check and import this
+//            Want to check and import this
             
             GoldCoinsOrdersHistoryPage gPage = new GoldCoinsOrdersHistoryPage(driver);
             gPage.GetAllOrderDetailsBasedOnSerialNo(driver, serialNo);
@@ -424,7 +424,7 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
             System.out.println("REGISTERED MOBILE : " + registeredMobileNumber);
             System.out.println("==================================================");
         } finally {
-//            if (driver != null) driver.quit();
+            if (driver != null) driver.quit();
         }
     }
 
@@ -438,6 +438,9 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
         if (OrderID == null || OrderID.trim().isEmpty()) {
             throw new Exception("Order ID is not available from Test 5. Test 5 may have failed.");
         }
+        
+        String DeliveryMsg = eUtil.readDataFromExcel("Admin", 2, 1);
+        String DaysToDeliver = wUtil.generateNextDaysDateAndTimeBasedOnIndex(3);
 
         OrderID = OrderID.trim();
         System.out.println("ORDER ID FROM TEST 5 : " + OrderID);
@@ -469,6 +472,18 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
             moPage.checkingRecentlyBuyedCoinsDetails(driver, OrderID);
             Thread.sleep(2000);
 
+            moPage.clickOnVerifyOrderBtnBasedOnOrderID(driver, OrderID);
+            Thread.sleep(2000);
+                   
+            moPage.allActionsInConfirmDispatchPageInLLpPage(DeliveryMsg, DaysToDeliver);
+            
+            Assert.assertTrue(
+      			    moPage.getDispatchedConfirmText().isDisplayed(),
+      			    "Problem Occurred While Dispatching Order"
+      			);
+
+      			System.out.println("Order Dispatched Successfully");
+            
             System.out.println("\n==================================================");
             System.out.println("ADMIN GOLD PAYMENT FLOW COMPLETED");
             System.out.println("ORDER ID : " + OrderID);
@@ -477,7 +492,77 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
             
             
         } finally {
-//            if (driver != null) driver.quit();
+            if (driver != null) driver.quit();
         }
     }
+    
+    @Test(priority = 7, dependsOnMethods = "adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest")
+    public void distributorUpdatingDeliveryDetailsTest() throws Exception {
+
+        System.out.println("\n==================================================");
+        System.out.println("TEST 7 : DISTRIBUTOR UPDATING DELIVERY DETAILS");
+        System.out.println("==================================================");
+
+        String IdImage = System.getProperty("user.dir")+ "/src/test/resources/assets/Aadhaar_Card.jpeg";
+        String Name = eUtil.readDataFromExcel("Admin", 6, 1);
+        String PhNo = eUtil.readDataFromExcel("Admin", 7, 1);
+        String IdNo = eUtil.readDataFromExcel("Admin", 8, 1);
+        
+        // Validate registered distributor mobile number
+        Assert.assertNotNull(
+                registeredMobileNumber,
+                "Registered distributor mobile number is NULL."
+        );
+
+        Assert.assertFalse(
+                registeredMobileNumber.trim().isEmpty(),
+                "Registered distributor mobile number is EMPTY."
+        );
+
+        // Read user URL and OTP from property file
+        String userUrl = pUtil.readDataFromPropertyFile("userurl");
+        String OTP = pUtil.readDataFromPropertyFile("userotp");
+
+        // Launch browser
+        driver = createChromeDriver();
+        
+        try {
+            driver.get(userUrl);
+            waitForPageLoad();
+
+            // Click Login
+            WelcomePage welcomePage = new WelcomePage(driver);
+            welcomePage.clickOnLoginLink();
+
+            // Login using previously registered distributor
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.LoginToApplication(driver, registeredMobileNumber, OTP);
+
+            waitForPageLoad();
+
+            System.out.println("Distributor Login Successful");
+            System.out.println("Registered Mobile : " + registeredMobileNumber);
+
+            Thread.sleep(2000);
+            DashboardPage dbPage = new DashboardPage(driver);
+            dbPage.getUserProfileImg().click();
+            
+            Thread.sleep(2000);
+            dbPage.getCoinOrdersLnk().click();
+            
+            Thread.sleep(2000);
+            GoldCoinsOrdersHistoryPage gPage = new GoldCoinsOrdersHistoryPage(driver);
+            gPage.clickOnUpdateDeliveryDetailsBtnBasedOnOrderID(driver, OrderID);
+            
+            Thread.sleep(2000);
+            
+            UpdateDeliveryDetailsPage uPage = new UpdateDeliveryDetailsPage(driver);
+            uPage.updatingDeliveryDetails(Name, PhNo,  IdNo, IdImage);
+
+        } finally {
+            
+             if (driver != null) driver.quit();
+        }
+    }
+    
 }

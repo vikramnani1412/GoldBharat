@@ -53,6 +53,9 @@ public class GoldCoinsOrdersHistoryPage {
     // Updating Delivery Details
     @FindBy(xpath="//p[.=' Update Delivery Details ']")private WebElement UpdateDeliveryDetailsBtn;
     
+    @FindBy(xpath="//td[.='GB-40775']/following-sibling::td/p[.=' Update Delivery Details ']")private WebElement UpdateDeliveryDetailsBtnBasedOnOrderID;
+    
+    
     @FindBy(xpath="//h3[.=' Update Delivery Details ']/following-sibling::button[@class='btn-close']")private WebElement UpdateDeliveryDetailsPageCloseBtn;
     
     @FindBy(xpath="//select[@class='input-filed']")private WebElement OrderPickedByDrpDwn;
@@ -162,6 +165,11 @@ public class GoldCoinsOrdersHistoryPage {
 
 	public WebElement getSubmitBtn() {
 		return SubmitBtn;
+	}
+
+
+	public WebElement getUpdateDeliveryDetailsBtnBasedOnOrderID() {
+		return UpdateDeliveryDetailsBtnBasedOnOrderID;
 	}
 
 
@@ -281,6 +289,11 @@ public class GoldCoinsOrdersHistoryPage {
 		{
 			System.out.println("Transaction Details Not Uploaded");
 		}
+	}
+	
+	public void clickOnUpdateDeliveryDetailsBtnBasedOnOrderID(WebDriver driver, String OrderID)
+	{
+		driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/p[.=' Update Delivery Details ']")).click();
 	}
 	
 }

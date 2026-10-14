@@ -234,8 +234,8 @@ public class DashboardPage {
 		BuyGoldBtn.click();
 	}
 	
-	
-	public void clickOnUserProfileImageAndLogoutLink(WebDriver driver) throws Exception {
+	public void clickOnUserProfileImageAndLogoutLink(WebDriver driver) throws Exception
+	{
 
 		WebDriverUtility wUtil = new WebDriverUtility();
 		
@@ -251,6 +251,16 @@ public class DashboardPage {
 	    Thread.sleep(2000);
 	    UserProfileImg.click();
 	    
-	    
+	}
+	
+	public void checkingOrderDetails() throws Exception
+	{		
+		Thread.sleep(2000);
+		UserProfileImg.click();
+		Thread.sleep(2000);
+		CoinOrdersLnk.click();
+		Thread.sleep(2000);
+		
+		
 	}
 }

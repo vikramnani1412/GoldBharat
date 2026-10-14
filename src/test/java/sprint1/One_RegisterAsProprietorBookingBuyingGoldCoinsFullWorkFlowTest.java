@@ -3,6 +3,7 @@ package sprint1;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import com.goldbharath.genericutilities.ExcelFileUtility;
 import com.goldbharath.genericutilities.PropertyFileUtility;
 import com.goldbharath.genericutilities.WebDriverUtility;
@@ -27,1294 +29,430 @@ import com.goldbharath.objectrepository.user.KycAsProprietorPage;
 import com.goldbharath.objectrepository.user.LoginPage;
 import com.goldbharath.objectrepository.user.RegisterPage;
 import com.goldbharath.objectrepository.user.ReviewYourGoldOrderPage;
+import com.goldbharath.objectrepository.user.UpdateDeliveryDetailsPage;
 import com.goldbharath.objectrepository.user.UploadTransactionDetailsForGoldCoinsPage;
 import com.goldbharath.objectrepository.user.UserProfilePage;
 import com.goldbharath.objectrepository.user.WelcomePage;
 import com.goldbharath.objectrepository.user.whatWouldYouLikeToBuyPage;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-
-/**
- * ============================================================
- * CLASS NAME : GoldBharathFullWorkFlow
- * ============================================================
- *
- * COMPLETE GOLDBHARATH END-TO-END AUTOMATION FLOW
- *
- * FLOW:
- *
- * 1. Register User
- *          ↓
- * 2. Capture Registered Mobile Number
- *          ↓
- * 3. Login using Same Mobile Number
- *          ↓
- * 4. Complete Proprietor KYC
- *          ↓
- * 5. Login to Admin Panel
- *          ↓
- * 6. Navigate to All Distributors
- *          ↓
- * 7. Search Recently Registered/KYC Completed Distributor
- *          ↓
- * 8. Accept Distributor KYC
- *          ↓
- * 9. Edit Distributor Details
- *          ↓
- * 10. Give Gold Limit
- *          ↓
- * 11. Give Silver Limit
- *          ↓
- * 12. Complete E2E Flow
- *
- * ============================================================
- */
 public class One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest {
 
-    /**
-     * WebDriverUtility
-     *
-     * Used for reusable Selenium operations such as:
-     * - Explicit waits
-     * - Element handling
-     * - Common WebDriver operations
-     */
     WebDriverUtility wUtil = new WebDriverUtility();
-
-    /**
-     * PropertyFileUtility
-     *
-     * Used to read:
-     * - User URL
-     * - Admin URL
-     * - Admin username
-     * - Admin password
-     */
     PropertyFileUtility pUtil = new PropertyFileUtility();
-
-    /**
-     * ExcelFileUtility
-     *
-     * Used to read:
-     * - Registration data
-     * - KYC data
-     * - Gold limit
-     * - Silver limit
-     * - Mobile numbers
-     */
     ExcelFileUtility eUtil = new ExcelFileUtility();
-    
-    /**
-     * WebDriver instance used by the current test.
-     */
+
     private WebDriver driver;
-
-    /**
-     * This variable stores the mobile number successfully
-     * registered in Test 1.
-     *
-     * The SAME mobile number is then used in:
-     *
-     * Test 1 → Registration
-     * Test 2 → User Login
-     * Test 3 → Admin Distributor Search
-     *
-     * static is used because TestNG executes the test methods
-     * separately while we need to retain the value.
-     */
     private static String registeredMobileNumber;
-
     private static String OrderID;
 
-    /**
-     * Excel sheet name.
-     */
     private static final String SHEET_NAME = "Sheet1";
-
-
-    /**
-     * Default explicit wait time.
-     */
     private static final int WAIT_TIME = 20;
 
-    /**
-     * This method creates and returns a ChromeDriver.
-     *
-     * Keeping browser creation in one reusable method avoids
-     * duplicate Chrome configuration in every test.
-     */
-    private WebDriver createChromeDriver() {
+    // Browser Utilities
 
+    private WebDriver createChromeDriver() {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
-
-        // Disable GPU related issues.
-        options.addArguments("--disable-gpu");
-
-        // Set browser window size.
-        options.addArguments("--window-size=1920,1080");
-
-        // Disable browser notifications.
-        options.addArguments("--disable-notifications");
-
-        // Disable popup blocking.
-        options.addArguments("--disable-popup-blocking");
-
-        // Disable Chrome information bars.
-        options.addArguments("--disable-infobars");
+        options.addArguments("--disable-gpu", "--window-size=1920,1080",
+                "--disable-notifications", "--disable-popup-blocking", "--disable-infobars");
 
         WebDriver webDriver = new ChromeDriver(options);
-
         webDriver.manage().window().maximize();
-
-        webDriver.manage()
-                  .timeouts()
-                  .implicitlyWait(Duration.ofSeconds(5));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         return webDriver;
     }
 
-    /**
-     * Waits until the browser document is completely loaded.
-     *
-     * This is better than blindly using Thread.sleep().
-     */
     private void waitForPageLoad() {
-
-        WebDriverWait wait =
-                new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME));
-
-        wait.until(webDriver -> ((org.openqa.selenium.JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME))
+                .until(webDriver -> ((org.openqa.selenium.JavascriptExecutor) webDriver)
+                        .executeScript("return document.readyState").equals("complete"));
     }
 
-    /**
-     * Waits for Register button and clicks it.
-     */
-    private void clickRegisterButton() 
-    {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME));
-
+    private void clickRegisterButton() {
         By registerButton = By.xpath("//button[normalize-space()='Register']");
-
-        wait.until(ExpectedConditions.elementToBeClickable(registerButton)).click();
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME))
+                .until(ExpectedConditions.elementToBeClickable(registerButton)).click();
     }
 
-    /**
-     * Reads mobile numbers from Excel.
-     *
-     * Excel row index:
-     *
-     * 10 → mobile number
-     * 11 → mobile number
-     * ...
-     * 29 → mobile number
-     *
-     * Column:
-     *
-     * 1 → Mobile Number
-     *
-     * IMPORTANT:
-     *
-     * Apache POI row/column indexes are normally zero based.
-     */
+    // Test Data Provider
+
     @DataProvider(name = "mobileNumbers")
     public Object[][] mobileNumbers() throws Exception {
-
         List<String> mobileNumbers = new ArrayList<>();
 
         for (int row = 10; row <= 29; row++) {
-
-            // Read mobile number from Excel.
             String mobileNumber = eUtil.readDataFromExcel(SHEET_NAME, row, 1);
 
-            // ----------------------------------------------------
-            // Validate mobile number
-            // ----------------------------------------------------
-
             if (mobileNumber != null && !mobileNumber.trim().isEmpty()) {
-
-                // Remove unwanted spaces.
-                mobileNumber = mobileNumber.trim();
-
-                // Add mobile number to list.
-                mobileNumbers.add(mobileNumber);
-
-                // Print Excel data in console.
-                System.out.println("Excel Row " + row + " : " + mobileNumber);
+                mobileNumbers.add(mobileNumber.trim());
+                System.out.println("Excel Row " + row + " : " + mobileNumber.trim());
             }
         }
 
-
-        // --------------------------------------------------------
-        // Validate Excel data
-        // --------------------------------------------------------
-
-        if (mobileNumbers.isEmpty()) 
-        {
+        if (mobileNumbers.isEmpty()) {
             throw new Exception("No mobile numbers found in Excel rows 10 to 29.");
         }
 
         return new Object[][]{{mobileNumbers}};
     }
 
-    /**
-     * TEST 1:
-     *
-     * Register a new GoldBharath user.
-     *
-     * After successful registration, the mobile number returned
-     * by RegisterPage is stored in registeredMobileNumber.
-     *
-     * This SAME number will be used in the next tests.
-     */
-    @Test(priority = 1, dataProvider = "mobileNumbers")
-    public void RegisteringToGoldbharathTest(List<String> mobileNumbers) throws Exception 
-    {
-        System.out.println("\n==================================================");
-        System.out.println("TEST 1 : GOLDBHARATH USER REGISTRATION");
-        System.out.println("==================================================");
+    // Test 1: User Registration
 
-        // ========================================================
-        // STEP 1 : READ REGISTRATION DATA FROM EXCEL
-        // ========================================================
+    @Test(priority = 1, dataProvider = "mobileNumbers")
+    public void RegisteringToGoldbharathTest(List<String> mobileNumbers) throws Exception {
+        System.out.println("\n========== TEST 1: USER REGISTRATION ==========");
 
         String businessName = eUtil.readDataFromExcel(SHEET_NAME, 1, 1);
-
         String personName = eUtil.readDataFromExcel(SHEET_NAME, 2, 1);
-
         String email = eUtil.readDataFromExcel(SHEET_NAME, 3, 1);
-
         String date = eUtil.readDataFromExcel(SHEET_NAME, 5, 1);
-
         String pincode = eUtil.readDataFromExcel(SHEET_NAME, 6, 1);
-
         String address = eUtil.readDataFromExcel(SHEET_NAME, 7, 1);
-
-        // ========================================================
-        // STEP 2 : READ USER URL
-        // ========================================================
-
         String userUrl = pUtil.readDataFromPropertyFile("userurl");
-
-        // ========================================================
-        // STEP 3 : START CHROME BROWSER
-        // ========================================================
 
         driver = createChromeDriver();
 
         try {
-
-            // ====================================================
-            // STEP 4 : OPEN USER APPLICATION
-            // ====================================================
-
             driver.get(userUrl);
-
             waitForPageLoad();
-
-            // ====================================================
-            // STEP 5 : CLICK REGISTER
-            // ====================================================
-
             clickRegisterButton();
 
-            // ====================================================
-            // STEP 6 : CREATE REGISTER PAGE OBJECT
-            // ====================================================
-
             RegisterPage registerPage = new RegisterPage(driver);
+            registeredMobileNumber = registerPage.registeringToGoldbharathApplication(
+                    driver, businessName, personName, email, mobileNumbers, date, pincode, address);
 
-            // ====================================================
-            // STEP 7 : REGISTER USER
-            // ====================================================
+            Assert.assertNotNull(registeredMobileNumber, "Registered mobile number is NULL.");
+            Assert.assertFalse(registeredMobileNumber.trim().isEmpty(), "Registered mobile number is EMPTY.");
 
-            /*
-             * registerPage method should:
-             *
-             * 1. Select a mobile number
-             * 2. Enter registration details
-             * 3. Submit registration
-             * 4. Handle duplicate number if required
-             * 5. Return successfully registered mobile number
-             */
-
-            registeredMobileNumber = registerPage.registeringToGoldbharathApplication(driver, businessName, personName, email, mobileNumbers, date, pincode, address);
-
-            // ====================================================
-            // STEP 8 : VALIDATE REGISTERED MOBILE NUMBER
-            // ====================================================
-
-            Assert.assertNotNull(registeredMobileNumber, "Registration failed - mobile number is NULL.");
-
-            Assert.assertFalse(registeredMobileNumber.trim().isEmpty(), "Registration failed - mobile number is EMPTY.");
-
-            // ====================================================
-            // STEP 9 : PRINT REGISTERED MOBILE
-            // ====================================================
-
-            System.out.println("--------------------------------------------------");
-
-            System.out.println("REGISTRATION SUCCESSFUL");
-
-            System.out.println("REGISTERED MOBILE : "+ registeredMobileNumber);
-
-            System.out.println("--------------------------------------------------");
-
-        } 
-        finally 
-        {
-            if (driver != null) 
-            {
-                driver.quit();
-            }
+            System.out.println("Registration successful. Mobile: " + registeredMobileNumber);
+        } finally {
+            if (driver != null) driver.quit();
         }
     }
 
-    // ============================================================
-    // TEST 2
-    // LOGIN + KYC
-    // ============================================================
+    // Test 2: User Login and Proprietor KYC
 
-    /**
-     * TEST 2:
-     *
-     * Login using the mobile number generated in Test 1.
-     *
-     * Then complete Proprietor KYC.
-     *
-     * This test depends on successful registration.
-     */
     @Test(priority = 2, dependsOnMethods = "RegisteringToGoldbharathTest")
     public void loginUpdatingKYC() throws Exception {
+        System.out.println("\n========== TEST 2: LOGIN AND PROPRIETOR KYC ==========");
 
-        System.out.println("\n==================================================");
-        System.out.println("TEST 2 : LOGIN + PROPRIETOR KYC");
-        System.out.println("==================================================");
-
-        // ========================================================
-        // STEP 1 : VALIDATE REGISTERED MOBILE
-        // ========================================================
-
-        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) 
-        {
+        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
             throw new Exception("Registered mobile number is not available.");
         }
 
-        System.out.println("LOGIN MOBILE : "+ registeredMobileNumber);
-
-
-        // ========================================================
-        // STEP 2 : READ KYC DATA FROM EXCEL
-        // ========================================================
-
-        String proprietorName =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        34,
-                        2
-                );
-
-
-        String proprietorPan =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        35,
-                        2
-                );
-
-
-        String gstNumber =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        36,
-                        2
-                );
-
-
-        String bankName =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        37,
-                        2
-                );
-
-
-        String accountNumber =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        38,
-                        2
-                );
-
-
-        String ifscCode =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        39,
-                        2
-                );
-
-
-        String accountHolderName =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        40,
-                        2
-                );
-
-
-        // ========================================================
-        // STEP 3 : READ USER URL
-        // ========================================================
-
-        String userUrl =
-                pUtil.readDataFromPropertyFile("userurl");
-        
-
-
-        // ========================================================
-        // STEP 4 : START CHROME
-        // ========================================================
+        String proprietorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 2);
+        String proprietorPan = eUtil.readDataFromExcel(SHEET_NAME, 35, 2);
+        String gstNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 2);
+        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 37, 2);
+        String accountNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 2);
+        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 39, 2);
+        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 40, 2);
+        String userUrl = pUtil.readDataFromPropertyFile("userurl");
+        String OTP = pUtil.readDataFromPropertyFile("userotp");
 
         driver = createChromeDriver();
 
-
         try {
-
-            // ====================================================
-            // STEP 5 : OPEN USER APPLICATION
-            // ====================================================
-
             driver.get(userUrl);
-
             waitForPageLoad();
 
-
-            // ====================================================
-            // STEP 6 : CLICK LOGIN LINK
-            // ====================================================
-
-            WelcomePage welcomePage =
-                    new WelcomePage(driver);
-
-            welcomePage.clickOnLoginLink();
-
-
-            // ====================================================
-            // STEP 7 : LOGIN USING REGISTERED MOBILE
-            // ====================================================
-
-            LoginPage loginPage =  new LoginPage(driver);
-
-            String OTP = pUtil.readDataFromPropertyFile("userotp");
-            
-            loginPage.LoginToApplication(driver, registeredMobileNumber, OTP);
-
-
-            // ====================================================
-            // STEP 8 : WAIT FOR DASHBOARD
-            // ====================================================
-
+            new WelcomePage(driver).clickOnLoginLink();
+            new LoginPage(driver).LoginToApplication(driver, registeredMobileNumber, OTP);
             waitForPageLoad();
 
+            new DashboardPage(driver).clickOnUserProfileImageAndLogoutLink(driver);
+            new UserProfilePage(driver).clickOnKycLink();
 
-            // ====================================================
-            // STEP 9 : OPEN USER PROFILE
-            // ====================================================
+            new KycAsProprietorPage(driver).proprietorKyc(
+                    driver, proprietorName, proprietorPan, gstNumber, bankName,
+                    accountNumber, ifscCode, accountHolderName);
 
-            DashboardPage dashboardPage =
-                    new DashboardPage(driver);
-
-            /*
-             * IMPORTANT:
-             *
-             * Keep the existing method according to your
-             * DashboardPage implementation.
-             *
-             * If this method only opens the profile menu,
-             * the method name should ideally be renamed to:
-             *
-             * clickOnUserProfileImage()
-             *
-             * because "Logout" is misleading here.
-             */
-
-            dashboardPage
-                    .clickOnUserProfileImageAndLogoutLink(driver);
-
-
-            // ====================================================
-            // STEP 10 : OPEN KYC PAGE
-            // ====================================================
-
-            UserProfilePage userProfilePage =
-                    new UserProfilePage(driver);
-
-            userProfilePage.clickOnKycLink();
-
-
-            // ====================================================
-            // STEP 11 : CREATE KYC PAGE OBJECT
-            // ====================================================
-
-            KycAsProprietorPage kycPage =
-                    new KycAsProprietorPage(driver);
-
-
-            // ====================================================
-            // STEP 12 : COMPLETE PROPRIETOR KYC
-            // ====================================================
-
-            kycPage.proprietorKyc(
-                    driver,
-                    proprietorName,
-                    proprietorPan,
-                    gstNumber,
-                    bankName,
-                    accountNumber,
-                    ifscCode,
-                    accountHolderName
-            );
-
-
-            // ====================================================
-            // STEP 13 : SUCCESS MESSAGE
-            // ====================================================
-
-            System.out.println(
-                    "--------------------------------------------------"
-            );
-
-            System.out.println(
-                    "KYC COMPLETED SUCCESSFULLY"
-            );
-
-            System.out.println(
-                    "MOBILE : "
-                            + registeredMobileNumber
-            );
-
-            System.out.println(
-                    "--------------------------------------------------"
-            );
-
-
-        } 
-        finally 
-        {
-            if (driver != null) {
-                driver.quit();
-            }
+            System.out.println("KYC completed successfully. Mobile: " + registeredMobileNumber);
+        } finally {
+            if (driver != null) driver.quit();
         }
     }
 
+    // Test 3: Admin KYC Approval and Gold/Silver Limits
 
-    // ============================================================
-    // TEST 3
-    // ADMIN DISTRIBUTOR FLOW
-    // ============================================================
+    @Test(priority = 3, dependsOnMethods = "loginUpdatingKYC")
+    public void loginToAdminApproveKycAndGivingGoldAndSilverLimit() throws Exception {
+        System.out.println("\n========== TEST 3: ADMIN DISTRIBUTOR FLOW ==========");
 
-    /**
-     * TEST 3:
-     *
-     * 1. Login to Admin
-     * 2. Open All Distributors
-     * 3. Search registered distributor
-     * 4. Accept KYC
-     * 5. Edit distributor
-     * 6. Give Gold Limit
-     * 7. Give Silver Limit
-     *
-     * This test depends on successful KYC completion.
-     */
-    @Test(
-            priority = 3,
-            dependsOnMethods = "loginUpdatingKYC"
-    )
-    public void loginToAdminApproveKycAndGivingGoldAndSilverLimit()
-            throws Exception {
-
-
-        System.out.println(
-                "\n=================================================="
-        );
-
-        System.out.println(
-                "TEST 3 : ADMIN DISTRIBUTOR FLOW"
-        );
-
-        System.out.println(
-                "=================================================="
-        );
-
-
-        // ========================================================
-        // STEP 1 : VALIDATE REGISTERED MOBILE
-        // ========================================================
-
-        if (registeredMobileNumber == null ||
-                registeredMobileNumber.trim().isEmpty()) {
-
-            throw new Exception(
-                    "Registered mobile number is not available."
-            );
+        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
+            throw new Exception("Registered mobile number is not available.");
         }
 
+        String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
+        String username = pUtil.readDataFromPropertyFile("adminusername");
+        String password = pUtil.readDataFromPropertyFile("adminpassword");
+        String ownerName = eUtil.readDataFromExcel(SHEET_NAME, 34, 2);
+        String goldLimit = eUtil.readDataFromExcel(SHEET_NAME, 48, 1);
+        String silverLimit = eUtil.readDataFromExcel(SHEET_NAME, 49, 1);
 
-        // ========================================================
-        // STEP 2 : READ ADMIN LOGIN DATA
-        // ========================================================
-
-        String adminUrl =
-                pUtil.readDataFromPropertyFile("adminurl");
-
-
-        String username =
-                pUtil.readDataFromPropertyFile("adminusername");
-
-
-        String password =
-                pUtil.readDataFromPropertyFile("adminpassword");
-
-
-        // ========================================================
-        // STEP 3 : READ OWNER / KYC DETAILS
-        // ========================================================
-
-        String ownerName =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        34,
-                        2
-                );
-
-
-//        String proprietorName =
-//                eUtil.readDataFromExcel(
-//                        SHEET_NAME,
-//                        34,
-//                        2
-//                );
-//
-//
-//        String proprietorPan =
-//                eUtil.readDataFromExcel(
-//                        SHEET_NAME,
-//                        35,
-//                        2
-//                );
-//
-//
-//        String gstNumber =
-//                eUtil.readDataFromExcel(
-//                        SHEET_NAME,
-//                        36,
-//                        2
-//                );
-//
-//
-//        String bankName =
-//                eUtil.readDataFromExcel(
-//                        SHEET_NAME,
-//                        37,
-//                        2
-//                );
-//
-//
-//        String accountNumber =
-//                eUtil.readDataFromExcel(
-//                        SHEET_NAME,
-//                        38,
-//                        2
-//                );
-//
-//
-//        String ifscCode =
-//                eUtil.readDataFromExcel(
-//                        SHEET_NAME,
-//                        39,
-//                        2
-//                );
-//
-//
-//        String accountHolderName =
-//                eUtil.readDataFromExcel(
-//                        SHEET_NAME,
-//                        40,
-//                        2
-//                );
-
-
-        // ========================================================
-        // STEP 4 : READ GOLD AND SILVER LIMIT
-        // ========================================================
-
-        /*
-         * Current Excel mapping from your uploaded code:
-         *
-         * Row 48 -> Gold Limit
-         * Row 49 -> Silver Limit
-         *
-         * Column 1 is used for these values.
-         */
-
-        String goldLimit =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        48,
-                        1
-                );
-
-
-        String silverLimit =
-                eUtil.readDataFromExcel(
-                        SHEET_NAME,
-                        49,
-                        1
-                );
-
-
-        // ========================================================
-        // STEP 5 : VALIDATE GOLD LIMIT
-        // ========================================================
-
-        Assert.assertNotNull(
-                goldLimit,
-                "Gold Limit is NULL in Excel."
-        );
-
-
-        Assert.assertFalse(
-                goldLimit.trim().isEmpty(),
-                "Gold Limit is EMPTY in Excel."
-        );
-
-
-        // ========================================================
-        // STEP 6 : VALIDATE SILVER LIMIT
-        // ========================================================
-
-        Assert.assertNotNull(
-                silverLimit,
-                "Silver Limit is NULL in Excel."
-        );
-
-
-        Assert.assertFalse(
-                silverLimit.trim().isEmpty(),
-                "Silver Limit is EMPTY in Excel."
-        );
-
-
-        // ========================================================
-        // STEP 7 : PRINT TEST DATA
-        // ========================================================
-
-        System.out.println(
-                "REGISTERED MOBILE : "
-                        + registeredMobileNumber
-        );
-
-        System.out.println(
-                "OWNER NAME        : "
-                        + ownerName
-        );
-
-        System.out.println(
-                "GOLD LIMIT        : "
-                        + goldLimit
-        );
-
-        System.out.println(
-                "SILVER LIMIT      : "
-                        + silverLimit
-        );
-
-
-        // ========================================================
-        // STEP 8 : START ADMIN CHROME
-        // ========================================================
+        Assert.assertNotNull(goldLimit, "Gold limit is NULL in Excel.");
+        Assert.assertFalse(goldLimit.trim().isEmpty(), "Gold limit is EMPTY in Excel.");
+        Assert.assertNotNull(silverLimit, "Silver limit is NULL in Excel.");
+        Assert.assertFalse(silverLimit.trim().isEmpty(), "Silver limit is EMPTY in Excel.");
 
         driver = createChromeDriver();
 
-
         try {
-
-            // ====================================================
-            // STEP 9 : OPEN ADMIN APPLICATION
-            // ====================================================
-
             driver.get(adminUrl);
-
             waitForPageLoad();
 
-
-            // ====================================================
-            // STEP 10 : ADMIN LOGIN
-            // ====================================================
-
-            com.goldbharath.objectrepository.admin.LoginPage adminLoginPage =
-                    new com.goldbharath.objectrepository.admin.LoginPage(driver);
-
-
-            adminLoginPage.loginToAdmin(
-                    username,
-                    password
-            );
-
-
-            // ====================================================
-            // STEP 11 : WAIT FOR ADMIN DASHBOARD
-            // ====================================================
-
+            new com.goldbharath.objectrepository.admin.LoginPage(driver)
+                    .loginToAdmin(username, password);
             waitForPageLoad();
 
-
-            // ====================================================
-            // STEP 12 : OPEN ALL DISTRIBUTORS
-            // ====================================================
-
-            com.goldbharath.objectrepository.admin.DashboardPage
-                    adminDashboardPage =
+            com.goldbharath.objectrepository.admin.DashboardPage adminDashboardPage =
                     new com.goldbharath.objectrepository.admin.DashboardPage(driver);
 
+            new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME))
+                    .until(ExpectedConditions.elementToBeClickable(
+                            adminDashboardPage.getAllDistributorLnk())).click();
 
-            WebDriverWait wait =
-                    new WebDriverWait(
-                            driver,
-                            Duration.ofSeconds(WAIT_TIME)
-                    );
+            ManageDistributorPage manageDistributorPage = new ManageDistributorPage(driver);
+            manageDistributorPage.clickOnRecentlyRegisteredAndKycCompletedDistributor(
+                    driver, registeredMobileNumber, ownerName);
 
+            new DistributorDetailsPage(driver).acceptingDistributorKycDetails();
 
-            wait.until(
-                    ExpectedConditions.elementToBeClickable(
-                            adminDashboardPage.getAllDistributorLnk()
-                    )
-            ).click();
+            manageDistributorPage.clickOnRecentlyRegisteredDistributorEditButton(
+                    driver, registeredMobileNumber);
 
+            new BusinessInformationPage(driver)
+                    .editingAndGivingSilverAndGoldLimit(silverLimit, goldLimit);
 
-            // ====================================================
-            // STEP 13 : CREATE MANAGE DISTRIBUTOR PAGE
-            // ====================================================
+            System.out.println("Admin flow completed successfully.");
+            System.out.println("Mobile: " + registeredMobileNumber);
+            System.out.println("Owner: " + ownerName);
+            System.out.println("Gold Limit: " + goldLimit);
+            System.out.println("Silver Limit: " + silverLimit);
 
-            ManageDistributorPage manageDistributorPage =
-                    new ManageDistributorPage(driver);
-
-
-            // ====================================================
-            // STEP 14 : FIND RECENTLY REGISTERED DISTRIBUTOR
-            // ====================================================
-
-            /*
-             * Search using:
-             *
-             * Registered Mobile Number
-             * Owner Name
-             */
-
-            manageDistributorPage
-                    .clickOnRecentlyRegisteredAndKycCompletedDistributor(
-                            driver,
-                            registeredMobileNumber,
-                            ownerName
-                    );
-
-
-            // ====================================================
-            // STEP 15 : ACCEPT DISTRIBUTOR KYC
-            // ====================================================
-
-            DistributorDetailsPage distributorDetailsPage =
-                    new DistributorDetailsPage(driver);
-
-
-            distributorDetailsPage
-                    .acceptingDistributorKycDetails();
-
-
-            // ====================================================
-            // STEP 16 : OPEN EDIT DISTRIBUTOR
-            // ====================================================
-
-            manageDistributorPage
-                    .clickOnRecentlyRegisteredDistributorEditButton(
-                            driver,
-                            registeredMobileNumber
-                    );
-
-
-            // ====================================================
-            // STEP 17 : CREATE BUSINESS INFORMATION PAGE
-            // ====================================================
-
-            BusinessInformationPage
-                    businessInformationPage =
-                    new BusinessInformationPage(driver);
-
-
-            // ====================================================
-            // STEP 18 : EDIT DETAILS
-            // AND GIVE GOLD/SILVER LIMIT
-            // ====================================================
-
-            businessInformationPage
-                    .editingAndGivingSilverAndGoldLimit(
-                            silverLimit,
-                            goldLimit
-                    );
-
-
-            // ====================================================
-            // STEP 19 : FINAL SUCCESS
-            // ====================================================
-
-            System.out.println(
-                    "\n=================================================="
-            );
-
-            System.out.println(
-                    "GOLDBHARATH E2E FLOW COMPLETED SUCCESSFULLY"
-            );
-
-            System.out.println(
-                    "=================================================="
-            );
-
-            System.out.println(
-                    "Registered Mobile : "
-                            + registeredMobileNumber
-            );
-
-            System.out.println(
-                    "Owner Name        : "
-                            + ownerName
-            );
-
-            System.out.println(
-                    "Gold Limit        : "
-                            + goldLimit
-            );
-
-            System.out.println(
-                    "Silver Limit      : "
-                            + silverLimit
-            );
-
-            System.out.println(
-                    "=================================================="
-            );
-
-            // ====================================================
-            // STEP 20 : Logout Of Application
-            // ====================================================
-            
             Thread.sleep(2000);
-            LogoutPage loPage = new LogoutPage(driver);
-            loPage.logoutOfApplication();
-            
-
+            new LogoutPage(driver).logoutOfApplication();
         } finally {
-
-            if (driver != null) {
-                driver.quit();
-            }
+            if (driver != null) driver.quit();
         }
     }
-    
-        	
-        	// ============================================================
-        	// TEST 4
-        	// DISTRIBUTOR GOLD BOOKING
-        	// ============================================================
-
-        	/*
-        	 * FIXED: This test no longer hardcodes registeredMobileNumber.
-        	 * It now depends on the full chain (Test 1 -> Test 2 -> Test 3),
-        	 * so it reuses the SAME mobile number that Test 1 actually
-        	 * registered and that Tests 2/3 already used for login/KYC/admin
-        	 * approval. This keeps the whole flow consistent end-to-end
-        	 * instead of booking gold for a distributor that was never
-        	 * created/approved in this run.
-        	 */
-        	@Test(priority = 4, dependsOnMethods = "loginToAdminApproveKycAndGivingGoldAndSilverLimit")
-        	public void distributorBookingGoldTest() throws Exception {
-
-        	    // ========================================================
-        	    // STEP 1 : PRINT TEST NAME
-        	    // ========================================================
-
-        	    System.out.println("\n==================================================");
-        	    System.out.println("TEST 4 : DISTRIBUTOR GOLD BOOKING");
-        	    System.out.println("==================================================");
-
-        	    // ========================================================
-        	    // STEP 2 : VALIDATE REGISTERED MOBILE NUMBER
-        	    // ========================================================
-
-        	    /*
-        	     * registeredMobileNumber is already set by
-        	     * RegisteringToGoldbharathTest (Test 1) and carried
-        	     * through Tests 2 and 3 via the static field.
-        	     * No need to reassign it here.
-        	     */
-        	    if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
-        	        throw new Exception("Registered mobile number is not available. Earlier tests in the chain may have failed.");
-        	    }
-
-        	    // ========================================================
-        	    // STEP 3 : PRINT REGISTERED MOBILE NUMBER
-        	    // ========================================================
-
-        	    System.out.println("REGISTERED MOBILE NUMBER : " + registeredMobileNumber);
-
-        	    // ========================================================
-        	    // STEP 4 : READ USER URL
-        	    // ========================================================
-
-        	    String userUrl = pUtil.readDataFromPropertyFile("userurl");
-        	    
-        	    String OTP = pUtil.readDataFromPropertyFile("userotp");
-
-        	    // ========================================================
-        	    // STEP 5 : START CHROME BROWSER
-        	    // ========================================================
-
-        	    driver = createChromeDriver();
-
-        	    try {
-
-        	        // ====================================================
-        	        // STEP 6 : OPEN GOLDBHARATH APPLICATION
-        	        // ====================================================
-
-        	        driver.get(userUrl);
-        	        waitForPageLoad();
-
-        	        // ====================================================
-        	        // STEP 7 : OPEN LOGIN PAGE
-        	        // ====================================================
-
-        	        WelcomePage welcomePage = new WelcomePage(driver);
-        	        welcomePage.clickOnLoginLink();
-
-        	        // ====================================================
-        	        // STEP 8 : LOGIN USING THE REGISTERED MOBILE NUMBER
-        	        // ====================================================
-
-        	        LoginPage loginPage = new LoginPage(driver);
-        	        loginPage.LoginToApplication(driver, registeredMobileNumber, OTP);
-
-        	        // ====================================================
-        	        // STEP 9 : WAIT FOR DASHBOARD
-        	        // ====================================================
-
-        	        waitForPageLoad();
-
-        	        // ====================================================
-        	        // STEP 10 : PRINT LOGIN SUCCESS
-        	        // ====================================================
-
-        	        System.out.println("Distributor Login Successful");
-        	        System.out.println("Mobile : " + registeredMobileNumber);
-
-        	        // ====================================================
-        	        // STEP 11 : GOLD BOOKING FLOW
-        	        // ====================================================
-
-        	        DashboardPage dbPage = new DashboardPage(driver);
-        	        dbPage.clickOnBookGoldBtn(driver);
-
-        	        Thread.sleep(2000);
-
-        	        BookGoldPage bgPage = new BookGoldPage(driver);
-        	        bgPage.fetchingGoldLivePriceAndBookingGold(driver);
-
-        	        // ====================================================
-        	        // STEP 12 : SUCCESS MESSAGE
-        	        // ====================================================
-
-        	        System.out.println("\n==================================================");
-        	        System.out.println("GOLD BOOKING COMPLETED SUCCESSFULLY");
-        	        System.out.println("REGISTERED MOBILE : " + registeredMobileNumber);
-        	        System.out.println("==================================================");
-
-        	    } finally {
-
-        	      if (driver != null) {
-        	          driver.quit();
-        	      }
-        	 
-        	    }
-        	}
-        	
-        	
-        		@Test(priority = 5, dependsOnMethods = "distributorBookingGoldTest")
-	public void distributorBuyingGoldTest() throws Exception {
-		final String serialNo = "1";
-		final String transactionImage = System.getProperty("user.dir") + "/src/test/resources/assets/Customer_Transaction_History_Report_Example.png";
-		final String transactionIdNum = eUtil.readDataFromExcel("User", 1, 0);
-
-		System.out.println("\n==================================================");
-		System.out.println("TEST 5 : DISTRIBUTOR GOLD BUYING");
-		System.out.println("==================================================");
-
-		if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
-			throw new Exception("Registered mobile number is not available. Earlier tests in the chain may have failed.");
-		}
-
-		System.out.println("REGISTERED MOBILE NUMBER : " + registeredMobileNumber);
-
-		String userUrl = pUtil.readDataFromPropertyFile("userurl");
-		String OTP = pUtil.readDataFromPropertyFile("userotp");
-		driver = createChromeDriver();
-
-		try {
-			driver.get(userUrl);
-			waitForPageLoad();
-
-			WelcomePage welcomePage = new WelcomePage(driver);
-			welcomePage.clickOnLoginLink();
-
-			LoginPage loginPage = new LoginPage(driver);
-			loginPage.LoginToApplication(driver, registeredMobileNumber, OTP);
-			waitForPageLoad();
-
-			System.out.println("Distributor Login Successful");
-			System.out.println("Mobile : " + registeredMobileNumber);
-
-			DashboardPage dbPage = new DashboardPage(driver);
-			dbPage.clickOnBuyGoldBtn(driver);
-			Thread.sleep(2000);
-
-			whatWouldYouLikeToBuyPage wPage = new whatWouldYouLikeToBuyPage(driver);
-			wPage.getGoldCoinsEle().click();
-			Thread.sleep(2000);
-
-			BuildYourGoldCoinCombinationPage bPage = new BuildYourGoldCoinCombinationPage(driver);
-			bPage.increaseGoldGramsAccToWeight(driver, "1", 1);
-			Thread.sleep(2000);
-			bPage.increaseGoldGramsAccToWeight(driver, "2", 2);
-			Thread.sleep(2000);
-			bPage.increaseGoldGramsAccToWeight(driver, "5", 1);
-			Thread.sleep(2000);
-			bPage.increaseGoldGramsAccToWeight(driver, "10", 2);
-			Thread.sleep(2000);
-			bPage.increaseGoldGramsAccToWeight(driver, "20", 1);
-			Thread.sleep(2000);
-			bPage.increaseGoldGramsAccToWeight(driver, "50", 1);
-			Thread.sleep(2000);
-			bPage.increaseGoldGramsAccToWeight(driver, "100", 1);
-			Thread.sleep(2000);
-
-			bPage.getContinueBtn().click();
-			Thread.sleep(2000);
-
-			ReviewYourGoldOrderPage rPage = new ReviewYourGoldOrderPage(driver);
-			rPage.takeAllDetailsAndClickProceedBtn(driver);
-			Thread.sleep(2000);
-
-			GoldCoinsOrdersHistoryPage gPage = new GoldCoinsOrdersHistoryPage(driver);
-			gPage.GetAllOrderDetailsBasedOnSerialNo(driver, serialNo);
-			Thread.sleep(2000);
-
-			System.out.println("\n==================================================");
-			System.out.println("GOLD BUYING COMPLETED SUCCESSFULLY");
-			System.out.println("REGISTERED MOBILE : " + registeredMobileNumber);
-			System.out.println("==================================================");
-
-			// Capture the generated Order ID and retain it for Test 6.
-			OrderID = gPage.GetOrderIdBasedOnSerialNo(driver, serialNo);
-
-			if (OrderID == null || OrderID.trim().isEmpty()) {
-				throw new Exception("Order ID was not captured from Test 5.");
-			}
-
-			OrderID = OrderID.trim();
-			System.out.println("ORDER ID GENERATED : " + OrderID);
-
-			// Use the same captured Order ID for payment document upload.
-			gPage.clickOnUpdatePaymentDocumentBtnBasedOnOrderID(driver, OrderID);
-			Thread.sleep(2000);
-
-			UploadTransactionDetailsForGoldCoinsPage uPage = new UploadTransactionDetailsForGoldCoinsPage(driver);
-			uPage.uploadingTransactionDetails(transactionImage, transactionIdNum);
-			Thread.sleep(2000);
-
-			gPage.successMsgValidation(driver, OrderID);
-
-			System.out.println("\n==================================================");
-			System.out.println("TEST 5 COMPLETED SUCCESSFULLY");
-			System.out.println("ORDER ID : " + OrderID);
-			System.out.println("REGISTERED MOBILE : " + registeredMobileNumber);
-			System.out.println("==================================================");
-
-		} finally {
-			
-			 if (driver != null) { 
-				 driver.quit(); }
-		}
-	}
-
-	// ============================================================
-	// TEST 6 : ADMIN CHECK PURCHASED GOLD & CONFIRM PAYMENT
-	// ============================================================
-
-	@Test(priority = 6, dependsOnMethods = "distributorBuyingGoldTest")
-	public void adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest() throws Exception {
-
-		System.out.println("\n==================================================");
-		System.out.println("TEST 6 : ADMIN CHECK PURCHASED GOLD & CONFIRM PAYMENT");
-		System.out.println("==================================================");
-
-		// Test 6 must use the Order ID generated by Test 5.
-		if (OrderID == null || OrderID.trim().isEmpty()) {
-			throw new Exception("Order ID is not available from Test 5. Test 5 may have failed to capture the Order ID.");
-		}
-
-		OrderID = OrderID.trim();
-		System.out.println("ORDER ID FROM TEST 5 : " + OrderID);
-
-		String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
-		String username = pUtil.readDataFromPropertyFile("adminusername");
-		String password = pUtil.readDataFromPropertyFile("adminpassword");
-
-		driver = createChromeDriver();
-
-		try {
-			driver.get(adminUrl);
-			waitForPageLoad();
-
-			com.goldbharath.objectrepository.admin.LoginPage adminLoginPage =
-					new com.goldbharath.objectrepository.admin.LoginPage(driver);
-			adminLoginPage.loginToAdmin(username, password);
-			waitForPageLoad();
-
-			System.out.println("Admin Login Successful");
-
-			com.goldbharath.objectrepository.admin.DashboardPage dbPage =
-					new com.goldbharath.objectrepository.admin.DashboardPage(driver);
-			dbPage.clickOnManageOrdersLnk();
-			Thread.sleep(2000);
-
-			com.goldbharath.objectrepository.admin.ManageOrdersPage moPage =
-					new com.goldbharath.objectrepository.admin.ManageOrdersPage(driver);
-			moPage.checkingRecentlyBuyedCoinsDetails(driver, OrderID);
-			Thread.sleep(2000);
-
-			System.out.println("\n==================================================");
-			System.out.println("ADMIN GOLD PAYMENT FLOW COMPLETED");
-			System.out.println("ORDER ID : " + OrderID);
-			System.out.println("REGISTERED MOBILE : " + registeredMobileNumber);
-			System.out.println("==================================================");
-
-		} finally {
-			
-			 if (driver != null) {
-				 driver.quit(); }
-		}
-	}
 
+    // Test 4: Distributor Gold Booking
+
+    @Test(priority = 4, dependsOnMethods = "loginToAdminApproveKycAndGivingGoldAndSilverLimit")
+    public void distributorBookingGoldTest() throws Exception {
+        System.out.println("\n========== TEST 4: DISTRIBUTOR GOLD BOOKING ==========");
+
+        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
+            throw new Exception("Registered mobile number is not available.");
+        }
+
+        String userUrl = pUtil.readDataFromPropertyFile("userurl");
+        String OTP = pUtil.readDataFromPropertyFile("userotp");
+
+        driver = createChromeDriver();
+
+        try {
+            driver.get(userUrl);
+            waitForPageLoad();
+
+            new WelcomePage(driver).clickOnLoginLink();
+            new LoginPage(driver).LoginToApplication(driver, registeredMobileNumber, OTP);
+            waitForPageLoad();
+
+            new DashboardPage(driver).clickOnBookGoldBtn(driver);
+            Thread.sleep(2000);
+
+            new BookGoldPage(driver).fetchingGoldLivePriceAndBookingGold(driver);
+
+            System.out.println("Gold booking completed. Mobile: " + registeredMobileNumber);
+        } finally {
+            if (driver != null) driver.quit();
+        }
+    }
+
+    // Test 5: Distributor Gold Purchase and Payment Document Upload
+
+    @Test(priority = 5, dependsOnMethods = "distributorBookingGoldTest")
+    public void distributorBuyingGoldTest() throws Exception {
+        String serialNo = "1";
+        String transactionImage = System.getProperty("user.dir")
+                + "/src/test/resources/assets/Customer_Transaction_History_Report_Example.png";
+        String transactionIdNum = eUtil.readDataFromExcel("User", 1, 0);
+
+        System.out.println("\n========== TEST 5: DISTRIBUTOR GOLD BUYING ==========");
+
+        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
+            throw new Exception("Registered mobile number is not available.");
+        }
+
+        String userUrl = pUtil.readDataFromPropertyFile("userurl");
+        String OTP = pUtil.readDataFromPropertyFile("userotp");
+
+        driver = createChromeDriver();
+
+        try {
+            driver.get(userUrl);
+            waitForPageLoad();
+
+            new WelcomePage(driver).clickOnLoginLink();
+            new LoginPage(driver).LoginToApplication(driver, registeredMobileNumber, OTP);
+            waitForPageLoad();
+
+            new DashboardPage(driver).clickOnBuyGoldBtn(driver);
+            Thread.sleep(2000);
+
+            new whatWouldYouLikeToBuyPage(driver).getGoldCoinsEle().click();
+            Thread.sleep(2000);
+
+            BuildYourGoldCoinCombinationPage bPage = new BuildYourGoldCoinCombinationPage(driver);
+            bPage.increaseGoldGramsAccToWeight(driver, "1", 1);
+            bPage.increaseGoldGramsAccToWeight(driver, "2", 2);
+            bPage.increaseGoldGramsAccToWeight(driver, "5", 1);
+            bPage.increaseGoldGramsAccToWeight(driver, "10", 2);
+            bPage.increaseGoldGramsAccToWeight(driver, "20", 1);
+            bPage.increaseGoldGramsAccToWeight(driver, "50", 1);
+            bPage.increaseGoldGramsAccToWeight(driver, "100", 1);
+
+            Thread.sleep(2000);
+            bPage.getContinueBtn().click();
+            Thread.sleep(2000);
+
+            new ReviewYourGoldOrderPage(driver).takeAllDetailsAndClickProceedBtn(driver);
+            Thread.sleep(2000);
+
+            GoldCoinsOrdersHistoryPage gPage = new GoldCoinsOrdersHistoryPage(driver);
+            gPage.GetAllOrderDetailsBasedOnSerialNo(driver, serialNo);
+            Thread.sleep(2000);
+
+            OrderID = gPage.GetOrderIdBasedOnSerialNo(driver, serialNo);
+
+            if (OrderID == null || OrderID.trim().isEmpty()) {
+                throw new Exception("Order ID was not captured from Test 5.");
+            }
+
+            OrderID = OrderID.trim();
+            System.out.println("Order ID generated: " + OrderID);
+
+            gPage.clickOnUpdatePaymentDocumentBtnBasedOnOrderID(driver, OrderID);
+            Thread.sleep(2000);
+
+            new UploadTransactionDetailsForGoldCoinsPage(driver)
+                    .uploadingTransactionDetails(transactionImage, transactionIdNum);
+            Thread.sleep(2000);
+
+            gPage.successMsgValidation(driver, OrderID);
+
+            System.out.println("Gold purchase and payment document upload completed. Order ID: " + OrderID);
+        } finally {
+            if (driver != null) driver.quit();
+        }
+    }
+
+    // Test 6: Admin Payment Confirmation and Dispatch
+
+    @Test(priority = 6, dependsOnMethods = "distributorBuyingGoldTest")
+    public void adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest() throws Exception {
+        System.out.println("\n========== TEST 6: ADMIN PAYMENT CONFIRMATION ==========");
+
+        String deliveryMsg = eUtil.readDataFromExcel("Admin", 2, 1);
+        String daysToDeliver = wUtil.generateNextDaysDateAndTimeBasedOnIndex(3);
+
+        if (OrderID == null || OrderID.trim().isEmpty()) {
+            throw new Exception("Order ID is not available from Test 5.");
+        }
+
+        OrderID = OrderID.trim();
+        System.out.println("Order ID: " + OrderID);
+
+        String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
+        String username = pUtil.readDataFromPropertyFile("adminusername");
+        String password = pUtil.readDataFromPropertyFile("adminpassword");
+
+        driver = createChromeDriver();
+
+        try {
+            driver.get(adminUrl);
+            waitForPageLoad();
+
+            new com.goldbharath.objectrepository.admin.LoginPage(driver)
+                    .loginToAdmin(username, password);
+            waitForPageLoad();
+
+            new com.goldbharath.objectrepository.admin.DashboardPage(driver)
+                    .clickOnManageOrdersLnk();
+            Thread.sleep(2000);
+
+            com.goldbharath.objectrepository.admin.ManageOrdersPage moPage =
+                    new com.goldbharath.objectrepository.admin.ManageOrdersPage(driver);
+
+            moPage.checkingRecentlyBuyedCoinsDetails(driver, OrderID);
+            Thread.sleep(2000);
+
+            moPage.clickOnVerifyOrderBtnBasedOnOrderID(driver, OrderID);
+            Thread.sleep(2000);
+
+            moPage.allActionsInConfirmDispatchPageInLLpPage(deliveryMsg, daysToDeliver);
+            Thread.sleep(2000);
+            
+            moPage.confirmingOrderStatus(driver, OrderID);
+
+        } finally {
+             if (driver != null) driver.quit();
+        }
+    }
+
+    // Test 7: Distributor Delivery Details Update
+
+    @Test(priority = 7, dependsOnMethods = "adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest")
+    public void distributorUpdatingDeliveryDetailsTest() throws Exception {
+        System.out.println("\n========== TEST 7: UPDATE DELIVERY DETAILS ==========");
+
+        String idImage = System.getProperty("user.dir")
+                + "/src/test/resources/assets/Aadhaar_Card.jpeg";
+        String name = eUtil.readDataFromExcel("Admin", 6, 1);
+        String phoneNumber = eUtil.readDataFromExcel("Admin", 7, 1);
+        String idNumber = eUtil.readDataFromExcel("Admin", 8, 1);
+
+        Assert.assertNotNull(registeredMobileNumber, "Registered mobile number is NULL.");
+        Assert.assertFalse(registeredMobileNumber.trim().isEmpty(),
+                "Registered mobile number is EMPTY.");
+
+        String userUrl = pUtil.readDataFromPropertyFile("userurl");
+        String OTP = pUtil.readDataFromPropertyFile("userotp");
+
+        driver = createChromeDriver();
+
+        try {
+            driver.get(userUrl);
+            waitForPageLoad();
+
+            new WelcomePage(driver).clickOnLoginLink();
+            new LoginPage(driver).LoginToApplication(driver, registeredMobileNumber, OTP);
+            waitForPageLoad();
+
+            DashboardPage dbPage = new DashboardPage(driver);
+            dbPage.getUserProfileImg().click();
+            Thread.sleep(2000);
+
+            dbPage.getCoinOrdersLnk().click();
+            Thread.sleep(2000);
+
+            new GoldCoinsOrdersHistoryPage(driver)
+                    .clickOnUpdateDeliveryDetailsBtnBasedOnOrderID(driver, OrderID);
+            Thread.sleep(2000);
+
+            new UpdateDeliveryDetailsPage(driver)
+                    .updatingDeliveryDetails(name, phoneNumber, idNumber, idImage);
+
+            System.out.println("Delivery details updated successfully. Order ID: " + OrderID);
+        } finally {
+             if (driver != null) driver.quit();
+        }
+    }
 }
 

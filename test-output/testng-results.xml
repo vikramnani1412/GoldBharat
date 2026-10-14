@@ -1,44 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-10-13T17:13:04 IST" name="Default suite" finished-at="2026-10-13T17:22:29 IST" duration-ms="565918">
+  <suite started-at="2026-10-14T17:46:26 IST" name="Sprint 1" finished-at="2026-10-14T17:48:25 IST" duration-ms="119454">
     <groups>
+      <group name="distributorOrderCreated">
+        <method signature="Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest.DistributorBuyingGoldBarsTest()[pri:0, instance:sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest@a8e6492]" name="DistributorBuyingGoldBarsTest" class="sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest"/>
+      </group> <!-- distributorOrderCreated -->
     </groups>
-    <test started-at="2026-10-13T17:13:04 IST" name="Default test" finished-at="2026-10-13T17:22:29 IST" duration-ms="565918">
-      <class name="sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest">
-        <test-method signature="RegisteringToGoldbharathTest(java.util.List)[pri:1, instance:sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@1fb669c3]" started-at="2026-10-13T17:13:05 IST" name="RegisteringToGoldbharathTest" data-provider="mobileNumbers" finished-at="2026-10-13T17:16:07 IST" duration-ms="181983" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[9999999999, 9999999998, 9999999988, 9999999888, 9999998888, 9999988888, 9999888888, 9998888888, 9988888888, 9888888888, 9777777777, 9666666666, 9555555555, 9444444444, 9333333333, 9222222222, 9111111111, 9888889999, 9777778888, 9666669999]]]>
-              </value>
-            </param>
-          </params>
+    <test started-at="2026-10-14T17:46:26 IST" name="Distributor And Admin Workflow" finished-at="2026-10-14T17:48:25 IST" duration-ms="119454">
+      <class name="sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest@a8e6492]" started-at="2026-10-14T17:46:26 IST" name="launchBrowser" finished-at="2026-10-14T17:46:38 IST" duration-ms="12628" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- RegisteringToGoldbharathTest -->
-        <test-method signature="loginUpdatingKYC()[pri:2, instance:sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@1fb669c3]" started-at="2026-10-13T17:16:07 IST" name="loginUpdatingKYC" finished-at="2026-10-13T17:17:09 IST" depends-on-methods="sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.RegisteringToGoldbharathTest" duration-ms="62498" status="PASS">
+        </test-method> <!-- launchBrowser -->
+        <test-method is-config="true" signature="loginToDoctorApp()[pri:0, instance:sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest@a8e6492]" started-at="2026-10-14T17:46:38 IST" name="loginToDoctorApp" finished-at="2026-10-14T17:46:47 IST" duration-ms="8314" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginUpdatingKYC -->
-        <test-method signature="loginToAdminApproveKycAndGivingGoldAndSilverLimit()[pri:3, instance:sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@1fb669c3]" started-at="2026-10-13T17:17:09 IST" name="loginToAdminApproveKycAndGivingGoldAndSilverLimit" finished-at="2026-10-13T17:19:31 IST" depends-on-methods="sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingKYC" duration-ms="141686" status="PASS">
+        </test-method> <!-- loginToDoctorApp -->
+        <test-method signature="DistributorBuyingGoldBarsTest()[pri:0, instance:sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest@a8e6492]" started-at="2026-10-14T17:46:47 IST" name="DistributorBuyingGoldBarsTest" finished-at="2026-10-14T17:47:16 IST" duration-ms="29336" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginToAdminApproveKycAndGivingGoldAndSilverLimit -->
-        <test-method signature="distributorBookingGoldTest()[pri:4, instance:sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@1fb669c3]" started-at="2026-10-13T17:19:31 IST" name="distributorBookingGoldTest" finished-at="2026-10-13T17:19:59 IST" depends-on-methods="sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminApproveKycAndGivingGoldAndSilverLimit" duration-ms="28279" status="PASS">
+        </test-method> <!-- DistributorBuyingGoldBarsTest -->
+        <test-method is-config="true" signature="logoutFromDoctorApp()[pri:0, instance:sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest@a8e6492]" started-at="2026-10-14T17:47:16 IST" name="logoutFromDoctorApp" finished-at="2026-10-14T17:47:31 IST" duration-ms="15350" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- distributorBookingGoldTest -->
-        <test-method signature="distributorBuyingGoldTest()[pri:5, instance:sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@1fb669c3]" started-at="2026-10-13T17:19:59 IST" name="distributorBuyingGoldTest" finished-at="2026-10-13T17:21:52 IST" depends-on-methods="sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.distributorBookingGoldTest" duration-ms="112473" status="PASS">
+        </test-method> <!-- logoutFromDoctorApp -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest@a8e6492]" started-at="2026-10-14T17:47:31 IST" name="closeBrowser" finished-at="2026-10-14T17:47:32 IST" duration-ms="242" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- distributorBuyingGoldTest -->
-        <test-method signature="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest()[pri:6, instance:sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@1fb669c3]" started-at="2026-10-13T17:21:52 IST" name="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest" finished-at="2026-10-13T17:22:29 IST" depends-on-methods="sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.distributorBuyingGoldTest" duration-ms="37548" status="PASS">
+        </test-method> <!-- closeBrowser -->
+      </class> <!-- sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest -->
+      <class name="sprint1.Two_AdminConfirmingFullWorkFlowTest">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:sprint1.Two_AdminConfirmingFullWorkFlowTest@5b43fbf6]" started-at="2026-10-14T17:47:32 IST" name="launchBrowser" finished-at="2026-10-14T17:47:34 IST" duration-ms="1919" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest -->
-      </class> <!-- sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- launchBrowser -->
+        <test-method is-config="true" signature="loginToAdminApp()[pri:0, instance:sprint1.Two_AdminConfirmingFullWorkFlowTest@5b43fbf6]" started-at="2026-10-14T17:47:34 IST" name="loginToAdminApp" finished-at="2026-10-14T17:47:40 IST" duration-ms="6208" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginToAdminApp -->
+        <test-method signature="adminConfirmingPaymentAndVerifyingOrder()[pri:0, instance:sprint1.Two_AdminConfirmingFullWorkFlowTest@5b43fbf6]" started-at="2026-10-14T17:47:40 IST" name="adminConfirmingPaymentAndVerifyingOrder" depends-on-groups="distributorOrderCreated" finished-at="2026-10-14T17:48:19 IST" duration-ms="38985" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- adminConfirmingPaymentAndVerifyingOrder -->
+        <test-method is-config="true" signature="logoutFromAdminApp()[pri:0, instance:sprint1.Two_AdminConfirmingFullWorkFlowTest@5b43fbf6]" started-at="2026-10-14T17:48:19 IST" name="logoutFromAdminApp" finished-at="2026-10-14T17:48:25 IST" duration-ms="6241" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- logoutFromAdminApp -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:sprint1.Two_AdminConfirmingFullWorkFlowTest@5b43fbf6]" started-at="2026-10-14T17:48:25 IST" name="closeBrowser" finished-at="2026-10-14T17:48:25 IST" duration-ms="169" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+      </class> <!-- sprint1.Two_AdminConfirmingFullWorkFlowTest -->
+    </test> <!-- Distributor And Admin Workflow -->
+  </suite> <!-- Sprint 1 -->
 </testng-results>
