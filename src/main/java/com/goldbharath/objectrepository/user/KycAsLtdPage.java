@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.goldbharath.genericutilities.WebDriverUtility;
+
 public class KycAsLtdPage {
 
 	//Finding WebElements Using @FindBy Annotations
@@ -144,8 +146,9 @@ public class KycAsLtdPage {
 	
 	// Business Library
 	
-	public void LtdKyc(String Name, String MobileNo, String AadharNo, String PanNo, String SecondDirectorName, String GstNo, String CIN, String BankName, String AccountNo, String IfscCode, String AcHolderName) throws Exception
+	public void LtdKyc(WebDriver driver, String Name, String MobileNo, String AadharNo, String PanNo, String SecondDirectorName, String GstNo, String CIN, String BankName, String AccountNo, String IfscCode, String AcHolderName) throws Exception
 	{
+		WebDriverUtility wUtil = new WebDriverUtility();
 		String PanimagePath = System.getProperty("user.dir")+ "/src/test/resources/assets/PAN_Card.jpeg";
 		String AadharImagePath = System.getProperty("user.dir")+ "/src/test/resources/assets/Aadhaar_Card.jpeg";
 		
@@ -189,7 +192,13 @@ public class KycAsLtdPage {
 		Thread.sleep(2000);
 	    AccountHolderNameEdt.sendKeys(AcHolderName);
 	    Thread.sleep(2000);
-	    SubmitBtn.click();
+	    
+	    wUtil.scrollToParticularWebElement(driver, SubmitBtn);
+	    Thread.sleep(2000);
+	    wUtil.clickOnParticularWebElementUsingActionsClass(driver, SubmitBtn);
+	    Thread.sleep(2000);
+	    
+//	    SubmitBtn.click();
 	}
 	
 		

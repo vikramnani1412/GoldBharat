@@ -73,10 +73,10 @@ public class LoginCompletingKYC extends DistributorBaseClass {
 		kPage.proprietorKyc(driver, PropreitorName, PropreitorPan, GstNumber, BankName, AccountNumber, IFSCCode, AccountHolderName);
 		
 		KycAsPvtLtdPage pvt = new KycAsPvtLtdPage(driver);
-		pvt.PvtLtdKyc(FirstDirectorName, LTDDirectorMobileNumber, FirstDirectorCompanyAadharNumber, FirstDirectorCompanyPANNumber, SecondDirectorName, CompanyGSTNumber, CompanyCINNumber, LTDBankName, LTdACNumber, LTDIFSCCode, LTDAccountHolderName);
+		pvt.PvtLtdKyc(driver, FirstDirectorName, LTDDirectorMobileNumber, FirstDirectorCompanyAadharNumber, FirstDirectorCompanyPANNumber, SecondDirectorName, CompanyGSTNumber, CompanyCINNumber, LTDBankName, LTdACNumber, LTDIFSCCode, LTDAccountHolderName);
 		
 		KycAsLtdPage ltd = new KycAsLtdPage(driver);
-		ltd.LtdKyc(FirstDirectorName, LTDDirectorMobileNumber, FirstDirectorCompanyAadharNumber, FirstDirectorCompanyPANNumber, SecondDirectorName, CompanyGSTNumber, CompanyCINNumber, LTDBankName, LTdACNumber, LTDIFSCCode, LTDAccountHolderName);
+		ltd.LtdKyc(driver, FirstDirectorName, LTDDirectorMobileNumber, FirstDirectorCompanyAadharNumber, FirstDirectorCompanyPANNumber, SecondDirectorName, CompanyGSTNumber, CompanyCINNumber, LTDBankName, LTdACNumber, LTDIFSCCode, LTDAccountHolderName);
 	
 		KycAsLLpPage llp = new KycAsLLpPage(driver);
 		llp.LLpKyc(driver, DirectorName, DirectorMobileNumber, DirectorAadharNumber, CompanyPanNumber, CompanyGstNumber, DirectorCINNumber, LLPBankName, ACNumber, LLPIFSCCode, LLPAccountHolderName);
