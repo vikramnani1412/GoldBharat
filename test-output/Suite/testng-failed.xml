@@ -6,16 +6,17 @@
   </listeners>
   <test thread-count="1" parallel="tests" name="Test(failed)">
     <classes>
-      <class name="sprint1.One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest">
+      <class name="sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest">
         <methods>
-          <include name="distributorBookingGoldTest"/>
-          <include name="RegisteringToGoldbharathTest" invocation-numbers="0"/>
-          <include name="distributorBuyingGoldTest"/>
-          <include name="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest"/>
           <include name="loginUpdatingKYC"/>
+          <include name="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest"/>
           <include name="loginToAdminApproveKycAndGivingGoldAndSilverLimit"/>
+          <include name="distributorBuyingGoldTest"/>
+          <include name="distributorUpdatingDeliveryDetailsTest"/>
+          <include name="RegisteringToGoldbharathTest"/>
+          <include name="distributorBookingGoldTest"/>
         </methods>
-      </class> <!-- sprint1.One_GoldBharathGoldCoinsAsProprietorFullWorkFlowTest -->
+      </class> <!-- sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

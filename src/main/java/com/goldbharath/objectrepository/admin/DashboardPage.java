@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.goldbharath.genericutilities.WebDriverUtility;
+
 public class DashboardPage {
 
 	//Finding WebElements Using @FindBy Annotations
@@ -161,7 +163,8 @@ public class DashboardPage {
 	
 	public void clickOnManageOrdersLnk() throws Exception
 	{
-		Thread.sleep(2000);
+		WebDriverUtility wUtil = new WebDriverUtility();
+		wUtil.waitForElementToBeClickable(null, ManageOrderLnk);
 		ManageOrderLnk.click();
 	}
 	
