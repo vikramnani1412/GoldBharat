@@ -95,7 +95,7 @@ public class DistributorBaseClass extends CommonBaseClass {
     		Thread.sleep(2000);
             LogoutPage lPage = new LogoutPage(driver);
             lPage.logoutOfApplication(driver);
-            System.out.println("Doctor Logout Successful");
+            System.out.println("Distributor Logout Successfully");
         } catch (Exception e) {
             System.out.println(
                     "Logout skipped because user is already logged out or page not available");

@@ -15,6 +15,15 @@
           <include name="logoutFromAdminApp"/>
         </methods>
       </class> <!-- sprint1.Two_AdminConfirmingFullWorkFlowTest -->
+      <class name="sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest">
+        <methods>
+          <include name="closeBrowser"/>
+          <include name="DistributorBuyingGoldBarsTest"/>
+          <include name="launchBrowser"/>
+          <include name="loginToDoctorApp"/>
+          <include name="logoutFromDoctorApp"/>
+        </methods>
+      </class> <!-- sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest -->
     </classes>
   </test> <!-- Distributor And Admin Workflow(failed) -->
 </suite> <!-- Failed suite [Sprint 1] -->

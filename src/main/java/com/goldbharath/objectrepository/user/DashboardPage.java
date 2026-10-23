@@ -261,6 +261,20 @@ public class DashboardPage {
 		CoinOrdersLnk.click();
 		Thread.sleep(2000);
 		
+	}
+	
+	public void checkingDispatchNotificationBasedOnOrderID(WebDriver driver, String OrderId) throws Exception
+	{
+		Thread.sleep(2000);
+		WebElement DispatchMsg = driver.findElement(By.xpath("//span[contains(normalize-space(.),'"+OrderId+"')]/../../../following-sibling::div/p[.='Status: Order Dispatched']"));
+		if(DispatchMsg.isDisplayed())
+		{
+			System.out.println("Dispatched Successfully");
+		}
+		else
+		{
+			System.out.println("Not Dispatched");
+		}
 		
 	}
 }

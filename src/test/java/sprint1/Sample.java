@@ -8,6 +8,7 @@ public class Sample {
 	void abc()
 	{
 		int a=1;
+		System.out.println(a);
 	}
 	
 }
