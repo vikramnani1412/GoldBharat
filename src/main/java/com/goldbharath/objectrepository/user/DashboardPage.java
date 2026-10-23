@@ -1,17 +1,14 @@
 package com.goldbharath.objectrepository.user;
 
-import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.goldbharath.genericutilities.WebDriverUtility;
+import org.testng.Assert;
+
 
 public class DashboardPage {
 
@@ -266,15 +263,45 @@ public class DashboardPage {
 	public void checkingDispatchNotificationBasedOnOrderID(WebDriver driver, String OrderId) throws Exception
 	{
 		Thread.sleep(2000);
-		WebElement DispatchMsg = driver.findElement(By.xpath("//span[contains(normalize-space(.),'"+OrderId+"')]/../../../following-sibling::div/p[.='Status: Order Dispatched']"));
-		if(DispatchMsg.isDisplayed())
-		{
-			System.out.println("Dispatched Successfully");
-		}
-		else
-		{
-			System.out.println("Not Dispatched");
-		}
+
+	    WebElement dispatchMsg = driver.findElement(
+	        By.xpath("//span[contains(normalize-space(.),'" + OrderId
+	        + "')]/../../../following-sibling::div/p[.='Status: Order Dispatched']")
+	    );
+
+	    Assert.assertTrue(
+	        dispatchMsg.isDisplayed(),
+	        "Order was not dispatched successfully. Order ID: " + OrderId
+	    );
+
+	    Assert.assertEquals(
+	        dispatchMsg.getText().trim(),
+	        "Status: Order Dispatched",
+	        "Dispatch status message does not match!"
+	    );
+
+	    System.out.println("Order ID: " + OrderId);
+	    System.out.println("Dispatch Message: " + dispatchMsg.getText());
+	    System.out.println("Assertion Passed: Order Dispatched Successfully!");
 		
 	}
+	
+	
+	
+	
+//	public void checkingDispatchNotificationBasedOnOrderID(WebDriver driver, String OrderId) throws Exception
+//	{
+//		Thread.sleep(2000);
+//		WebElement DispatchMsg = driver.findElement(By.xpath("//span[contains(normalize-space(.),'"+OrderId+"')]/../../../following-sibling::div/p[.='Status: Order Dispatched']"));
+//		if(DispatchMsg.isDisplayed())
+//		{
+//			System.out.println("Dispatched Successfully");
+//		}
+//		else
+//		{
+//			System.out.println("Not Dispatched");
+//		}
+//		
+//	}
+	
 }

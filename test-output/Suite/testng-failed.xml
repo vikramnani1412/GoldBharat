@@ -6,17 +6,24 @@
   </listeners>
   <test thread-count="1" parallel="tests" name="Test(failed)">
     <classes>
-      <class name="sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest">
+      <class name="sprint1.Two_AdminConfirmingFullWorkFlowTest">
         <methods>
-          <include name="loginUpdatingKYC"/>
-          <include name="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest"/>
-          <include name="loginToAdminApproveKycAndGivingGoldAndSilverLimit"/>
-          <include name="distributorBuyingGoldTest"/>
-          <include name="RegisteringToGoldbharathTest" invocation-numbers="0"/>
-          <include name="distributorUpdatingDeliveryDetailsTest"/>
-          <include name="distributorBookingGoldTest"/>
+          <include name="loginToAdminApp"/>
+          <include name="adminConfirmingPaymentAndVerifyingOrder"/>
+          <include name="closeBrowser"/>
+          <include name="logoutFromAdminApp"/>
+          <include name="launchBrowser"/>
         </methods>
-      </class> <!-- sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest -->
+      </class> <!-- sprint1.Two_AdminConfirmingFullWorkFlowTest -->
+      <class name="sprint1.Two_DistributorCheckingOrderDispatchedDetailsTest">
+        <methods>
+          <include name="closeBrowser"/>
+          <include name="launchBrowser"/>
+          <include name="loginToDoctorApp"/>
+          <include name="logoutFromDoctorApp"/>
+          <include name="checkingDispatchDetails"/>
+        </methods>
+      </class> <!-- sprint1.Two_DistributorCheckingOrderDispatchedDetailsTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
