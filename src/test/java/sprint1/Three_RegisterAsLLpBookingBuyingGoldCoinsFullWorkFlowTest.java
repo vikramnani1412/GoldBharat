@@ -476,13 +476,10 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
             Thread.sleep(2000);
                    
             moPage.allActionsInConfirmDispatchPageInLLpPage(DeliveryMsg, DaysToDeliver);
+            Thread.sleep(2000);
             
-            Assert.assertTrue(
-      			    moPage.getDispatchedConfirmText().isDisplayed(),
-      			    "Problem Occurred While Dispatching Order"
-      			);
-
-      			System.out.println("Order Dispatched Successfully");
+            moPage.checkingDispatchStatus(driver, OrderID);
+            Thread.sleep(2000);
             
             System.out.println("\n==================================================");
             System.out.println("ADMIN GOLD PAYMENT FLOW COMPLETED");
@@ -565,4 +562,56 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
         }
     }
     
+ // TEST 6: ADMIN CHECK PICKER DETAILS
+    @Test(priority = 8, dependsOnMethods = "distributorUpdatingDeliveryDetailsTest")
+    public void adminCheckingPickerDetailsTest() throws Exception {
+        System.out.println("\n==================================================");
+        System.out.println("TEST 6 : ADMIN CHECK PURCHASED GOLD & CONFIRM PAYMENT");
+        System.out.println("==================================================");
+
+        if (OrderID == null || OrderID.trim().isEmpty()) {
+            throw new Exception("Order ID is not available from Test 5. Test 5 may have failed.");
+        }
+        
+        String DeliveryMsg = eUtil.readDataFromExcel("Admin", 2, 1);
+        String DaysToDeliver = wUtil.generateNextDaysDateAndTimeBasedOnIndex(3);
+
+        OrderID = OrderID.trim();
+        System.out.println("ORDER ID FROM TEST 5 : " + OrderID);
+
+        String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
+        String username = pUtil.readDataFromPropertyFile("adminusername");
+        String password = pUtil.readDataFromPropertyFile("adminpassword");
+
+        driver = createChromeDriver();
+
+        try {
+            driver.get(adminUrl);
+            waitForPageLoad();
+
+            com.goldbharath.objectrepository.admin.LoginPage adminLoginPage =
+                    new com.goldbharath.objectrepository.admin.LoginPage(driver);
+            adminLoginPage.loginToAdmin(username, password);
+            waitForPageLoad();
+
+            System.out.println("Admin Login Successful");
+
+            com.goldbharath.objectrepository.admin.DashboardPage dbPage = new com.goldbharath.objectrepository.admin.DashboardPage(driver);
+            dbPage.clickOnManageOrdersLnk();
+            Thread.sleep(2000);
+
+            com.goldbharath.objectrepository.admin.ManageOrdersPage moPage = new com.goldbharath.objectrepository.admin.ManageOrdersPage(driver);
+            moPage.clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(driver, OrderID);
+                                    
+            System.out.println("\n==================================================");
+            System.out.println("ADMIN GOLD PAYMENT FLOW COMPLETED");
+            System.out.println("ORDER ID : " + OrderID);
+            System.out.println("REGISTERED MOBILE : " + registeredMobileNumber);
+            System.out.println("==================================================");
+            
+            
+        } finally {
+            if (driver != null) driver.quit();
+        }
+    }
 }

@@ -3,15 +3,18 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest">
+      <class name="sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest">
         <methods>
-          <include name="closeBrowser"/>
-          <include name="DistributorBuyingGoldBarsTest"/>
-          <include name="launchBrowser"/>
-          <include name="logoutFromDoctorApp"/>
-          <include name="loginToDoctorApp"/>
+          <include name="loginUpdatingKYC"/>
+          <include name="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest"/>
+          <include name="loginToAdminApproveKycAndGivingGoldAndSilverLimit"/>
+          <include name="distributorBuyingGoldTest"/>
+          <include name="distributorUpdatingDeliveryDetailsTest"/>
+          <include name="adminCheckingPickerDetailsTest"/>
+          <include name="RegisteringToGoldbharathTest" invocation-numbers="0"/>
+          <include name="distributorBookingGoldTest"/>
         </methods>
-      </class> <!-- sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest -->
+      </class> <!-- sprint1.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
