@@ -78,12 +78,13 @@
         <version>2.6.0</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>4.45.0</version>
-    </dependency>
+    <!-- Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.51.0</version>
+    <scope>compile</scope>
+</dependency>
 
     <!-- Swapped slf4j-simple for Log4j2: slf4j-simple only prints to console,
          Log4j2 gives you rolling file logs (log4j2.xml) which are far more
