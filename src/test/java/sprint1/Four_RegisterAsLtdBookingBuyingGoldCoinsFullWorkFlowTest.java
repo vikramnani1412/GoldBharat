@@ -39,7 +39,7 @@ import com.goldbharath.objectrepository.user.whatWouldYouLikeToBuyPage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Five_RegisterAsLtdBookingBuyingGoldCoinsFullWorkFlowTest {
+public class Four_RegisterAsLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 	
 	WebDriverUtility wUtil = new WebDriverUtility();
     PropertyFileUtility pUtil = new PropertyFileUtility();

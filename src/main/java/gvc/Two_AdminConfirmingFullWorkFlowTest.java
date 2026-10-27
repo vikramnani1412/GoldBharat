@@ -12,7 +12,7 @@ public class Two_AdminConfirmingFullWorkFlowTest extends AdminBaseClass {
 
 	WebDriverUtility wUtil = new WebDriverUtility();
 	
-    @Test(dependsOnGroups = "distributorOrderCreated")
+	@Test(dependsOnGroups = "distributorOrderCreated")
     public void adminConfirmingPaymentAndVerifyingOrder() throws Exception {
 
     	String DeliveryMsg = eUtil.readDataFromExcel("Admin", 2, 1);
@@ -48,32 +48,3 @@ public class Two_AdminConfirmingFullWorkFlowTest extends AdminBaseClass {
 }
 
 
-
-
-
-
-//package sprint1;
-//
-//import org.testng.annotations.Test;
-//
-//import com.goldbharath.genericutilities.AdminBaseClass;
-//import com.goldbharath.objectrepository.admin.BuyOrderPage;
-//import com.goldbharath.objectrepository.admin.DashboardPage;
-//import com.goldbharath.objectrepository.user.BuyGoldPage;
-//
-//public class Two_AdminConfirmingFullWorkFlowTest extends AdminBaseClass {
-//
-//	@Test()
-//	public void adminConfirmingPaymentAndVerifyingOrder() throws Exception
-//	{
-//		 DashboardPage	dPage = new DashboardPage(driver);
-//		 dPage.clickOnManageOrdersLnk();
-//		 
-//		 String orderID = Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest.OrderId;
-//		 System.out.println(orderID);
-//		 
-//		 BuyOrderPage bPage = new BuyOrderPage(driver);
-//		 bPage.confirmingPaymentBasedOnOrderID(driver, orderID);
-//	}
-//	
-//}

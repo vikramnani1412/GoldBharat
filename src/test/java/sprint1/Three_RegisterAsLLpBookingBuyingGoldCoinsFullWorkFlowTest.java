@@ -562,7 +562,7 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
         }
     }
     
- // TEST 6: ADMIN CHECK PICKER DETAILS
+    // TEST 8: ADMIN CHECK PICKER DETAILS
     @Test(priority = 8, dependsOnMethods = "distributorUpdatingDeliveryDetailsTest")
     public void adminCheckingPickerDetailsTest() throws Exception {
         System.out.println("\n==================================================");
