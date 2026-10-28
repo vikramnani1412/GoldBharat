@@ -4,13 +4,14 @@
 
    <listeners>
         <listener class-name="com.goldbharath.genericutilities.ListenersImplementationClass"/>
+        <listener class-name="com.goldbharath.genericutilities.RetryAnalyzer"/>
    </listeners>
 
   <test thread-count="1" parallel="tests" name="Test">
     <classes>
-      <class name="sprint1.Two_DistributorCheckingOrderDispatchedDetailsTest"/>
       <class name="sprint1.Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest"/>
       <class name="sprint1.Two_AdminConfirmingFullWorkFlowTest"/>
+      <class name="sprint1.Two_DistributorCheckingOrderDispatchedDetailsTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

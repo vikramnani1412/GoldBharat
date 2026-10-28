@@ -21,6 +21,7 @@ import com.goldbharath.objectrepository.admin.BusinessInformationPage;
 import com.goldbharath.objectrepository.admin.DistributorDetailsPage;
 import com.goldbharath.objectrepository.admin.LogoutPage;
 import com.goldbharath.objectrepository.admin.ManageDistributorPage;
+import com.goldbharath.objectrepository.admin.ManageOrdersPage;
 import com.goldbharath.objectrepository.user.BookGoldPage;
 import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 import com.goldbharath.objectrepository.user.DashboardPage;
@@ -336,7 +337,7 @@ public class One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest {
             }
 
             OrderID = OrderID.trim();
-            System.out.println("Order ID generated: " + OrderID);
+            System.out.println("Method 5th Order ID generated: " + OrderID);
 
             gPage.clickOnUpdatePaymentDocumentBtnBasedOnOrderID(driver, OrderID);
             Thread.sleep(2000);
@@ -407,9 +408,9 @@ public class One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest {
     }
 
     // Test 7: Distributor Delivery Details Update
-
     @Test(priority = 7, dependsOnMethods = "adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest")
-    public void distributorUpdatingDeliveryDetailsTest() throws Exception {
+    public void distributorUpdatingDeliveryDetailsTest() throws Exception
+    {
         System.out.println("\n========== TEST 7: UPDATE DELIVERY DETAILS ==========");
 
         String idImage = System.getProperty("user.dir")
@@ -442,6 +443,8 @@ public class One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest {
             dbPage.getCoinOrdersLnk().click();
             Thread.sleep(2000);
 
+            wUtil.waitForPageLoad(driver);
+            
             new GoldCoinsOrdersHistoryPage(driver)
                     .clickOnUpdateDeliveryDetailsBtnBasedOnOrderID(driver, OrderID);
             Thread.sleep(2000);
@@ -454,5 +457,112 @@ public class One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest {
              if (driver != null) driver.quit();
         }
     }
+    
+    // Test 8: Admin Accepting Picker Details
+    @Test(priority = 8, dependsOnMethods = "distributorUpdatingDeliveryDetailsTest")
+    public void adminAcceptingPickerDetails() throws Exception {
+
+        System.out.println("\n========== TEST 8: ADMIN ACCEPTING PICKER DETAILS ==========");
+
+        // Get the same Order ID used in Method 7
+        Assert.assertNotNull(OrderID, "Order ID is NULL from Method 7.");
+        Assert.assertFalse(OrderID.trim().isEmpty(), "Order ID is EMPTY.");
+
+        String orderIdFromMethod7 = OrderID.trim();
+
+        System.out.println("Order ID received from Method 7: " + orderIdFromMethod7);
+
+        String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
+        String username = pUtil.readDataFromPropertyFile("adminusername");
+        String password = pUtil.readDataFromPropertyFile("adminpassword");
+
+        driver = createChromeDriver();
+
+        try {
+            driver.get(adminUrl);
+            waitForPageLoad();
+
+            new com.goldbharath.objectrepository.admin.LoginPage(driver)
+                    .loginToAdmin(username, password);
+
+            waitForPageLoad();
+
+            new com.goldbharath.objectrepository.admin.DashboardPage(driver)
+                    .clickOnManageOrdersLnk();
+
+            waitForPageLoad();
+
+            ManageOrdersPage moPage = new ManageOrdersPage(driver);
+
+            
+            moPage.clickOnCoinsLnk(driver);
+
+            Thread.sleep(2000);
+            moPage.clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(
+                    driver, orderIdFromMethod7);
+
+            System.out.println(
+                    "Picker Details action completed successfully. Order ID: "
+                            + orderIdFromMethod7);
+
+        } finally {
+            if (driver != null) {
+                driver.quit();
+                driver = null;
+            }
+        }
+    }
+    
 }
+
+    
+
+    
+//    @Test(priority = 8, dependsOnMethods = "distributorUpdatingDeliveryDetailsTest")
+//    public void adminAcceptingPickerDetails() throws Exception {
+//        System.out.println("\n========== TEST 8: ADMIN ACCEPTING PICKER DETAILS ==========");
+//
+//        String deliveryMsg = eUtil.readDataFromExcel("Admin", 2, 1);
+//        String daysToDeliver = wUtil.generateNextDaysDateAndTimeBasedOnIndex(3);
+//
+//        if (OrderID == null || OrderID.trim().isEmpty()) {
+//            throw new Exception("Order ID is not available from Test 5.");
+//        }
+//
+//        OrderID = OrderID.trim();
+//        System.out.println("Order ID: " + OrderID);
+//
+//        String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
+//        String username = pUtil.readDataFromPropertyFile("adminusername");
+//        String password = pUtil.readDataFromPropertyFile("adminpassword");
+//
+//        driver = createChromeDriver();
+//
+//        try {
+//            driver.get(adminUrl);
+//            waitForPageLoad();
+//
+//            new com.goldbharath.objectrepository.admin.LoginPage(driver)
+//                    .loginToAdmin(username, password);
+//            waitForPageLoad();
+//
+//            new com.goldbharath.objectrepository.admin.DashboardPage(driver)
+//                    .clickOnManageOrdersLnk();
+//            Thread.sleep(2000);
+//            
+//            com.goldbharath.objectrepository.admin.ManageOrdersPage moPage =
+//                    new com.goldbharath.objectrepository.admin.ManageOrdersPage(driver);
+//            Thread.sleep(2000);
+//            
+//            moPage.clickOnCoinsLnk(driver);
+//            Thread.sleep(2000);
+//            
+//            moPage.clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(driver, OrderID);
+//            Thread.sleep(2000);
+//            
+//        }
+//        finally {
+//        	if (driver != null) driver.quit();
+//		}
+//    }
 

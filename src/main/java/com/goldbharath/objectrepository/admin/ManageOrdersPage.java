@@ -33,7 +33,7 @@ public class ManageOrdersPage {
   
     @FindBy(xpath="//button[.=' Book Order ']")private WebElement BookOrderBtn;
   
-    @FindBy(xpath="//button[.=' Coins ']")private WebElement CoinsBtn;
+    @FindBy(xpath="//button[normalize-space(.)='Coins']")private WebElement CoinsBtn;
     
     @FindBy(xpath="//input[@placeholder='Search by Order No., Name, State, City....']")private WebElement SearchEdt;
     
@@ -97,7 +97,8 @@ public class ManageOrdersPage {
     @FindBy(xpath="//td[.='GB-66957']/following-sibling::td/button[.=' Dispatched ']")private WebElement DispatchedConfirmText;
   
     // Picker Details Details Btn Based On OrderID
-    @FindBy(xpath="//tr[td[normalize-space(.)='GB-60207']]//button[normalize-space(.)='Picker Details']")private WebElement PickerDetailsBtnBasedOnOrderID;
+                     
+    @FindBy(xpath="//tr[td[normalize-space(.)='GB-87815']]//button[normalize-space(.)='Picker Details']")private WebElement PickerDetailsBtnBasedOnOrderID;
     
     @FindBy(xpath="//div[.='Final OTP Confirmation']/following-sibling::div/button[.='Send OTP']")private WebElement SendOtpBtn;
     
@@ -297,10 +298,12 @@ public class ManageOrdersPage {
   	{
   		WebDriverUtility wUtil = new WebDriverUtility();
   		wUtil.waitForPageLoad(driver);
-  		
+  		System.out.println("Coins Button Displayed");
+  		wUtil.waitForElementToBeClickable(driver, CoinsBtn);
   		CoinsBtn.click();
+  		System.out.println("Coins Button Clicked");
+  		
   	}
-  	
   	
   	//  //button[.=' Accept ']
   	//  //button[.=' Decline ']
@@ -379,11 +382,16 @@ public class ManageOrdersPage {
   	
   	public void clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(WebDriver driver, String orderID) throws Exception {
 
+  		WebDriverUtility wUtil = new WebDriverUtility();
   	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
   	    Thread.sleep(2000);
+  	    driver.navigate().refresh();  	    
+  	    
+  	    Thread.sleep(3000);
   	    // Step 1: Click Picker Details for the specific Order ID
-  	    WebElement pickerDetailsBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[td[normalize-space(.)='" + orderID + "']]//button[normalize-space(.)='Picker Details']")));
+  	    WebElement pickerDetailsBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[td[normalize-space(.)='"+orderID+"']]//button[normalize-space(.)='Picker Details']")));
+  	    wUtil.waitForElementToBeClickable(driver, pickerDetailsBtn);
   	    pickerDetailsBtn.click();
   	    
   	    Thread.sleep(2000);
@@ -396,12 +404,12 @@ public class ManageOrdersPage {
   	    otpInput.sendKeys("123456");
 
   	    Thread.sleep(2000);
-  	    // Step 4: Verify that the Order Delivered button is displayed
-  	    WebElement orderDeliveredBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[td[normalize-space(.)='" + orderID + "']]//button[normalize-space(.)='Order Delivered']")));
+  	    // Step 4: Verify that the Order Delivered Text is displayed
+  	    WebElement orderDeliveredText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[td[normalize-space(.)='" + orderID + "']]//button[normalize-space(.)='Order Delivered']")));
         
   	    Thread.sleep(2000);
   	    // Step 5: Validate using TestNG assertion
-  	    Assert.assertTrue(orderDeliveredBtn.isDisplayed(),"Order Delivered button is not displayed for Order ID: " + orderID);
+  	    Assert.assertTrue(orderDeliveredText.isDisplayed(),"Order Delivered button is not displayed for Order ID: " + orderID);
   	    System.out.println("Order Delivered button is displayed successfully for Order ID: " + orderID);
   	    
   	}

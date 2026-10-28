@@ -1,36 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="8" passed="7" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-10-27T15:28:35 IST" name="Default suite" finished-at="2026-10-27T15:29:24 IST" duration-ms="48464">
+  <suite started-at="2026-10-28T18:07:30 IST" name="Default suite" finished-at="2026-10-28T18:15:11 IST" duration-ms="460130">
     <groups>
-      <group name="distributorOrderCreated">
-        <method signature="Four_LoginAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.DistributorBuyingGoldBarsTest()[pri:0, instance:sprint1.Four_LoginAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@6cc558c6]" name="DistributorBuyingGoldBarsTest" class="sprint1.Four_LoginAsLLpBookingBuyingGoldCoinsFullWorkFlowTest"/>
-      </group> <!-- distributorOrderCreated -->
     </groups>
-    <test started-at="2026-10-27T15:28:35 IST" name="Default test" finished-at="2026-10-27T15:29:24 IST" duration-ms="48464">
-      <class name="sprint1.Four_LoginAsLLpBookingBuyingGoldCoinsFullWorkFlowTest">
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:sprint1.Four_LoginAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@6cc558c6]" started-at="2026-10-27T15:28:35 IST" name="launchBrowser" finished-at="2026-10-27T15:28:38 IST" duration-ms="2684" status="PASS">
+    <test started-at="2026-10-28T18:07:30 IST" name="Default test" finished-at="2026-10-28T18:15:11 IST" duration-ms="460130">
+      <class name="sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest">
+        <test-method signature="RegisteringToGoldbharathTest(java.util.List)[pri:1, instance:sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@12359a82]" started-at="2026-10-28T18:07:32 IST" name="RegisteringToGoldbharathTest" data-provider="mobileNumbers" finished-at="2026-10-28T18:08:14 IST" duration-ms="42571" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[9999999999, 9999999998, 9999999988, 9999999888, 9999998888, 9999988888, 9999888888, 9998888888, 9988888888, 9888888888, 9777777777, 9666666666, 9555555555, 9444444444, 9333333333, 9222222222, 9111111111, 9888889999, 9777778888, 9666669999]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- launchBrowser -->
-        <test-method is-config="true" signature="loginToDoctorApp()[pri:0, instance:sprint1.Four_LoginAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@6cc558c6]" started-at="2026-10-27T15:28:38 IST" name="loginToDoctorApp" finished-at="2026-10-27T15:28:46 IST" duration-ms="8292" status="PASS">
+        </test-method> <!-- RegisteringToGoldbharathTest -->
+        <test-method signature="loginUpdatingKYC()[pri:2, instance:sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@12359a82]" started-at="2026-10-28T18:08:14 IST" name="loginUpdatingKYC" finished-at="2026-10-28T18:09:08 IST" depends-on-methods="sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.RegisteringToGoldbharathTest" duration-ms="53813" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginToDoctorApp -->
-        <test-method signature="DistributorBuyingGoldBarsTest()[pri:0, instance:sprint1.Four_LoginAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@6cc558c6]" started-at="2026-10-27T15:28:46 IST" name="DistributorBuyingGoldBarsTest" finished-at="2026-10-27T15:29:15 IST" duration-ms="28827" status="PASS">
+        </test-method> <!-- loginUpdatingKYC -->
+        <test-method signature="loginToAdminApproveKycAndGivingGoldAndSilverLimit()[pri:3, instance:sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@12359a82]" started-at="2026-10-28T18:09:08 IST" name="loginToAdminApproveKycAndGivingGoldAndSilverLimit" finished-at="2026-10-28T18:11:17 IST" depends-on-methods="sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingKYC" duration-ms="128482" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- DistributorBuyingGoldBarsTest -->
-        <test-method is-config="true" signature="logoutFromDoctorApp()[pri:0, instance:sprint1.Four_LoginAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@6cc558c6]" started-at="2026-10-27T15:29:15 IST" name="logoutFromDoctorApp" finished-at="2026-10-27T15:29:23 IST" duration-ms="8190" status="PASS">
+        </test-method> <!-- loginToAdminApproveKycAndGivingGoldAndSilverLimit -->
+        <test-method signature="distributorBookingGoldTest()[pri:4, instance:sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@12359a82]" started-at="2026-10-28T18:11:17 IST" name="distributorBookingGoldTest" finished-at="2026-10-28T18:11:43 IST" depends-on-methods="sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminApproveKycAndGivingGoldAndSilverLimit" duration-ms="26465" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- logoutFromDoctorApp -->
-        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:sprint1.Four_LoginAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@6cc558c6]" started-at="2026-10-27T15:29:23 IST" name="closeBrowser" finished-at="2026-10-27T15:29:24 IST" duration-ms="441" status="PASS">
+        </test-method> <!-- distributorBookingGoldTest -->
+        <test-method signature="distributorBuyingGoldTest()[pri:5, instance:sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@12359a82]" started-at="2026-10-28T18:11:43 IST" name="distributorBuyingGoldTest" finished-at="2026-10-28T18:13:16 IST" depends-on-methods="sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBookingGoldTest" duration-ms="92816" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- closeBrowser -->
-      </class> <!-- sprint1.Four_LoginAsLLpBookingBuyingGoldCoinsFullWorkFlowTest -->
+        </test-method> <!-- distributorBuyingGoldTest -->
+        <test-method signature="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest()[pri:6, instance:sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@12359a82]" started-at="2026-10-28T18:13:16 IST" name="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest" finished-at="2026-10-28T18:14:17 IST" depends-on-methods="sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBuyingGoldTest" duration-ms="60793" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest -->
+        <test-method signature="distributorUpdatingDeliveryDetailsTest()[pri:7, instance:sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@12359a82]" started-at="2026-10-28T18:14:17 IST" name="distributorUpdatingDeliveryDetailsTest" finished-at="2026-10-28T18:14:47 IST" depends-on-methods="sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest" duration-ms="30129" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- distributorUpdatingDeliveryDetailsTest -->
+        <test-method signature="adminAcceptingPickerDetails()[pri:8, instance:sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@12359a82]" started-at="2026-10-28T18:14:47 IST" name="adminAcceptingPickerDetails" finished-at="2026-10-28T18:15:11 IST" depends-on-methods="sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorUpdatingDeliveryDetailsTest" duration-ms="23656" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for element found by By.xpath: //tr[td[normalize-space(.)='GB-26510']]//button[normalize-space(.)='Picker Details'] to be clickable, but the element was not found: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//tr[td[normalize-space(.)='GB-26510']]//button[normalize-space(.)='Picker Details']"}.
+(tried for 10 seconds with 500 milliseconds interval)
+Build info: version: '4.51.0', revision: '35c5fab 35c5fab4a58fa5878edb255eb7747b04ca51a015'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.11'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 156.0.8078.73, chrome: {chromedriverVersion: 156.0.8078.73 (2f9a11097447..., userDataDir: C:\Users\INNOVA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:61137}, goog:processID: 13812, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:61137/devtoo..., se:cdpVersion: 156.0.8078.73, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:cmtgKey: true, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: c3a46d91f500e3b761535e13e5db0759]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element found by By.xpath: //tr[td[normalize-space(.)='GB-26510']]//button[normalize-space(.)='Picker Details'] to be clickable, but the element was not found: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//tr[td[normalize-space(.)='GB-26510']]//button[normalize-space(.)='Picker Details']"}.
+(tried for 10 seconds with 500 milliseconds interval)
+Build info: version: '4.51.0', revision: '35c5fab 35c5fab4a58fa5878edb255eb7747b04ca51a015'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.11'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 156.0.8078.73, chrome: {chromedriverVersion: 156.0.8078.73 (2f9a11097447..., userDataDir: C:\Users\INNOVA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:61137}, goog:processID: 13812, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:61137/devtoo..., se:cdpVersion: 156.0.8078.73, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:cmtgKey: true, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: c3a46d91f500e3b761535e13e5db0759
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:85)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:234)
+at com.goldbharath.objectrepository.admin.ManageOrdersPage.clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(ManageOrdersPage.java:390)
+at sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminAcceptingPickerDetails(One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.java:501)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:697)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:1005)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:744)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- adminAcceptingPickerDetails -->
+      </class> <!-- sprint1.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

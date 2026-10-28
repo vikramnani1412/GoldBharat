@@ -77,7 +77,7 @@ public class UpdateDeliveryDetailsPage {
 	
 	// Business Library
 	
-	public void updatingDeliveryDetails(String Name, String PhoneNo, String IdNo, String IdCardPath) throws Exception
+	public void updatingDeliveryDetails(WebDriver driver, String Name, String PhoneNo, String IdNo, String IdCardPath) throws Exception
 	{
 		WebDriverUtility wUtil = new WebDriverUtility();
 		
@@ -95,10 +95,21 @@ public class UpdateDeliveryDetailsPage {
 			Thread.sleep(1000);
 			IdChooseFileBtn.sendKeys(IdCardPath);
 		} catch (Exception e) {
-			System.out.println("Self Selected");
+			Thread.sleep(2000);
 		}
-		Thread.sleep(2000);
-		SubmitBtn.click();
+		finally {
+			if(SubmitBtn.isDisplayed())
+			{
+				Thread.sleep(2000);
+				SubmitBtn.click();
+				Thread.sleep(2000);
+				driver.navigate().refresh();
+			}
+			else
+			{
+				System.out.println("Submit Button is not Displayed");
+			}
+		}
 	}
 	
 }
