@@ -37,7 +37,7 @@ public class GoldBarsOrderHistoryPage {
 	// Order Status Ele Based on OrderID //////// Need to Make Dynamic
 	@FindBy(xpath="//tr/td/following-sibling::td[.='GB-91636']/following-sibling::td[last()]")private WebElement OrderStatusAsPerOrderIdEle;
 	
-	@FindBy(xpath="//tr/td[.='1']/following-sibling::td[.='GB-55065']/following-sibling::td/p[.=' Document Submitted ']")private WebElement DocumentsSubmitedSuccessMsg;
+	@FindBy(xpath="//tr/td[.='GB-11105']/following-sibling::td/p[.=' Document Submitted ']")private WebElement DocumentsSubmitedMsg;
 	
 	// Upto here done want to develop Excess eles whwn it comes
 	
@@ -101,8 +101,8 @@ public class GoldBarsOrderHistoryPage {
 	}
 
 
-	public WebElement getDocumentsSubmitedSuccessMsg() {
-		return DocumentsSubmitedSuccessMsg;
+	public WebElement getDocumentsSubmitedMsg() {
+		return DocumentsSubmitedMsg;
 	}
 
 

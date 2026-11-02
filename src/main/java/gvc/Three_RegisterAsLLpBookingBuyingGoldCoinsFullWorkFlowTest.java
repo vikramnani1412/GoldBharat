@@ -554,7 +554,7 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
             Thread.sleep(2000);
             
             UpdateDeliveryDetailsPage uPage = new UpdateDeliveryDetailsPage(driver);
-            uPage.updatingDeliveryDetails(Name, PhNo,  IdNo, IdImage);
+            uPage.updatingDeliveryDetails(driver, Name, PhNo,  IdNo, IdImage);
 
         } finally {
             

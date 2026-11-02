@@ -1,4 +1,4 @@
-package sprint1;
+package Goldbharat;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -22,13 +22,13 @@ import com.goldbharath.objectrepository.admin.BusinessInformationPage;
 import com.goldbharath.objectrepository.admin.DistributorDetailsPage;
 import com.goldbharath.objectrepository.admin.LogoutPage;
 import com.goldbharath.objectrepository.admin.ManageDistributorPage;
+import com.goldbharath.objectrepository.admin.ManageOrdersPage;
 import com.goldbharath.objectrepository.user.BookGoldPage;
 import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 import com.goldbharath.objectrepository.user.DashboardPage;
 import com.goldbharath.objectrepository.user.GoldCoinsOrdersHistoryPage;
 import com.goldbharath.objectrepository.user.KycAsLLpPage;
 import com.goldbharath.objectrepository.user.KycAsLtdPage;
-import com.goldbharath.objectrepository.user.KycAsPvtLtdPage;
 import com.goldbharath.objectrepository.user.LoginPage;
 import com.goldbharath.objectrepository.user.RegisterPage;
 import com.goldbharath.objectrepository.user.ReviewYourGoldOrderPage;
@@ -40,7 +40,7 @@ import com.goldbharath.objectrepository.user.whatWouldYouLikeToBuyPage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Five_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
+public class Four_RegisterAsLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 	
 	WebDriverUtility wUtil = new WebDriverUtility();
     PropertyFileUtility pUtil = new PropertyFileUtility();
@@ -145,7 +145,7 @@ public class Five_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
         }
     }
 
-    // TEST 2: LOGIN + Pvt Ltd KYC
+    // TEST 2: LOGIN + LLP KYC
     @Test(priority = 2, dependsOnMethods = "RegisteringToGoldbharathTest")
     public void loginUpdatingKYC() throws Exception {
         System.out.println("\n==================================================");
@@ -158,17 +158,17 @@ public class Five_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 
         System.out.println("LOGIN MOBILE : " + registeredMobileNumber);
 
-        String Name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
-        String MobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
-        String AadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
-        String PANNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
-        String SecondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
-        String GstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
-        String CinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
-        String BankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
-        String AcNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
-        String IFSCCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
-        String AccountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
+        String Name = eUtil.readDataFromExcel(SHEET_NAME, 34, 8);
+        String MobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 8);
+        String AadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 8);
+        String PANNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 8);
+        String SecondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 8);
+        String GstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 8);
+        String CinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 8);
+        String BankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 8);
+        String AcNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 8);
+        String IFSCCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 8);
+        String AccountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 8);
         String userUrl = pUtil.readDataFromPropertyFile("userurl");
 
         driver = createChromeDriver();
@@ -192,9 +192,10 @@ public class Five_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
             UserProfilePage userProfilePage = new UserProfilePage(driver);
             userProfilePage.clickOnKycLink();
             
-            KycAsPvtLtdPage kycPage = new KycAsPvtLtdPage(driver);
-            kycPage.PvtLtdKyc(driver, Name, MobileNumber, AadharNumber, PANNumber, SecondDirectorName, GstNumber, CinNumber, BankName, AcNumber, IFSCCode, AccountHolderName);
-            
+            KycAsLtdPage kycPage = new KycAsLtdPage(driver);
+            kycPage.LtdKyc(driver, Name, MobileNumber, AadharNumber,
+                    PANNumber, SecondDirectorName, GstNumber,
+                    CinNumber, BankName, AcNumber, IFSCCode, AccountHolderName);
 
             System.out.println("--------------------------------------------------");
             System.out.println("Ltd KYC COMPLETED SUCCESSFULLY");
@@ -558,12 +559,81 @@ public class Five_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
             Thread.sleep(2000);
             
             UpdateDeliveryDetailsPage uPage = new UpdateDeliveryDetailsPage(driver);
-            uPage.updatingDeliveryDetails(Name, PhNo,  IdNo, IdImage);
+            uPage.updatingDeliveryDetails(driver, Name, PhNo,  IdNo, IdImage);
 
         } finally {
             
              if (driver != null) driver.quit();
         }
     }
-	
+    
+    // TEST 8: ADMIN CHECK PICKER DETAILS
+    @Test(priority = 8, dependsOnMethods = "distributorUpdatingDeliveryDetailsTest")
+    public void adminCheckingPickerDetailsTest() throws Exception {
+
+        System.out.println("\n==================================================");
+        System.out.println("TEST 8 : ADMIN CHECK PICKER DETAILS");
+        System.out.println("==================================================");
+
+        // Get the Order ID generated by the distributor in Test 5
+        Assert.assertNotNull(OrderID, "Order ID is NULL. Distributor booking test may have failed.");
+
+        Assert.assertFalse(OrderID.trim().isEmpty(), "Order ID is EMPTY. Distributor booking test may have failed.");
+
+        // Store the same distributor-generated Order ID
+        String distributorBookedOrderID = OrderID.trim();
+
+        System.out.println("DISTRIBUTOR BOOKED ORDER ID : "+ distributorBookedOrderID);
+
+        String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
+        String username = pUtil.readDataFromPropertyFile("adminusername");
+        String password = pUtil.readDataFromPropertyFile("adminpassword");
+
+        driver = createChromeDriver();
+
+        try {
+            driver.get(adminUrl);
+            waitForPageLoad();
+
+            com.goldbharath.objectrepository.admin.LoginPage adminLoginPage =
+                    new com.goldbharath.objectrepository.admin.LoginPage(driver);
+            
+            adminLoginPage.loginToAdmin(username, password);
+            waitForPageLoad();
+
+            System.out.println("Admin Login Successful");
+
+            com.goldbharath.objectrepository.admin.DashboardPage dbPage =
+                    new com.goldbharath.objectrepository.admin.DashboardPage(driver);
+
+            dbPage.clickOnManageOrdersLnk();
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME));
+
+            wait.until(webDriver -> ((org.openqa.selenium.JavascriptExecutor) webDriver)
+                            .executeScript("return document.readyState")
+                            .equals("complete"));
+
+            com.goldbharath.objectrepository.admin.ManageOrdersPage moPage = new com.goldbharath.objectrepository.admin.ManageOrdersPage(driver);
+
+            // Use the exact Order ID generated in Test 5
+            moPage.clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(
+                    driver,
+                    distributorBookedOrderID
+            );
+
+            System.out.println("\n==================================================");
+            System.out.println("ADMIN PICKER DETAILS FLOW COMPLETED");
+            System.out.println("ORDER ID : " + distributorBookedOrderID);
+            System.out.println("REGISTERED MOBILE : " + registeredMobileNumber);
+            System.out.println("==================================================");
+
+        } finally {
+            if (driver != null) {
+                driver.quit();
+            }
+        }
+    }
+    
+    
 }

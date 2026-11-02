@@ -20,7 +20,7 @@ public class Two_AdminConfirmingFullWorkFlowTest extends AdminBaseClass {
 //    	String Time = "1230";
     	
         String orderID =
-                Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest.OrderId;
+                Two_GoldBharath_BuyingGoldBarsAsProprietorDistributorFullWorkFlowTest.OrderId;
 
         if (orderID == null || orderID.trim().isEmpty()) {
             throw new AssertionError(

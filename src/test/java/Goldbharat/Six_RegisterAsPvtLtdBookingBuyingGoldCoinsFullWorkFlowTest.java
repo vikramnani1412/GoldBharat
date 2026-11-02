@@ -1,4 +1,4 @@
-package sprint1;
+package Goldbharat;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,11 +22,14 @@ import com.goldbharath.objectrepository.admin.BusinessInformationPage;
 import com.goldbharath.objectrepository.admin.DistributorDetailsPage;
 import com.goldbharath.objectrepository.admin.LogoutPage;
 import com.goldbharath.objectrepository.admin.ManageDistributorPage;
+import com.goldbharath.objectrepository.admin.ManageOrdersPage;
 import com.goldbharath.objectrepository.user.BookGoldPage;
 import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 import com.goldbharath.objectrepository.user.DashboardPage;
 import com.goldbharath.objectrepository.user.GoldCoinsOrdersHistoryPage;
 import com.goldbharath.objectrepository.user.KycAsLLpPage;
+import com.goldbharath.objectrepository.user.KycAsLtdPage;
+import com.goldbharath.objectrepository.user.KycAsPvtLtdPage;
 import com.goldbharath.objectrepository.user.LoginPage;
 import com.goldbharath.objectrepository.user.RegisterPage;
 import com.goldbharath.objectrepository.user.ReviewYourGoldOrderPage;
@@ -37,9 +41,9 @@ import com.goldbharath.objectrepository.user.whatWouldYouLikeToBuyPage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
-
-    WebDriverUtility wUtil = new WebDriverUtility();
+public class Six_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
+	
+	WebDriverUtility wUtil = new WebDriverUtility();
     PropertyFileUtility pUtil = new PropertyFileUtility();
     ExcelFileUtility eUtil = new ExcelFileUtility();
 
@@ -142,7 +146,7 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
         }
     }
 
-    // TEST 2: LOGIN + LLP KYC
+    // TEST 2: LOGIN + Pvt Ltd KYC
     @Test(priority = 2, dependsOnMethods = "RegisteringToGoldbharathTest")
     public void loginUpdatingKYC() throws Exception {
         System.out.println("\n==================================================");
@@ -155,16 +159,17 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
 
         System.out.println("LOGIN MOBILE : " + registeredMobileNumber);
 
-        String DirectorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 5);
-        String DirectorMobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 5);
-        String DirectorAadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 5);
-        String CompanyPANNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 5);
-        String CompanyGSTNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 5);
-        String DirectorCINNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 5);
-        String BankName = eUtil.readDataFromExcel(SHEET_NAME, 40, 5);
-        String ACNumber = eUtil.readDataFromExcel(SHEET_NAME, 41, 5);
-        String IFSCCode = eUtil.readDataFromExcel(SHEET_NAME, 42, 5);
-        String AccountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 43, 5);
+        String Name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
+        String MobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
+        String AadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
+        String PANNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
+        String SecondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
+        String GstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
+        String CinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
+        String BankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
+        String AcNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
+        String IFSCCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
+        String AccountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
         String userUrl = pUtil.readDataFromPropertyFile("userurl");
 
         driver = createChromeDriver();
@@ -187,14 +192,13 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
 
             UserProfilePage userProfilePage = new UserProfilePage(driver);
             userProfilePage.clickOnKycLink();
-
-            KycAsLLpPage kycPage = new KycAsLLpPage(driver);
-            kycPage.LLpKyc(driver, DirectorName, DirectorMobileNumber, DirectorAadharNumber,
-                    CompanyPANNumber, CompanyGSTNumber, DirectorCINNumber, BankName,
-                    ACNumber, IFSCCode, AccountHolderName);
+            
+            KycAsPvtLtdPage kycPage = new KycAsPvtLtdPage(driver);
+            kycPage.PvtLtdKyc(driver, Name, MobileNumber, AadharNumber, PANNumber, SecondDirectorName, GstNumber, CinNumber, BankName, AcNumber, IFSCCode, AccountHolderName);
+            
 
             System.out.println("--------------------------------------------------");
-            System.out.println("LLP KYC COMPLETED SUCCESSFULLY");
+            System.out.println("Ltd KYC COMPLETED SUCCESSFULLY");
             System.out.println("MOBILE : " + registeredMobileNumber);
             System.out.println("--------------------------------------------------");
         } 
@@ -261,7 +265,7 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
                     driver, registeredMobileNumber);
 
             BusinessInformationPage businessInformationPage = new BusinessInformationPage(driver);
-            businessInformationPage.editingAndGivingSilverAndGoldLimitForLLP(silverLimit, goldLimit);
+            businessInformationPage.editingAndGivingSilverAndGoldLimitForLtd(silverLimit, goldLimit);
 
             System.out.println("\n==================================================");
             System.out.println("GOLDBHARATH ADMIN DISTRIBUTOR FLOW COMPLETED");
@@ -476,10 +480,11 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
             Thread.sleep(2000);
                    
             moPage.allActionsInConfirmDispatchPageInLLpPage(DeliveryMsg, DaysToDeliver);
-            Thread.sleep(2000);
             
-            moPage.checkingDispatchStatus(driver, OrderID);
-            Thread.sleep(2000);
+            WebElement OrderStatus = driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/button[.=' Dispatched ']"));
+            
+            Assert.assertTrue(OrderStatus.isDisplayed(), "Problem Occurred While Dispatching Order");
+      		System.out.println("Order Dispatched Successfully");
             
             System.out.println("\n==================================================");
             System.out.println("ADMIN GOLD PAYMENT FLOW COMPLETED");
@@ -554,64 +559,81 @@ public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
             Thread.sleep(2000);
             
             UpdateDeliveryDetailsPage uPage = new UpdateDeliveryDetailsPage(driver);
-            uPage.updatingDeliveryDetails(Name, PhNo,  IdNo, IdImage);
+            uPage.updatingDeliveryDetails(driver, Name, PhNo,  IdNo, IdImage);
 
         } finally {
             
              if (driver != null) driver.quit();
         }
     }
-    
-    // TEST 8: ADMIN CHECK PICKER DETAILS
-    @Test(priority = 8, dependsOnMethods = "distributorUpdatingDeliveryDetailsTest")
-    public void adminCheckingPickerDetailsTest() throws Exception {
-        System.out.println("\n==================================================");
-        System.out.println("TEST 6 : ADMIN CHECK PURCHASED GOLD & CONFIRM PAYMENT");
-        System.out.println("==================================================");
+	
+         // TEST 8: ADMIN CHECK PICKER DETAILS
+         @Test(priority = 8, dependsOnMethods = "distributorUpdatingDeliveryDetailsTest")
+         public void adminCheckingPickerDetailsTest() throws Exception 
+         {
+        	 System.out.println("\n==================================================");
+             System.out.println("TEST 8 : ADMIN CHECK PICKER DETAILS");
+             System.out.println("==================================================");
 
-        if (OrderID == null || OrderID.trim().isEmpty()) {
-            throw new Exception("Order ID is not available from Test 5. Test 5 may have failed.");
-        }
-        
-        String DeliveryMsg = eUtil.readDataFromExcel("Admin", 2, 1);
-        String DaysToDeliver = wUtil.generateNextDaysDateAndTimeBasedOnIndex(3);
+             // Get the Order ID generated by the distributor in Test 5
+             Assert.assertNotNull(OrderID, "Order ID is NULL. Distributor booking test may have failed.");
 
-        OrderID = OrderID.trim();
-        System.out.println("ORDER ID FROM TEST 5 : " + OrderID);
+             Assert.assertFalse(OrderID.trim().isEmpty(), "Order ID is EMPTY. Distributor booking test may have failed.");
 
-        String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
-        String username = pUtil.readDataFromPropertyFile("adminusername");
-        String password = pUtil.readDataFromPropertyFile("adminpassword");
+             // Store the same distributor-generated Order ID
+             String distributorBookedOrderID = OrderID.trim();
 
-        driver = createChromeDriver();
+             System.out.println("DISTRIBUTOR BOOKED ORDER ID : "+ distributorBookedOrderID);
 
-        try {
-            driver.get(adminUrl);
-            waitForPageLoad();
+             String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
+             String username = pUtil.readDataFromPropertyFile("adminusername");
+             String password = pUtil.readDataFromPropertyFile("adminpassword");
 
-            com.goldbharath.objectrepository.admin.LoginPage adminLoginPage =
-                    new com.goldbharath.objectrepository.admin.LoginPage(driver);
-            adminLoginPage.loginToAdmin(username, password);
-            waitForPageLoad();
+             driver = createChromeDriver();
 
-            System.out.println("Admin Login Successful");
+             try {
+                 driver.get(adminUrl);
+                 waitForPageLoad();
 
-            com.goldbharath.objectrepository.admin.DashboardPage dbPage = new com.goldbharath.objectrepository.admin.DashboardPage(driver);
-            dbPage.clickOnManageOrdersLnk();
-            Thread.sleep(2000);
+                 com.goldbharath.objectrepository.admin.LoginPage adminLoginPage =
+                         new com.goldbharath.objectrepository.admin.LoginPage(driver);
+                 
+                 adminLoginPage.loginToAdmin(username, password);
+                 waitForPageLoad();
 
-            com.goldbharath.objectrepository.admin.ManageOrdersPage moPage = new com.goldbharath.objectrepository.admin.ManageOrdersPage(driver);
-            moPage.clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(driver, OrderID);
-                                    
-            System.out.println("\n==================================================");
-            System.out.println("ADMIN GOLD PAYMENT FLOW COMPLETED");
-            System.out.println("ORDER ID : " + OrderID);
-            System.out.println("REGISTERED MOBILE : " + registeredMobileNumber);
-            System.out.println("==================================================");
-            
-            
-        } finally {
-            if (driver != null) driver.quit();
-        }
+                 System.out.println("Admin Login Successful");
+
+                 com.goldbharath.objectrepository.admin.DashboardPage dbPage =
+                         new com.goldbharath.objectrepository.admin.DashboardPage(driver);
+
+                 dbPage.clickOnManageOrdersLnk();
+
+                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIME));
+
+                 wait.until(webDriver -> ((org.openqa.selenium.JavascriptExecutor) webDriver)
+                                 .executeScript("return document.readyState")
+                                 .equals("complete"));
+
+                 com.goldbharath.objectrepository.admin.ManageOrdersPage moPage = new com.goldbharath.objectrepository.admin.ManageOrdersPage(driver);
+
+                 // Use the exact Order ID generated in Test 5
+                 moPage.clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(
+                         driver,
+                         distributorBookedOrderID
+                 );
+
+                 System.out.println("\n==================================================");
+                 System.out.println("ADMIN PICKER DETAILS FLOW COMPLETED");
+                 System.out.println("ORDER ID : " + distributorBookedOrderID);
+                 System.out.println("REGISTERED MOBILE : " + registeredMobileNumber);
+                 System.out.println("==================================================");
+
+             } finally {
+                 if (driver != null) {
+                     driver.quit();
+                 }
+             }
     }
+    
+    
 }

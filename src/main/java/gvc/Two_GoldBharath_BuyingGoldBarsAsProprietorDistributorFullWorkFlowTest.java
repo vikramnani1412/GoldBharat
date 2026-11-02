@@ -1,5 +1,5 @@
 
-package sprint1;
+package gvc;
 
 import org.testng.annotations.Test;
 
@@ -14,7 +14,7 @@ import com.goldbharath.objectrepository.user.GoldBarsOrderHistoryPage;
 import com.goldbharath.objectrepository.user.UploadTransactionDetailsForGoldBarsPage;
 import com.goldbharath.objectrepository.user.whatWouldYouLikeToBuyPage;
 
-public class Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest extends DistributorBaseClass {
+public class Two_GoldBharath_BuyingGoldBarsAsProprietorDistributorFullWorkFlowTest extends DistributorBaseClass {
 
     WebDriverUtility wUtil = new WebDriverUtility();
     JavaUtility jUtil = new JavaUtility();

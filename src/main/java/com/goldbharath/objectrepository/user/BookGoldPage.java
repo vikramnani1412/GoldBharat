@@ -35,6 +35,38 @@ public class BookGoldPage {
 	
 	//Rule-3:Provide getters to access these variables
 	
+	public WebElement getCloseBtn() {
+		return CloseBtn;
+	}
+
+
+	public WebElement getCurrentLivePriceEle() {
+		return CurrentLivePriceEle;
+	}
+
+
+	public WebElement getPriceLockedTimeEle() {
+		return PriceLockedTimeEle;
+	}
+
+
+	public WebElement getQuantityDrpDwn() {
+		return QuantityDrpDwn;
+	}
+
+
+	public WebElement getAmountEdt() {
+		return AmountEdt;
+	}
+
+
+	public WebElement getBookBtn() {
+		return BookBtn;
+	}
+
+
+	// Business Library
+	
 	public void fetchingGoldLivePriceAndBookingGold(WebDriver driver) throws Exception
 	{
 	    WebDriverUtility wUtil = new WebDriverUtility();

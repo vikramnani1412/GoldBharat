@@ -22,6 +22,7 @@ import com.goldbharath.objectrepository.admin.BusinessInformationPage;
 import com.goldbharath.objectrepository.admin.DistributorDetailsPage;
 import com.goldbharath.objectrepository.admin.LogoutPage;
 import com.goldbharath.objectrepository.admin.ManageDistributorPage;
+import com.goldbharath.objectrepository.admin.ManageOrdersPage;
 import com.goldbharath.objectrepository.user.BookGoldPage;
 import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 import com.goldbharath.objectrepository.user.DashboardPage;
@@ -558,7 +559,7 @@ public class Six_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
             Thread.sleep(2000);
             
             UpdateDeliveryDetailsPage uPage = new UpdateDeliveryDetailsPage(driver);
-            uPage.updatingDeliveryDetails(Name, PhNo,  IdNo, IdImage);
+            uPage.updatingDeliveryDetails(driver, Name, PhNo,  IdNo, IdImage);
 
         } finally {
             
@@ -566,4 +567,60 @@ public class Six_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
         }
     }
 	
+    // Test 8: Admin Accepting Picker Details
+    @Test(priority = 8, dependsOnMethods = "distributorUpdatingDeliveryDetailsTest")
+    public void adminAcceptingPickerDetails() throws Exception {
+
+        System.out.println("\n========== TEST 8: ADMIN ACCEPTING PICKER DETAILS ==========");
+
+        // Get the same Order ID used in Method 7
+        Assert.assertNotNull(OrderID, "Order ID is NULL from Method 7.");
+        Assert.assertFalse(OrderID.trim().isEmpty(), "Order ID is EMPTY.");
+
+        String orderIdFromMethod7 = OrderID.trim();
+
+        System.out.println("Order ID received from Method 7: " + orderIdFromMethod7);
+
+        String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
+        String username = pUtil.readDataFromPropertyFile("adminusername");
+        String password = pUtil.readDataFromPropertyFile("adminpassword");
+
+        driver = createChromeDriver();
+
+        try {
+            driver.get(adminUrl);
+            waitForPageLoad();
+
+            new com.goldbharath.objectrepository.admin.LoginPage(driver)
+                    .loginToAdmin(username, password);
+
+            waitForPageLoad();
+
+            new com.goldbharath.objectrepository.admin.DashboardPage(driver)
+                    .clickOnManageOrdersLnk();
+
+            waitForPageLoad();
+
+            ManageOrdersPage moPage = new ManageOrdersPage(driver);
+
+            
+            moPage.clickOnCoinsLnk(driver);
+
+            Thread.sleep(2000);
+            moPage.clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(
+                    driver, orderIdFromMethod7);
+
+            System.out.println(
+                    "Picker Details action completed successfully. Order ID: "
+                            + orderIdFromMethod7);
+
+        } finally {
+            if (driver != null) {
+                driver.quit();
+                driver = null;
+            }
+        }
+    }
+    
+    
 }

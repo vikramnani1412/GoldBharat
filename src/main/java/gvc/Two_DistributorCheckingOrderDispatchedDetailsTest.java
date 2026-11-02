@@ -20,7 +20,7 @@ public class Two_DistributorCheckingOrderDispatchedDetailsTest
         wUtil.waitUntilPageLoad(driver);
         
 		String orderId =
-                Two_GoldBharathBuyingGoldBarsAsProprietorDistributorFullWorkFlowTest.OrderId;
+                Two_GoldBharath_BuyingGoldBarsAsProprietorDistributorFullWorkFlowTest.OrderId;
         Thread.sleep(2000);
         
         dPage.checkingDispatchNotificationBasedOnOrderID(driver, orderId);

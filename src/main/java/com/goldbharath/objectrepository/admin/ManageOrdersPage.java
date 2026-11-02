@@ -379,40 +379,141 @@ public class ManageOrdersPage {
 		System.out.println("Order Dispatched Successfully");
   	}
   	
-  	
-  	public void clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(WebDriver driver, String orderID) throws Exception {
+  	public void clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(
+  	        WebDriver driver, String orderID) throws Exception {
 
-  		WebDriverUtility wUtil = new WebDriverUtility();
-  	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+  	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-  	    Thread.sleep(2000);
-  	    driver.navigate().refresh();  	    
+  	    // Step 1: Validate the Order ID
+  	    Assert.assertNotNull(orderID, "Order ID is NULL.");
+  	    Assert.assertFalse(orderID.trim().isEmpty(), "Order ID is EMPTY.");
+
+  	    String actualOrderID = orderID.trim();
+
+  	    System.out.println("Searching Picker Details for Order ID: " + actualOrderID);
+
+  	    // Step 2: Refresh and wait for the page to load
+  	    driver.navigate().refresh();
+
+  	    wait.until(webDriver ->
+  	        "complete".equals(
+  	            ((org.openqa.selenium.JavascriptExecutor) webDriver)
+  	                .executeScript("return document.readyState")
+  	        )
+  	    );
   	    
-  	    Thread.sleep(3000);
-  	    // Step 1: Click Picker Details for the specific Order ID
-  	    WebElement pickerDetailsBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[td[normalize-space(.)='"+orderID+"']]//button[normalize-space(.)='Picker Details']")));
-  	    wUtil.waitForElementToBeClickable(driver, pickerDetailsBtn);
+  	    Thread.sleep(2000);
+  	    CoinsBtn.click();
+  	    
+  	    // Step 3: Locate the specific order row
+  	    By orderRow = By.xpath(
+  	        "//tr[.//td[normalize-space(.)='" + actualOrderID + "']]"
+  	    );
+
+  	    try {
+  	        wait.until(ExpectedConditions.visibilityOfElementLocated(orderRow));
+  	    } catch (org.openqa.selenium.TimeoutException e) {
+  	        System.out.println("Current URL: " + driver.getCurrentUrl());
+  	        System.out.println("Current page title: " + driver.getTitle());
+
+  	        throw new AssertionError(
+  	            "Order ID '" + actualOrderID
+  	            + "' was not found in the visible table. Check the order status, "
+  	            + "pagination, filters, and whether the correct admin page is open.",
+  	            e
+  	        );
+  	    }
+
+  	    // Step 4: Locate Picker Details within the matching order row
+  	    By pickerDetailsLocator = By.xpath(
+  	        "//tr[.//td[normalize-space(.)='" + actualOrderID + "']]"
+  	        + "//*[self::button or self::a]"
+  	        + "[contains(normalize-space(.), 'Picker Details')]"
+  	    );
+
+  	    WebElement pickerDetailsBtn = wait.until(
+  	        ExpectedConditions.elementToBeClickable(pickerDetailsLocator)
+  	    );
+
   	    pickerDetailsBtn.click();
-  	    
-  	    Thread.sleep(2000);
-  	    // Step 2: Click Send OTP button
+
+  	    System.out.println(
+  	        "Picker Details clicked successfully for Order ID: " + actualOrderID
+  	    );
+
+  	    // Step 5: Click Send OTP
   	    wait.until(ExpectedConditions.elementToBeClickable(SendOtpBtn)).click();
-         
-  	    Thread.sleep(2000);
-  	    // Step 3: Enter OTP
-  	    WebElement otpInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//h6[normalize-space(.)='OTP Verification']/../following-sibling::div//input[@autocomplete='one-time-code'])[1]")));
+
+  	    // Step 6: Enter OTP
+  	    By otpInputLocator = By.xpath(
+  	        "(//h6[normalize-space(.)='OTP Verification']"
+  	        + "/../following-sibling::div"
+  	        + "//input[@autocomplete='one-time-code'])[1]"
+  	    );
+
+  	    WebElement otpInput = wait.until(
+  	        ExpectedConditions.visibilityOfElementLocated(otpInputLocator)
+  	    );
+
   	    otpInput.sendKeys("123456");
 
-  	    Thread.sleep(2000);
-  	    // Step 4: Verify that the Order Delivered Text is displayed
-  	    WebElement orderDeliveredText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[td[normalize-space(.)='" + orderID + "']]//button[normalize-space(.)='Order Delivered']")));
-        
-  	    Thread.sleep(2000);
-  	    // Step 5: Validate using TestNG assertion
-  	    Assert.assertTrue(orderDeliveredText.isDisplayed(),"Order Delivered button is not displayed for Order ID: " + orderID);
-  	    System.out.println("Order Delivered button is displayed successfully for Order ID: " + orderID);
-  	    
+  	    // Step 7: Verify Order Delivered for the same order
+  	    By orderDeliveredLocator = By.xpath(
+  	        "//tr[.//td[normalize-space(.)='" + actualOrderID + "']]"
+  	        + "//*[self::button or self::a]"
+  	        + "[contains(normalize-space(.), 'Order Delivered')]"
+  	    );
+
+  	    WebElement orderDeliveredText = wait.until(
+  	        ExpectedConditions.visibilityOfElementLocated(orderDeliveredLocator)
+  	    );
+
+  	    Assert.assertTrue(
+  	        orderDeliveredText.isDisplayed(),
+  	        "Order Delivered control is not displayed for Order ID: " + actualOrderID
+  	    );
+
+  	    System.out.println(
+  	        "Order Delivered control is displayed successfully for Order ID: "
+  	        + actualOrderID
+  	    );
   	}
+  	
+  	
+  	
+//  	public void clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(WebDriver driver, String orderID) throws Exception {
+//
+//  		WebDriverUtility wUtil = new WebDriverUtility();
+//  	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//  	    Thread.sleep(2000);
+//  	    driver.navigate().refresh();  	    
+//  	    
+//  	    Thread.sleep(3000);
+//  	    // Step 1: Click Picker Details for the specific Order ID
+//  	    WebElement pickerDetailsBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[td[normalize-space(.)='"+orderID+"']]//button[normalize-space(.)='Picker Details']")));
+//  	    wUtil.waitForElementToBeClickable(driver, pickerDetailsBtn);
+//  	    pickerDetailsBtn.click();
+//  	    
+//  	    Thread.sleep(2000);
+//  	    // Step 2: Click Send OTP button
+//  	    wait.until(ExpectedConditions.elementToBeClickable(SendOtpBtn)).click();
+//         
+//  	    Thread.sleep(2000);
+//  	    // Step 3: Enter OTP
+//  	    WebElement otpInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//h6[normalize-space(.)='OTP Verification']/../following-sibling::div//input[@autocomplete='one-time-code'])[1]")));
+//  	    otpInput.sendKeys("123456");
+//
+//  	    Thread.sleep(2000);
+//  	    // Step 4: Verify that the Order Delivered Text is displayed
+//  	    WebElement orderDeliveredText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[td[normalize-space(.)='" + orderID + "']]//button[normalize-space(.)='Order Delivered']")));
+//        
+//  	    Thread.sleep(2000);
+//  	    // Step 5: Validate using TestNG assertion
+//  	    Assert.assertTrue(orderDeliveredText.isDisplayed(),"Order Delivered button is not displayed for Order ID: " + orderID);
+//  	    System.out.println("Order Delivered button is displayed successfully for Order ID: " + orderID);
+//  	    
+//  	}
   	
   	
 //  	public void clickOnPickerDetailsBtnBasedOnOrderID(WebDriver driver, String OrderID) throws Exception

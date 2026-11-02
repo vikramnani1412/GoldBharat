@@ -1,4 +1,4 @@
-package sprint1;
+package Goldbharat;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -450,7 +450,7 @@ public class One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest {
             Thread.sleep(2000);
 
             new UpdateDeliveryDetailsPage(driver)
-                    .updatingDeliveryDetails(name, phoneNumber, idNumber, idImage);
+                    .updatingDeliveryDetails(driver, name, phoneNumber, idNumber, idImage);
 
             System.out.println("Delivery details updated successfully. Order ID: " + OrderID);
         } finally {
@@ -514,55 +514,3 @@ public class One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest {
     }
     
 }
-
-    
-
-    
-//    @Test(priority = 8, dependsOnMethods = "distributorUpdatingDeliveryDetailsTest")
-//    public void adminAcceptingPickerDetails() throws Exception {
-//        System.out.println("\n========== TEST 8: ADMIN ACCEPTING PICKER DETAILS ==========");
-//
-//        String deliveryMsg = eUtil.readDataFromExcel("Admin", 2, 1);
-//        String daysToDeliver = wUtil.generateNextDaysDateAndTimeBasedOnIndex(3);
-//
-//        if (OrderID == null || OrderID.trim().isEmpty()) {
-//            throw new Exception("Order ID is not available from Test 5.");
-//        }
-//
-//        OrderID = OrderID.trim();
-//        System.out.println("Order ID: " + OrderID);
-//
-//        String adminUrl = pUtil.readDataFromPropertyFile("adminurl");
-//        String username = pUtil.readDataFromPropertyFile("adminusername");
-//        String password = pUtil.readDataFromPropertyFile("adminpassword");
-//
-//        driver = createChromeDriver();
-//
-//        try {
-//            driver.get(adminUrl);
-//            waitForPageLoad();
-//
-//            new com.goldbharath.objectrepository.admin.LoginPage(driver)
-//                    .loginToAdmin(username, password);
-//            waitForPageLoad();
-//
-//            new com.goldbharath.objectrepository.admin.DashboardPage(driver)
-//                    .clickOnManageOrdersLnk();
-//            Thread.sleep(2000);
-//            
-//            com.goldbharath.objectrepository.admin.ManageOrdersPage moPage =
-//                    new com.goldbharath.objectrepository.admin.ManageOrdersPage(driver);
-//            Thread.sleep(2000);
-//            
-//            moPage.clickOnCoinsLnk(driver);
-//            Thread.sleep(2000);
-//            
-//            moPage.clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(driver, OrderID);
-//            Thread.sleep(2000);
-//            
-//        }
-//        finally {
-//        	if (driver != null) driver.quit();
-//		}
-//    }
-
