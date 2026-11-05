@@ -38,6 +38,8 @@ public class KycAsProprietorPage {
     
     @FindBy(xpath="//button[.='Submit']")private WebElement SubmitBtn;
     
+    @FindBy(xpath="//a[.='Click Here']")private WebElement ClickHereLnk;
+    
     
 	//Rule-2:Create a constructor to initilise these elements
     
@@ -105,6 +107,11 @@ public class KycAsProprietorPage {
 	}
 
 
+	public WebElement getClickHereLnk() {
+		return ClickHereLnk;
+	}
+
+
 	public WebElement getSubmitBtn() {
 		return SubmitBtn;
 	}
@@ -118,6 +125,46 @@ public class KycAsProprietorPage {
 		String PanimagePath = System.getProperty("user.dir")+ "/src/test/resources/assets/PAN_Card.jpeg";
 		String GstimagePath = System.getProperty("user.dir")+ "/src/test/resources/assets/PAN_Card.jpeg";
 		
+		Thread.sleep(2000);
+		TypeDrpDwn.click();
+		Thread.sleep(2000);
+		SelectProprietor.click();
+		Thread.sleep(2000);
+		ProprietorNameEdt.sendKeys(Name);
+		Thread.sleep(2000);
+		PanNumberEdt.sendKeys(PanNumber);
+		Thread.sleep(2000);
+		UploadPanImageField.sendKeys(PanimagePath);
+		Thread.sleep(2000);
+		GstNumberEdt.sendKeys(GstNumber);
+		Thread.sleep(2000);
+		UploadGstImageField.sendKeys(GstimagePath);
+		Thread.sleep(2000);
+		BankNameEdt.sendKeys(BankName);
+		Thread.sleep(2000);
+		AcNumberEdt.sendKeys(AccountNo);
+		Thread.sleep(2000);
+		IfscCodeEdt.sendKeys(IfscCode);
+		Thread.sleep(2000);
+		AccountHolderNameEdt.sendKeys(AccountHolderName);
+		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});",SubmitBtn);
+		// Wait until clickable
+		wUtil.waitForElementToBeClickable(driver, SubmitBtn);
+		Thread.sleep(2000);
+		SubmitBtn.click();
+		Thread.sleep(2000);
+	}
+	
+	public void proprietorKycAfterRejecting(WebDriver driver, String Name, String PanNumber, String GstNumber, String BankName, String AccountNo, String IfscCode, String AccountHolderName) throws Exception
+	{
+		WebDriverUtility wUtil = new WebDriverUtility();
+		
+		String PanimagePath = System.getProperty("user.dir")+ "/src/test/resources/assets/PAN_Card.jpeg";
+		String GstimagePath = System.getProperty("user.dir")+ "/src/test/resources/assets/PAN_Card.jpeg";
+		
+		Thread.sleep(2000);
+		ClickHereLnk.click();
 		Thread.sleep(2000);
 		TypeDrpDwn.click();
 		Thread.sleep(2000);

@@ -74,6 +74,10 @@ public class ManageOrdersPage {
     
     @FindBy(xpath="//button[normalize-space()='Decline']")private WebElement DeclineBtn;
     
+    @FindBy(xpath="//textarea[@id='userInput']")private WebElement ReasonEdt;
+    
+    @FindBy(xpath="//button[.=' Submit ']")private WebElement SubmitBtn;
+    
     @FindBy(xpath="//button[normalize-space()='close']")private WebElement CloseBtn;
     
 //////////////////////////////////////////////After Clicking On Reject Order Button
@@ -105,8 +109,11 @@ public class ManageOrdersPage {
     
     //Rule-3:Create a constructor to initilise these elements
     
+  	private final WebDriver pageDriver;
+
   	public ManageOrdersPage(WebDriver driver)
   	{
+  		this.pageDriver = driver;
   		PageFactory.initElements(driver, this);
   	}
   	
@@ -269,6 +276,16 @@ public class ManageOrdersPage {
 
 
 
+	public WebElement getReasonEdt() {
+		return ReasonEdt;
+	}
+
+
+	public WebElement getSendOtpBtn() {
+		return SendOtpBtn;
+	}
+
+
 	public WebElement getCloseBtn() {
 		return CloseBtn;
 	}
@@ -292,6 +309,63 @@ public class ManageOrdersPage {
 
 
   	
+  	// Wait helpers
+
+  	private boolean isPresent(WebDriver driver, By locator)
+  	{
+  		driver.manage().timeouts().implicitlyWait(Duration.ZERO);
+  		try {
+  			return !driver.findElements(locator).isEmpty();
+  		} finally {
+  			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+  		}
+  	}
+
+  	private void waitForLoaderToDisappear(WebDriver driver)
+  	{
+  		By loader = By.xpath("//div[contains(@class,'loader-backdrop')]");
+  		driver.manage().timeouts().implicitlyWait(Duration.ZERO);
+  		try {
+  			new WebDriverWait(driver, Duration.ofSeconds(30))
+  				.ignoring(org.openqa.selenium.StaleElementReferenceException.class)
+  				.until(d -> d.findElements(loader).stream().noneMatch(WebElement::isDisplayed));
+  		} catch (org.openqa.selenium.TimeoutException e) {
+  			System.out.println("Loader still visible after 30 seconds");
+  		} finally {
+  			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+  		}
+  	}
+
+  	private void clickWhenReady(WebDriver driver, WebElement element)
+  	{
+  		waitForLoaderToDisappear(driver);
+  		new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.elementToBeClickable(element)).click();
+  	}
+
+  	private void clickWhenReady(WebDriver driver, By locator)
+  	{
+  		waitForLoaderToDisappear(driver);
+  		new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.elementToBeClickable(locator)).click();
+  	}
+
+  	private void openCoinsTab(WebDriver driver)
+  	{
+  		clickWhenReady(driver, CoinsBtn);
+  		waitForLoaderToDisappear(driver);
+  	}
+
+  	private void waitForDocumentReady(WebDriver driver)
+  	{
+  		new WebDriverWait(driver, Duration.ofSeconds(20)).until(d ->
+  			"complete".equals(((org.openqa.selenium.JavascriptExecutor) d).executeScript("return document.readyState")));
+  	}
+
+  	private String rowText(WebDriver driver, String OrderID)
+  	{
+  		java.util.List<WebElement> rows = driver.findElements(By.xpath("//tr[td[contains(normalize-space(.),'"+OrderID+"')]]"));
+  		return rows.isEmpty() ? "<row not found>" : rows.get(0).getText().replace("\n", " | ");
+  	}
+
   	// Business Library
   	
 	public void clickOnCoinsLnk(WebDriver driver)
@@ -306,12 +380,45 @@ public class ManageOrdersPage {
   	}
   	
   	//  //button[.=' Accept ']
-  	//  //button[.=' Decline ']
-  	//  //button[.=' close ']
-  	public void checkingRecentlyBuyedCoinsDetails(WebDriver driver, String OrderID) throws Exception
+	
+	public void checkingRecentlyBuyedCoinsDetailsAccepting(WebDriver driver, String OrderID) throws Exception
   	{
-  		Thread.sleep(2000);
-  		CoinsBtn.click();
+  		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+  		String row = "//tr[td[contains(normalize-space(.),'"+OrderID+"')]]";
+  		By confirmPaymentBtn = By.xpath(row+"//button[normalize-space()='Confirm Payment']");
+  		By viewCoinDetailsBtn = By.xpath(row+"//button[@title='View Coin Details']");
+  		By laterStageBtn = By.xpath(row+"//button[normalize-space()='Verify Order' or contains(normalize-space(.),'Dispatched')]");
+
+  		openCoinsTab(driver);
+
+  		try {
+  			wait.until(ExpectedConditions.visibilityOfElementLocated(confirmPaymentBtn));
+  		} catch (org.openqa.selenium.TimeoutException e) {
+  			// Retry-safe: payment may already have been accepted by an earlier attempt
+  			if (isPresent(driver, laterStageBtn)) {
+  				System.out.println("Payment already accepted for Order ID " + OrderID + ", skipping Accept");
+  				return;
+  			}
+  			throw new AssertionError("Confirm Payment button not available for Order ID " + OrderID + ". Row: " + rowText(driver, OrderID), e);
+  		}
+
+  		clickWhenReady(driver, viewCoinDetailsBtn);
+  		wait.until(ExpectedConditions.elementToBeClickable(QtyPurchasedViewPageCloseBtn)).click();
+  		waitForLoaderToDisappear(driver);
+
+  		clickWhenReady(driver, confirmPaymentBtn);
+  		String Details = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h4[text()='Order Details']/.."))).getText();
+  		System.out.println("Order Details is "+Details);
+
+  		clickWhenReady(driver, AcceptBtn);
+  		waitForLoaderToDisappear(driver);
+  	}
+	
+  	//  //button[.=' Decline ']
+	
+	public void checkingRecentlyBuyedCoinsDetailsDecline(WebDriver driver, String OrderID, String Reason) throws Exception
+  	{
+  		openCoinsTab(driver);
   		Thread.sleep(2000);
   		driver.findElement(By.xpath("//td[contains(normalize-space(.),'"+OrderID+"')]/following-sibling::td/button[@title='View Coin Details']")).click();
   		Thread.sleep(5000);
@@ -323,17 +430,43 @@ public class ManageOrdersPage {
   		Thread.sleep(2000);
   	    System.out.println("Order Details is "+Details);
   		Thread.sleep(2000);
-  		AcceptBtn.click();
+  		DeclineBtn.click();
+  		Thread.sleep(2000);
+  		ReasonEdt.sendKeys(Reason);
+  		Thread.sleep(2000);
+  		SubmitBtn.click();
+  	    
+  	}
+	
+  	//  //button[.=' close ']
+  	public void checkingRecentlyBuyedCoinsDetailsPageClosing(WebDriver driver, String OrderID) throws Exception
+  	{
+  		openCoinsTab(driver);
+  		Thread.sleep(2000);
+  		driver.findElement(By.xpath("//td[contains(normalize-space(.),'"+OrderID+"')]/following-sibling::td/button[@title='View Coin Details']")).click();
+  		Thread.sleep(5000);
+  		QtyPurchasedViewPageCloseBtn.click();
+  		Thread.sleep(2000);
+  		driver.findElement(By.xpath("//td[contains(normalize-space(.),'"+OrderID+"')]/following-sibling::td/button[.=' Confirm Payment ']")).click();
+  	    Thread.sleep(2000);
+  	    String Details = driver.findElement(By.xpath("//h4[text()='Order Details']/..")).getText();
+  		Thread.sleep(2000);
+  	    System.out.println("Order Details is "+Details);
+  		Thread.sleep(2000);
+  		CloseBtn.click();
   	    
   	}
   	
   	public void allActionsInConfirmDispatchPageInLLpPage(String DeliveryMsg, String DeliveryDateTime) throws Exception 
   	{
+  		new WebDriverWait(pageDriver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOf(DeliveryMessageEdt));
   		Thread.sleep(2000);
   	    DeliveryMessageEdt.sendKeys(DeliveryMsg);
   	    Thread.sleep(2000);
   	    DeliveryDateTimeEdt.sendKeys(DeliveryDateTime);
   	    Thread.sleep(2000);
+  	    // Robot sends OS-level keys: make sure the browser window has focus first
+  	    ((org.openqa.selenium.JavascriptExecutor) pageDriver).executeScript("window.focus();");
   	    Robot r = new Robot();
         
   	// Press and release TAB 3 times
@@ -367,7 +500,8 @@ public class ManageOrdersPage {
   	r.keyRelease(KeyEvent.VK_ENTER);
   	
   	    Thread.sleep(2000);
-  	    YesBtn.click();
+  	    clickWhenReady(pageDriver, YesBtn);
+  	    waitForLoaderToDisappear(pageDriver);
   	    
   	}
   	
@@ -538,25 +672,692 @@ public class ManageOrdersPage {
   	
   	
   	
-  	public void clickOnVerifyOrderBtnBasedOnOrderID(WebDriver driver, String OrderID) throws Exception
+  	public boolean clickOnVerifyOrderBtnBasedOnOrderID(WebDriver driver, String OrderID) throws Exception
   	{
-  		Thread.sleep(2000);
-  		driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/button[.=' Verify Order ']")).click();
-  		Thread.sleep(2000);
-  	    
+  		By verifyBtn = By.xpath("//tr[td[normalize-space()='"+OrderID+"']]//button[normalize-space()='Verify Order']");
+  		By dispatchedBtn = By.xpath("//tr[td[normalize-space()='"+OrderID+"']]//button[contains(normalize-space(.),'Dispatched')]");
+
+  		waitForLoaderToDisappear(driver);
+  		try {
+  			new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.elementToBeClickable(verifyBtn)).click();
+  			waitForLoaderToDisappear(driver);
+  			return true;
+  		} catch (org.openqa.selenium.TimeoutException e) {
+  			// Retry-safe: order may already be verified and dispatched by an earlier attempt
+  			if (isPresent(driver, dispatchedBtn)) {
+  				System.out.println("Order already dispatched, skipping Verify Order. Order ID: " + OrderID);
+  				return false;
+  			}
+  			// Table may not have refreshed after payment accept
+  			driver.navigate().refresh();
+  			waitForDocumentReady(driver);
+  			openCoinsTab(driver);
+  			try {
+  				new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.elementToBeClickable(verifyBtn)).click();
+  				waitForLoaderToDisappear(driver);
+  				return true;
+  			} catch (org.openqa.selenium.TimeoutException e2) {
+  				throw new AssertionError("Verify Order button not available for Order ID " + OrderID + ". Row: " + rowText(driver, OrderID), e2);
+  			}
+  		}
   	}
   	
   	public void confirmingOrderStatus(WebDriver driver, String OrderID) throws Exception
   	{
-  		Thread.sleep(2000);
-  		WebElement DispatchedConfirmMsg = driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/button[.=' Dispatched ']"));
-  		Thread.sleep(2000);
-        Assert.assertTrue(DispatchedConfirmMsg.isDisplayed(),
-                "Problem occurred while dispatching the order.");
+  		By dispatchedBtn = By.xpath("//tr[td[normalize-space()='"+OrderID+"']]//button[contains(normalize-space(.),'Dispatched')]");
+  		WebElement DispatchedConfirmMsg;
+  		waitForLoaderToDisappear(driver);
+  		try {
+  			DispatchedConfirmMsg = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(dispatchedBtn));
+  		} catch (org.openqa.selenium.TimeoutException e) {
+  			// Table may not reflect the new status until reloaded
+  			driver.navigate().refresh();
+  			waitForDocumentReady(driver);
+  			openCoinsTab(driver);
+  			try {
+  				DispatchedConfirmMsg = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(dispatchedBtn));
+  			} catch (org.openqa.selenium.TimeoutException e2) {
+  				throw new AssertionError("Dispatched status not shown for Order ID " + OrderID + ". Row: " + rowText(driver, OrderID), e2);
+  			}
+  		}
+  		Assert.assertTrue(DispatchedConfirmMsg.isDisplayed(),
+  				"Problem occurred while dispatching the order.");
 
-        System.out.println("Order dispatched successfully. Order ID: " + OrderID);
+  		System.out.println("Order dispatched successfully. Order ID: " + OrderID);
   	}
   	
   	
   	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//package com.goldbharath.objectrepository.admin;
+//
+//import java.awt.Robot;
+//import java.awt.event.KeyEvent;
+//import java.time.Duration;
+//
+//import org.openqa.selenium.By;
+//import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebElement;
+//import org.openqa.selenium.support.FindBy;
+//import org.openqa.selenium.support.PageFactory;
+//import org.openqa.selenium.support.ui.ExpectedConditions;
+//import org.openqa.selenium.support.ui.WebDriverWait;
+//import org.testng.Assert;
+//
+//import com.goldbharath.genericutilities.WebDriverUtility;
+//
+//public class ManageOrdersPage {
+//
+//	//Finding WebElements Using @FindBy Annotations
+//	
+//    @FindBy(xpath="//span[.='Dashboard']")private WebElement DashboardLnk;
+//    
+//    @FindBy(xpath="//span[.='Manage Distributor']")private WebElement ManageDistributorLnk;
+//    
+//    @FindBy(xpath="//span[.='Manage Order']")private WebElement ManageOrderLnk;
+//    
+//    @FindBy(xpath="//span[.='Coins']")private WebElement CoinsLnk;
+//    
+//    @FindBy(xpath="//i[@class='fa-solid fa-arrow-left icon-vertical ng-star-inserted']")private WebElement DashBoardCloseBtn;
+//    
+//    @FindBy(xpath="//button[.=' Buy Order ']")private WebElement BuyOrderBtn;
+//  
+//    @FindBy(xpath="//button[.=' Book Order ']")private WebElement BookOrderBtn;
+//  
+//    @FindBy(xpath="//button[normalize-space(.)='Coins']")private WebElement CoinsBtn;
+//    
+//    @FindBy(xpath="//input[@placeholder='Search by Order No., Name, State, City....']")private WebElement SearchEdt;
+//    
+//    @FindBy(xpath="//button[.=' Export to Excel ']")private WebElement ExportToExcelBtn;
+//	
+//    @FindBy(xpath="//i[@class='fa-solid fa-bell user-icon']")private WebElement NotificationsIcon;
+//    
+//    @FindBy(xpath="//button[@class='logout']")private WebElement LogoutBtn;
+//    
+//    
+//    /////////////// In Coins Page Coins View Btn
+//    
+//    @FindBy(xpath="//td[contains(normalize-space(.),'GB-53352')]/following-sibling::td/button[@title='View Coin Details']")private WebElement QtyPurchasedViewBtnBasedOnOrderId;
+//    
+//    @FindBy(xpath="(//div[@class='modal-header-icon']/following-sibling::h5/following-sibling::button[@class='btn-close'])[1]")private WebElement QtyPurchasedViewPageCloseBtn;
+//    
+//    ///////////////
+//    
+//   
+//    @FindBy(xpath="//td[contains(normalize-space(.),'GB-83077')]/following-sibling::td/button[.=' Confirm Payment ']")private WebElement CofirmPaymentBtnBasedOnOrderId;
+//    
+//    @FindBy(xpath="//td[contains(normalize-space(.),'GB-54937')]/following-sibling::td/following-sibling::td/button[normalize-space()='Reject Order']")private WebElement RejectOrderBtnBasedOnOrderId;
+//    
+//    @FindBy(xpath="//a[text()=' Previous ']")private WebElement PreviousPageLnk;
+//    
+//    @FindBy(xpath="//a[text()=' Next ']")private WebElement NextPageLnk;
+//    
+//    // Page no has to make dynamic
+//    @FindBy(xpath="//span[.='1']")private WebElement ExactPageBasedOnIndex;
+//    
+////////////////////////////////////////////////After Clicking On Quantity Purchased View Btn Coins Page
+//    
+//    @FindBy(xpath="(//div[@class='modal-header-icon']/following-sibling::h5[.='Coin']/following-sibling::button[@class='btn-close'])[1]")private WebElement ClosePageBtn;
+//    
+//////////////////////////////////////////////// After Clicking On Confirm Payment Order Details Page
+//    
+//    @FindBy(xpath="//button[normalize-space()='Accept']")private WebElement AcceptBtn;
+//    
+//    @FindBy(xpath="//button[normalize-space()='Decline']")private WebElement DeclineBtn;
+//    
+//    @FindBy(xpath="//textarea[@id='userInput']")private WebElement ReasonEdt;
+//    
+//    @FindBy(xpath="//button[.=' Submit ']")private WebElement SubmitBtn;
+//    
+//    @FindBy(xpath="//button[normalize-space()='close']")private WebElement CloseBtn;
+//    
+////////////////////////////////////////////////After Clicking On Reject Order Button
+// 
+//    @FindBy(xpath="//button[.='Yes']")private WebElement YesBtn;
+//    
+//    @FindBy(xpath="//button[.='No']")private WebElement NoBtn;
+//    
+//    ////////////////////////////// Last Verify Order Button In Confirm Dispatch Page
+//    
+//    @FindBy(xpath="//td[.='GB-16679']/following-sibling::td/button[.=' Verify Order ']")private WebElement VerifyOrderBtn;
+//    
+//    @FindBy(xpath="//input[@placeholder='Enter delivery message']")private WebElement DeliveryMessageEdt;
+//    
+//    @FindBy(xpath="//input[@placeholder='Enter delivery time']")private WebElement DeliveryDateTimeEdt;
+//    
+//    // Confirm Dispatch Page No Btn
+//    @FindBy(xpath="//button[normalize-space()='No']")private WebElement InConfirmDispatchPageNoBtn;
+//    
+//    // After Dispatch
+//    @FindBy(xpath="//td[.='GB-66957']/following-sibling::td/button[.=' Dispatched ']")private WebElement DispatchedConfirmText;
+//  
+//    // Picker Details Details Btn Based On OrderID
+//                     
+//    @FindBy(xpath="//tr[td[normalize-space(.)='GB-87815']]//button[normalize-space(.)='Picker Details']")private WebElement PickerDetailsBtnBasedOnOrderID;
+//    
+//    @FindBy(xpath="//div[.='Final OTP Confirmation']/following-sibling::div/button[.='Send OTP']")private WebElement SendOtpBtn;
+//    
+//    
+//    //Rule-3:Create a constructor to initilise these elements
+//    
+//  	public ManageOrdersPage(WebDriver driver)
+//  	{
+//  		PageFactory.initElements(driver, this);
+//  	}
+//  	
+//  	
+//  	//Rule-4:Provide getters to access these variables
+//    
+//  	public WebElement getDashboardLnk() {
+//		return DashboardLnk;
+//	}
+//
+//
+//
+//	public WebElement getManageDistributorLnk() {
+//		return ManageDistributorLnk;
+//	}
+//
+//
+//
+//	public WebElement getManageOrderLnk() {
+//		return ManageOrderLnk;
+//	}
+//
+//
+//
+//	public WebElement getCoinsLnk() {
+//		return CoinsLnk;
+//	}
+//
+//
+//
+//	public WebElement getDashBoardCloseBtn() {
+//		return DashBoardCloseBtn;
+//	}
+//
+//
+//
+//	public WebElement getBuyOrderBtn() {
+//		return BuyOrderBtn;
+//	}
+//
+//
+//
+//	public WebElement getBookOrderBtn() {
+//		return BookOrderBtn;
+//	}
+//
+//
+//
+//	public WebElement getCoinsBtn() {
+//		return CoinsBtn;
+//	}
+//
+//
+//
+//	public WebElement getSearchEdt() {
+//		return SearchEdt;
+//	}
+//
+//
+//
+//	public WebElement getVerifyOrderBtn() {
+//		return VerifyOrderBtn;
+//	}
+//
+//
+//	public WebElement getDeliveryMessageEdt() {
+//		return DeliveryMessageEdt;
+//	}
+//
+//
+//	public WebElement getDeliveryDateTimeEdt() {
+//		return DeliveryDateTimeEdt;
+//	}
+//
+//
+//	public WebElement getInConfirmDispatchPageNoBtn() {
+//		return InConfirmDispatchPageNoBtn;
+//	}
+//
+//
+//	public WebElement getExportToExcelBtn() {
+//		return ExportToExcelBtn;
+//	}
+//
+//
+//
+//	public WebElement getNotificationsIcon() {
+//		return NotificationsIcon;
+//	}
+//
+//
+//
+//	public WebElement getLogoutBtn() {
+//		return LogoutBtn;
+//	}
+//
+//
+//
+//	public WebElement getQtyPurchasedViewBtnBasedOnOrderId() {
+//		return QtyPurchasedViewBtnBasedOnOrderId;
+//	}
+//
+//
+//
+//	public WebElement getQtyPurchasedViewPageCloseBtn() {
+//		return QtyPurchasedViewPageCloseBtn;
+//	}
+//
+//
+//	public WebElement getCofirmPaymentBtnBasedOnOrderId() {
+//		return CofirmPaymentBtnBasedOnOrderId;
+//	}
+//
+//
+//
+//	public WebElement getRejectOrderBtnBasedOnOrderId() {
+//		return RejectOrderBtnBasedOnOrderId;
+//	}
+//
+//
+//
+//	public WebElement getDispatchedConfirmText() {
+//		return DispatchedConfirmText;
+//	}
+//
+//
+//	public WebElement getPreviousPageLnk() {
+//		return PreviousPageLnk;
+//	}
+//
+//
+//
+//	public WebElement getNextPageLnk() {
+//		return NextPageLnk;
+//	}
+//
+//
+//
+//	public WebElement getExactPageBasedOnIndex() {
+//		return ExactPageBasedOnIndex;
+//	}
+//
+//
+//
+//	public WebElement getClosePageBtn() {
+//		return ClosePageBtn;
+//	}
+//
+//
+//
+//	public WebElement getAcceptBtn() {
+//		return AcceptBtn;
+//	}
+//
+//
+//
+//	public WebElement getDeclineBtn() {
+//		return DeclineBtn;
+//	}
+//
+//
+//
+//	public WebElement getReasonEdt() {
+//		return ReasonEdt;
+//	}
+//
+//
+//	public WebElement getSendOtpBtn() {
+//		return SendOtpBtn;
+//	}
+//
+//
+//	public WebElement getCloseBtn() {
+//		return CloseBtn;
+//	}
+//	
+//
+//
+//	public WebElement getYesBtn() {
+//		return YesBtn;
+//	}
+//
+//
+//
+//	public WebElement getNoBtn() {
+//		return NoBtn;
+//	}
+//	
+//	
+//	public WebElement getPickerDetailsBtnBasedOnOrderID() {
+//		return PickerDetailsBtnBasedOnOrderID;
+//	}
+//
+//
+//  	
+//  	// Business Library
+//  	
+//	public void clickOnCoinsLnk(WebDriver driver)
+//  	{
+//  		WebDriverUtility wUtil = new WebDriverUtility();
+//  		wUtil.waitForPageLoad(driver);
+//  		System.out.println("Coins Button Displayed");
+//  		wUtil.waitForElementToBeClickable(driver, CoinsBtn);
+//  		CoinsBtn.click();
+//  		System.out.println("Coins Button Clicked");
+//  		
+//  	}
+//  	
+//  	//  //button[.=' Accept ']
+//	
+//	public void checkingRecentlyBuyedCoinsDetailsAccepting(WebDriver driver, String OrderID) throws Exception
+//  	{
+//  		Thread.sleep(2000);
+//  		CoinsBtn.click();
+//  		Thread.sleep(2000);
+//  		driver.findElement(By.xpath("//td[contains(normalize-space(.),'"+OrderID+"')]/following-sibling::td/button[@title='View Coin Details']")).click();
+//  		Thread.sleep(5000);
+//  		QtyPurchasedViewPageCloseBtn.click();
+//  		Thread.sleep(2000);
+//  		driver.findElement(By.xpath("//td[contains(normalize-space(.),'"+OrderID+"')]/following-sibling::td/button[.=' Confirm Payment ']")).click();
+//  	    Thread.sleep(2000);
+//  	    String Details = driver.findElement(By.xpath("//h4[text()='Order Details']/..")).getText();
+//  		Thread.sleep(2000);
+//  	    System.out.println("Order Details is "+Details);
+//  		Thread.sleep(2000);
+//  		AcceptBtn.click();
+//  	    
+//  	}
+//	
+//  	//  //button[.=' Decline ']
+//	
+//	public void checkingRecentlyBuyedCoinsDetailsDecline(WebDriver driver, String OrderID, String Reason) throws Exception
+//  	{
+//  		Thread.sleep(2000);
+//  		CoinsBtn.click();
+//  		Thread.sleep(2000);
+//  		driver.findElement(By.xpath("//td[contains(normalize-space(.),'"+OrderID+"')]/following-sibling::td/button[@title='View Coin Details']")).click();
+//  		Thread.sleep(5000);
+//  		QtyPurchasedViewPageCloseBtn.click();
+//  		Thread.sleep(2000);
+//  		driver.findElement(By.xpath("//td[contains(normalize-space(.),'"+OrderID+"')]/following-sibling::td/button[.=' Confirm Payment ']")).click();
+//  	    Thread.sleep(2000);
+//  	    String Details = driver.findElement(By.xpath("//h4[text()='Order Details']/..")).getText();
+//  		Thread.sleep(2000);
+//  	    System.out.println("Order Details is "+Details);
+//  		Thread.sleep(2000);
+//  		DeclineBtn.click();
+//  		Thread.sleep(2000);
+//  		ReasonEdt.sendKeys(Reason);
+//  		Thread.sleep(2000);
+//  		SubmitBtn.click();
+//  	    
+//  	}
+//	
+//  	//  //button[.=' close ']
+//  	public void checkingRecentlyBuyedCoinsDetailsPageClosing(WebDriver driver, String OrderID) throws Exception
+//  	{
+//  		Thread.sleep(2000);
+//  		CoinsBtn.click();
+//  		Thread.sleep(2000);
+//  		driver.findElement(By.xpath("//td[contains(normalize-space(.),'"+OrderID+"')]/following-sibling::td/button[@title='View Coin Details']")).click();
+//  		Thread.sleep(5000);
+//  		QtyPurchasedViewPageCloseBtn.click();
+//  		Thread.sleep(2000);
+//  		driver.findElement(By.xpath("//td[contains(normalize-space(.),'"+OrderID+"')]/following-sibling::td/button[.=' Confirm Payment ']")).click();
+//  	    Thread.sleep(2000);
+//  	    String Details = driver.findElement(By.xpath("//h4[text()='Order Details']/..")).getText();
+//  		Thread.sleep(2000);
+//  	    System.out.println("Order Details is "+Details);
+//  		Thread.sleep(2000);
+//  		CloseBtn.click();
+//  	    
+//  	}
+//  	
+//  	public void allActionsInConfirmDispatchPageInLLpPage(String DeliveryMsg, String DeliveryDateTime) throws Exception 
+//  	{
+//  		Thread.sleep(2000);
+//  	    DeliveryMessageEdt.sendKeys(DeliveryMsg);
+//  	    Thread.sleep(2000);
+//  	    DeliveryDateTimeEdt.sendKeys(DeliveryDateTime);
+//  	    Thread.sleep(2000);
+//  	    Robot r = new Robot();
+//        
+//  	// Press and release TAB 3 times
+//  	for (int i = 0; i < 3; i++) {
+//  	    r.keyPress(KeyEvent.VK_TAB);
+//  	    r.keyRelease(KeyEvent.VK_TAB);
+//  	    Thread.sleep(1000);
+//  	}
+//
+//  	// Press and release DOWN ARROW 3 times
+//  	for (int i = 0; i < 3; i++) {
+//  	    r.keyPress(KeyEvent.VK_DOWN);
+//  	    r.keyRelease(KeyEvent.VK_DOWN);
+//  	    Thread.sleep(1000);
+//  	}
+//
+//  	// Press and release TAB once
+//  	r.keyPress(KeyEvent.VK_TAB);
+//  	r.keyRelease(KeyEvent.VK_TAB);
+//  	Thread.sleep(1000);
+//
+//  	// Press and release DOWN ARROW 3 times
+//  	for (int i = 0; i < 3; i++) {
+//  	    r.keyPress(KeyEvent.VK_DOWN);
+//  	    r.keyRelease(KeyEvent.VK_DOWN);
+//  	    Thread.sleep(1000);
+//  	}
+//
+//  	// Press and release ENTER
+//  	r.keyPress(KeyEvent.VK_ENTER);
+//  	r.keyRelease(KeyEvent.VK_ENTER);
+//  	
+//  	    Thread.sleep(2000);
+//  	    YesBtn.click();
+//  	    
+//  	}
+//  	
+//  	public void checkingDispatchStatus(WebDriver driver, String OrderID) throws Exception
+//  	{
+//  		Thread.sleep(2000);
+//  		WebElement DispatchedText = driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/button[.=' Dispatched ']"));
+//  		Assert.assertTrue(DispatchedText.isDisplayed(),"Problem Occurred While Dispatching Order");
+//		System.out.println("Order Dispatched Successfully");
+//  	}
+//  	
+//  	public void clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(
+//  	        WebDriver driver, String orderID) throws Exception {
+//
+//  	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//
+//  	    // Step 1: Validate the Order ID
+//  	    Assert.assertNotNull(orderID, "Order ID is NULL.");
+//  	    Assert.assertFalse(orderID.trim().isEmpty(), "Order ID is EMPTY.");
+//
+//  	    String actualOrderID = orderID.trim();
+//
+//  	    System.out.println("Searching Picker Details for Order ID: " + actualOrderID);
+//
+//  	    // Step 2: Refresh and wait for the page to load
+//  	    driver.navigate().refresh();
+//
+//  	    wait.until(webDriver ->
+//  	        "complete".equals(
+//  	            ((org.openqa.selenium.JavascriptExecutor) webDriver)
+//  	                .executeScript("return document.readyState")
+//  	        )
+//  	    );
+//  	    
+//  	    Thread.sleep(2000);
+//  	    CoinsBtn.click();
+//  	    
+//  	    // Step 3: Locate the specific order row
+//  	    By orderRow = By.xpath(
+//  	        "//tr[.//td[normalize-space(.)='" + actualOrderID + "']]"
+//  	    );
+//
+//  	    try {
+//  	        wait.until(ExpectedConditions.visibilityOfElementLocated(orderRow));
+//  	    } catch (org.openqa.selenium.TimeoutException e) {
+//  	        System.out.println("Current URL: " + driver.getCurrentUrl());
+//  	        System.out.println("Current page title: " + driver.getTitle());
+//
+//  	        throw new AssertionError(
+//  	            "Order ID '" + actualOrderID
+//  	            + "' was not found in the visible table. Check the order status, "
+//  	            + "pagination, filters, and whether the correct admin page is open.",
+//  	            e
+//  	        );
+//  	    }
+//
+//  	    // Step 4: Locate Picker Details within the matching order row
+//  	    By pickerDetailsLocator = By.xpath(
+//  	        "//tr[.//td[normalize-space(.)='" + actualOrderID + "']]"
+//  	        + "//*[self::button or self::a]"
+//  	        + "[contains(normalize-space(.), 'Picker Details')]"
+//  	    );
+//
+//  	    WebElement pickerDetailsBtn = wait.until(
+//  	        ExpectedConditions.elementToBeClickable(pickerDetailsLocator)
+//  	    );
+//
+//  	    pickerDetailsBtn.click();
+//
+//  	    System.out.println(
+//  	        "Picker Details clicked successfully for Order ID: " + actualOrderID
+//  	    );
+//
+//  	    // Step 5: Click Send OTP
+//  	    wait.until(ExpectedConditions.elementToBeClickable(SendOtpBtn)).click();
+//
+//  	    // Step 6: Enter OTP
+//  	    By otpInputLocator = By.xpath(
+//  	        "(//h6[normalize-space(.)='OTP Verification']"
+//  	        + "/../following-sibling::div"
+//  	        + "//input[@autocomplete='one-time-code'])[1]"
+//  	    );
+//
+//  	    WebElement otpInput = wait.until(
+//  	        ExpectedConditions.visibilityOfElementLocated(otpInputLocator)
+//  	    );
+//
+//  	    otpInput.sendKeys("123456");
+//
+//  	    // Step 7: Verify Order Delivered for the same order
+//  	    By orderDeliveredLocator = By.xpath(
+//  	        "//tr[.//td[normalize-space(.)='" + actualOrderID + "']]"
+//  	        + "//*[self::button or self::a]"
+//  	        + "[contains(normalize-space(.), 'Order Delivered')]"
+//  	    );
+//
+//  	    WebElement orderDeliveredText = wait.until(
+//  	        ExpectedConditions.visibilityOfElementLocated(orderDeliveredLocator)
+//  	    );
+//
+//  	    Assert.assertTrue(
+//  	        orderDeliveredText.isDisplayed(),
+//  	        "Order Delivered control is not displayed for Order ID: " + actualOrderID
+//  	    );
+//
+//  	    System.out.println(
+//  	        "Order Delivered control is displayed successfully for Order ID: "
+//  	        + actualOrderID
+//  	    );
+//  	}
+//  	
+//  	
+//  	
+////  	public void clickOnPickerDetailsBtnBasedOnOrderIDAndAllActionsInThatPage(WebDriver driver, String orderID) throws Exception {
+////
+////  		WebDriverUtility wUtil = new WebDriverUtility();
+////  	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+////
+////  	    Thread.sleep(2000);
+////  	    driver.navigate().refresh();  	    
+////  	    
+////  	    Thread.sleep(3000);
+////  	    // Step 1: Click Picker Details for the specific Order ID
+////  	    WebElement pickerDetailsBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[td[normalize-space(.)='"+orderID+"']]//button[normalize-space(.)='Picker Details']")));
+////  	    wUtil.waitForElementToBeClickable(driver, pickerDetailsBtn);
+////  	    pickerDetailsBtn.click();
+////  	    
+////  	    Thread.sleep(2000);
+////  	    // Step 2: Click Send OTP button
+////  	    wait.until(ExpectedConditions.elementToBeClickable(SendOtpBtn)).click();
+////         
+////  	    Thread.sleep(2000);
+////  	    // Step 3: Enter OTP
+////  	    WebElement otpInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//h6[normalize-space(.)='OTP Verification']/../following-sibling::div//input[@autocomplete='one-time-code'])[1]")));
+////  	    otpInput.sendKeys("123456");
+////
+////  	    Thread.sleep(2000);
+////  	    // Step 4: Verify that the Order Delivered Text is displayed
+////  	    WebElement orderDeliveredText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[td[normalize-space(.)='" + orderID + "']]//button[normalize-space(.)='Order Delivered']")));
+////        
+////  	    Thread.sleep(2000);
+////  	    // Step 5: Validate using TestNG assertion
+////  	    Assert.assertTrue(orderDeliveredText.isDisplayed(),"Order Delivered button is not displayed for Order ID: " + orderID);
+////  	    System.out.println("Order Delivered button is displayed successfully for Order ID: " + orderID);
+////  	    
+////  	}
+//  	
+//  	
+////  	public void clickOnPickerDetailsBtnBasedOnOrderID(WebDriver driver, String OrderID) throws Exception
+////  	{
+////  		Thread.sleep(2000);
+////  		driver.findElement(By.xpath("//tr[td[normalize-space(.)='"+OrderID+"']]//button[normalize-space(.)='Picker Details']")).click();
+////  		Thread.sleep(2000);
+////  		SendOtpBtn.click();
+////  		Thread.sleep(2000);
+////  		driver.findElement(By.xpath("((//h6[.='OTP Verification']/../following-sibling::div)[1]//input[@autocomplete='one-time-code'])[1]")).sendKeys("123456");
+////  		Thread.sleep(2000);
+////  		WebElement OrderDelivered = driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/button[.=' Order Delivered ']"));
+////  		if(OrderDelivered.isDisplayed())
+////  		{
+////  			System.out.println("Order Delivered Successfully");
+////  		}
+////  		else
+////  		{
+////  			System.out.println("Order Not Delivered");
+////		}
+////  	}
+//  	
+//  	
+//  	
+//  	public void clickOnVerifyOrderBtnBasedOnOrderID(WebDriver driver, String OrderID) throws Exception
+//  	{
+//  		Thread.sleep(2000);
+//  		driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/button[.=' Verify Order ']")).click();
+//  		Thread.sleep(2000);
+//  	    
+//  	}
+//  	
+//  	public void confirmingOrderStatus(WebDriver driver, String OrderID) throws Exception
+//  	{
+//  		Thread.sleep(2000);
+//  		WebElement DispatchedConfirmMsg = driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/button[.=' Dispatched ']"));
+//  		Thread.sleep(2000);
+//        Assert.assertTrue(DispatchedConfirmMsg.isDisplayed(),
+//                "Problem occurred while dispatching the order.");
+//
+//        System.out.println("Order dispatched successfully. Order ID: " + OrderID);
+//  	}
+//  	
+//  	
+//  	
+//}

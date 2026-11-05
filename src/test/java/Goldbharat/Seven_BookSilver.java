@@ -1,10 +1,12 @@
 package Goldbharat;
 
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.goldbharath.genericutilities.DistributorBaseClass;
 import com.goldbharath.objectrepository.user.BookSilverPage;
 import com.goldbharath.objectrepository.user.DashboardPage;
 
+@Listeners(com.goldbharath.genericutilities.ListenersImplementationClass.class)
 public class Seven_BookSilver extends DistributorBaseClass {
 
 	@Test

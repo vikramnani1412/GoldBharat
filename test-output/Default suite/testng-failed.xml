@@ -3,15 +3,22 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Goldbharat.Seven_BookSilver">
+      <class name="Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest">
         <methods>
-          <include name="bookSilver"/>
-          <include name="closeBrowser"/>
-          <include name="launchBrowser"/>
-          <include name="logoutFromDoctorApp"/>
-          <include name="loginToDoctorApp"/>
+          <include name="loginToAdminApproveKycAndGivingGoldAndSilverLimitTest"/>
+          <include name="distributorBookingGoldTest"/>
+          <include name="distributorBuyingGoldTest"/>
+          <include name="adminAcceptingPickerDetails"/>
+          <include name="distributorReUploadingPaymentDetailsTest"/>
+          <include name="loginToAdminRejectingDistributorKycTest"/>
+          <include name="RegisteringToGoldbharathTest"/>
+          <include name="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest"/>
+          <include name="loginUpdatingRejectedKycTest"/>
+          <include name="distributorUpdatingDeliveryDetailsTest"/>
+          <include name="adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest"/>
+          <include name="loginUpdatingKycTest"/>
         </methods>
-      </class> <!-- Goldbharat.Seven_BookSilver -->
+      </class> <!-- Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

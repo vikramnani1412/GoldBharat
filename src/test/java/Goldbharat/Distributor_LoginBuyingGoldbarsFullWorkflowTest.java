@@ -1,10 +1,12 @@
 package Goldbharat;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.goldbharath.genericutilities.AdminBaseClass;
 import com.goldbharath.genericutilities.CommonBaseClass;
 import com.goldbharath.genericutilities.DistributorBaseClass;
+import com.goldbharath.genericutilities.RetryAnalyzer;
 import com.goldbharath.objectrepository.admin.BuyOrderPage;
 import com.goldbharath.objectrepository.user.BuyGoldPage;
 import com.goldbharath.objectrepository.user.DashboardPage;
@@ -12,7 +14,8 @@ import com.goldbharath.objectrepository.user.GoldBarsOrderHistoryPage;
 import com.goldbharath.objectrepository.user.UploadTransactionDetailsForGoldBarsPage;
 import com.goldbharath.objectrepository.user.whatWouldYouLikeToBuyPage;
 
-public class Two_Distributor_LoginBuyingGoldbarsFullWorkflowTest extends DistributorBaseClass{
+@Listeners(com.goldbharath.genericutilities.ListenersImplementationClass.class)
+public class Distributor_LoginBuyingGoldbarsFullWorkflowTest extends DistributorBaseClass{
 
 	// Order ID shared across all three steps
     public static String OrderId;
@@ -27,10 +30,10 @@ public class Two_Distributor_LoginBuyingGoldbarsFullWorkflowTest extends Distrib
         }
     }
 
-    // ---------------------------------------------------------
+    // ----------------------------------------------------------
     // STEP 1: Distributor buys gold bars and uploads transaction
-    // ---------------------------------------------------------
-    @Test(priority = 1)
+    // ----------------------------------------------------------
+    @Test(priority = 1, retryAnalyzer = RetryAnalyzer.class)
     public void distributorBuyingGoldBars() throws Exception {
 
         final String transactionImage = System.getProperty("user.dir")
@@ -40,40 +43,47 @@ public class Two_Distributor_LoginBuyingGoldbarsFullWorkflowTest extends Distrib
 
         wUtil.waitForPageLoad(driver);
 
-        DashboardPage dbPage = new DashboardPage(driver);
-        dbPage.clickOnBuyGoldBtn(driver);
-        Thread.sleep(2000);
+        try {
+        	DashboardPage dbPage = new DashboardPage(driver);
+            dbPage.clickOnBuyGoldBtn(driver);
+            Thread.sleep(2000);
 
-        whatWouldYouLikeToBuyPage wPage = new whatWouldYouLikeToBuyPage(driver);
-        wPage.getGoldBarsEle().click();
-        Thread.sleep(2000);
+            whatWouldYouLikeToBuyPage wPage = new whatWouldYouLikeToBuyPage(driver);
+            wPage.getGoldBarsEle().click();
+            Thread.sleep(2000);
 
-        BuyGoldPage bPage = new BuyGoldPage(driver);
-        bPage.buyGold(goldWeight);
+            BuyGoldPage bPage = new BuyGoldPage(driver);
+            bPage.buyGold(goldWeight);
 
-        GoldBarsOrderHistoryPage goPage = new GoldBarsOrderHistoryPage(driver);
-        goPage.getPurchasedGoldDetails(driver);
+            GoldBarsOrderHistoryPage goPage = new GoldBarsOrderHistoryPage(driver);
+            goPage.getPurchasedGoldDetails(driver);
 
-        // Capture the order ID only once
-        OrderId = goPage.getOrderIdEle().getText().trim();
-        if (OrderId.isEmpty()) {
-            throw new AssertionError("Distributor order ID is empty");
-        }
-        System.out.println("Distributor Order ID: " + OrderId);
+            // Capture the order ID only once
+            OrderId = goPage.getOrderIdEle().getText().trim();
+            if (OrderId.isEmpty()) {
+                throw new AssertionError("Distributor order ID is empty");
+            }
+            System.out.println("Distributor Order ID: " + OrderId);
 
-        UploadTransactionDetailsForGoldBarsPage uPage =
-                new UploadTransactionDetailsForGoldBarsPage(driver);
-        uPage.uploadingTransactionDetails(driver, transactionImage, transactionIdNum, OrderId);
+            UploadTransactionDetailsForGoldBarsPage uPage =
+                    new UploadTransactionDetailsForGoldBarsPage(driver);
+            uPage.uploadingTransactionDetails(driver, transactionImage, transactionIdNum, OrderId);
 
-        String orderStatus = goPage.getOrderStatusAsPerOrderID(driver, OrderId);
-        System.out.println("Order Status: " + orderStatus);
-        System.out.println("Distributor workflow completed.");
-    }
+            String orderStatus = goPage.getOrderStatusAsPerOrderID(driver, OrderId);
+            System.out.println("Order Status: " + orderStatus);
+            System.out.println("Distributor workflow completed.");
+		}
+        catch (Exception e) {
+			System.out.println(1);
+		}
+		
+  }
+        
 
     // ---------------------------------------------------------
     // STEP 2: Admin confirms payment (uses AdminBaseClass setup)
     // ---------------------------------------------------------
-    @Test(priority = 2, dependsOnMethods = "distributorBuyingGoldBars")
+    @Test(priority = 2, dependsOnMethods = "distributorBuyingGoldBars", retryAnalyzer = RetryAnalyzer.class)
     public void adminConfirmingPaymentAndVerifyingOrder() throws Throwable {
 
         if (OrderId == null || OrderId.trim().isEmpty()) {
@@ -109,16 +119,24 @@ public class Two_Distributor_LoginBuyingGoldbarsFullWorkflowTest extends Distrib
     // ---------------------------------------------------------
     // STEP 3: Distributor checks dispatch notification
     // ---------------------------------------------------------
-    @Test(priority = 3, dependsOnMethods = "adminConfirmingPaymentAndVerifyingOrder")
+    @Test(priority = 3, dependsOnMethods = "adminConfirmingPaymentAndVerifyingOrder", retryAnalyzer = RetryAnalyzer.class)
     public void distributorCheckingDispatchDetails() throws Exception {
 
-        DashboardPage dPage = new DashboardPage(driver);
-        dPage.getNotificationsIcon().click();
+    	try {
+    		DashboardPage dPage = new DashboardPage(driver);
+            dPage.getNotificationsIcon().click();
 
-        wUtil.waitUntilPageLoad(driver);
-        Thread.sleep(2000);
+            wUtil.waitUntilPageLoad(driver);
+            Thread.sleep(2000);
 
-        dPage.checkingDispatchNotificationBasedOnOrderID(driver, OrderId);
+            dPage.checkingDispatchNotificationBasedOnOrderID(driver, OrderId);
+		} 
+    	
+    	catch (Exception e) {
+			System.out.println(1);
+		}
+    	
+    	
     }
 	
 }

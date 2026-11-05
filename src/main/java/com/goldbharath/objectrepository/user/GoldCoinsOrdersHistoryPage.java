@@ -277,6 +277,13 @@ public class GoldCoinsOrdersHistoryPage {
 		driver.findElement(By.xpath("//tr[td[normalize-space()='"+OrderID+"']]//p[normalize-space()='Update Payment Document']")).click();
 	}
 	
+	public void clickOnReUploadPaymentDocumentBtnBasedOnOrderID(WebDriver driver, String OrderID) throws InterruptedException
+	{
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/p/button[.=' Reupload Payment Document ']")).click();
+	}
+	
+	
 	public void successMsgValidation(WebDriver driver, String OrderID) throws Exception
 	{
 		WebElement Success = driver.findElement(By.xpath("//td[normalize-space()='"+OrderID+"']/following-sibling::td/p[normalize-space()='Document Submitted']"));

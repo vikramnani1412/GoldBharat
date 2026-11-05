@@ -41,6 +41,7 @@ public class ManageDistributorPage {
     // Page number has to make dynamic
     @FindBy(xpath="//span[.='1']")private WebElement BasedOnNumberPageShouldDisplay;
     
+    @FindBy(xpath="//td[.='9998888888']/preceding-sibling::td/p/b")private WebElement DistributorNameBasedOnMobileNumber;
     
 	//Rule-3:Create a constructor to initilise these elements
     
@@ -112,6 +113,11 @@ public class ManageDistributorPage {
 	}
 
 
+	public WebElement getDistributorNameBasedOnMobileNumber() {
+		return DistributorNameBasedOnMobileNumber;
+	}
+
+
 	public WebElement getNextPageLnk() {
 		return NextPageLnk;
 	}
@@ -170,6 +176,12 @@ public class ManageDistributorPage {
 		} else {
 		    System.out.println("8712631764 is already disabled.");
 		}
+	}
+	
+	public void clickOnDistributorNameBasedOnMobileNumber(WebDriver driver, String RegisteredMobileNumber) throws Exception 
+	{
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//td[.='9998888888']/preceding-sibling::td/p/b")).click();
 	}
 	
 }

@@ -51,6 +51,8 @@ public class KycAsLtdPage {
     
     @FindBy(xpath="//button[.='Submit']")private WebElement SubmitBtn;
     
+    @FindBy(xpath="//a[.='Click Here']")private WebElement ClickHereLnk;
+    
 	//Rule-2:Create a constructor to initilise these elements
     
 	public KycAsLtdPage(WebDriver driver)
@@ -138,6 +140,11 @@ public class KycAsLtdPage {
 		return AccountHolderNameEdt;
 	}
 
+	public WebElement getClickHereLnk() {
+		return ClickHereLnk;
+	}
+
+
 	public WebElement getSubmitBtn() {
 		return SubmitBtn;
 	}
@@ -200,6 +207,63 @@ public class KycAsLtdPage {
 	    
 //	    SubmitBtn.click();
 	}
+	
+	public void LtdKycAfterRejected(WebDriver driver, String Name, String MobileNo, String AadharNo, String PanNo, String SecondDirectorName, String GstNo, String CIN, String BankName, String AccountNo, String IfscCode, String AcHolderName) throws Exception
+	{
+		WebDriverUtility wUtil = new WebDriverUtility();
+		String PanimagePath = System.getProperty("user.dir")+ "/src/test/resources/assets/PAN_Card.jpeg";
+		String AadharImagePath = System.getProperty("user.dir")+ "/src/test/resources/assets/Aadhaar_Card.jpeg";
+		
+		Thread.sleep(2000);
+		ClickHereLnk.click();
+		Thread.sleep(2000);
+		TypeDrpDwn.click();
+		Thread.sleep(2000);
+		SelectLtd.click();
+		Thread.sleep(2000);
+		DirectorNameEdt.sendKeys(Name);
+		Thread.sleep(2000);
+		DirectorMobileNumberEdt.sendKeys(MobileNo);
+		Thread.sleep(2000);
+		DirectorAadharNumberEdt.sendKeys(AadharNo);
+		Thread.sleep(2000);
+		UploadAadharFrontSideImage.sendKeys(AadharImagePath);
+		Thread.sleep(2000);
+		UploadAadharBackSideImage.sendKeys(AadharImagePath);
+		Thread.sleep(2000);
+		PanNumberEdt.sendKeys(PanNo);
+		Thread.sleep(2000);
+		UploadPanImage.sendKeys(PanimagePath);
+		Thread.sleep(2000);
+		SecondDirectorNameEdt.sendKeys(SecondDirectorName);
+		Thread.sleep(2000);
+		EnterGSTNumberEdt.sendKeys(GstNo);
+		Thread.sleep(2000);
+		UploadGstImage.sendKeys(PanimagePath);
+		Thread.sleep(2000);
+		CompanyCinEdt.sendKeys(CIN);
+		Thread.sleep(2000);
+		UploadCINimage.sendKeys(PanimagePath);
+		Thread.sleep(2000);
+		UploadYourImage.sendKeys(AadharImagePath);
+		Thread.sleep(2000);
+		EnterBankNameEdt.sendKeys(BankName);
+		Thread.sleep(2000);
+		EnterAcNumberEdt.sendKeys(AccountNo);
+		Thread.sleep(2000);
+		EnterIFSCCodeEdt.sendKeys(IfscCode);
+		Thread.sleep(2000);
+	    AccountHolderNameEdt.sendKeys(AcHolderName);
+	    Thread.sleep(2000);
+	    
+	    wUtil.scrollToParticularWebElement(driver, SubmitBtn);
+	    Thread.sleep(2000);
+	    wUtil.clickOnParticularWebElementUsingActionsClass(driver, SubmitBtn);
+	    Thread.sleep(2000);
+	    
+//	    SubmitBtn.click();
+	}
+	
 	
 		
 	

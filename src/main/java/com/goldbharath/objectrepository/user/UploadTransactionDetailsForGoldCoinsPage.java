@@ -1,5 +1,6 @@
 package com.goldbharath.objectrepository.user;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -79,5 +80,29 @@ public class UploadTransactionDetailsForGoldCoinsPage {
 			System.out.println("Transaction Not Updated");
 		}
 	}
+	
+	public void ReUploadingTransactionDetails(WebDriver driver ,String TransactionImage, String TransactionIDNum) throws Exception
+	{
+		Thread.sleep(2000);
+		WebElement Reason = driver.findElement(By.xpath("//h4[normalize-space()='Upload transaction details']/parent::*/following-sibling::div//b[contains(.,'R')]"));
+		Thread.sleep(2000);
+		System.out.println("Reason is "+Reason.getText());
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//h4[.=' Upload transaction details ']/../following-sibling::div//b[contains(.,'Rejection Reason :')]/../../following-sibling::input[@type='file']")).sendKeys(TransactionImage);
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//h4[.=' Upload transaction details ']/../following-sibling::div//b[contains(.,'Rejection Reason :')]/../../following-sibling::input[@formcontrolname='transation_id']")).sendKeys(TransactionIDNum);
+		Thread.sleep(2000);
+	    driver.findElement(By.xpath("(//button[.=' Upload '])[1]")).click();
+		Thread.sleep(2000);
+		if(SuccessMsg.isDisplayed())
+		{
+			System.out.println("Transaction Successfully Updated");
+		}
+		else
+		{
+			System.out.println("Transaction Not Updated");
+		}
+	}
+	
 	
 }

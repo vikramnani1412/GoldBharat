@@ -1,57 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+<testng-results ignored="0" total="12" passed="12" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-11-02T17:54:26 IST" name="Default suite" finished-at="2026-11-02T17:57:34 IST" duration-ms="188260">
+  <suite started-at="2026-11-05T17:39:39 IST" name="Default suite" finished-at="2026-11-05T17:51:29 IST" duration-ms="710469">
     <groups>
     </groups>
-    <test started-at="2026-11-02T17:54:26 IST" name="Default test" finished-at="2026-11-02T17:57:34 IST" duration-ms="188260">
-      <class name="Goldbharat.Two">
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:Goldbharat.Two@78d6692f]" started-at="2026-11-02T17:54:26 IST" name="launchBrowser" finished-at="2026-11-02T17:54:43 IST" duration-ms="16729" status="PASS">
+    <test started-at="2026-11-05T17:39:39 IST" name="Default test" finished-at="2026-11-05T17:51:29 IST" duration-ms="710469">
+      <class name="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest">
+        <test-method signature="RegisteringToGoldbharathTest(java.util.List)[pri:1, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:39:40 IST" name="RegisteringToGoldbharathTest" data-provider="mobileNumbers" finished-at="2026-11-05T17:41:54 IST" duration-ms="133894" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[9999999999, 9999999998, 9999999988, 9999999888, 9999998888, 9999988888, 9999888888, 9998888888, 9988888888, 9888888888, 9777777777, 9666666666, 9555555555, 9444444444, 9333333333, 9222222222, 9111111111, 9888889999, 9777778888, 9666669999]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- launchBrowser -->
-        <test-method is-config="true" signature="loginToDoctorApp()[pri:0, instance:Goldbharat.Two@78d6692f]" started-at="2026-11-02T17:54:43 IST" name="loginToDoctorApp" finished-at="2026-11-02T17:54:52 IST" duration-ms="9095" status="PASS">
+        </test-method> <!-- RegisteringToGoldbharathTest -->
+        <test-method signature="loginUpdatingKycTest()[pri:2, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:41:54 IST" name="loginUpdatingKycTest" finished-at="2026-11-05T17:43:04 IST" depends-on-methods="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.RegisteringToGoldbharathTest" duration-ms="70280" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginToDoctorApp -->
-        <test-method signature="distributorBuyingGoldBars()[pri:1, instance:Goldbharat.Two@78d6692f]" started-at="2026-11-02T17:54:52 IST" name="distributorBuyingGoldBars" finished-at="2026-11-02T17:55:26 IST" duration-ms="34251" status="PASS">
+        </test-method> <!-- loginUpdatingKycTest -->
+        <test-method signature="loginToAdminRejectingDistributorKycTest()[pri:3, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:43:04 IST" name="loginToAdminRejectingDistributorKycTest" finished-at="2026-11-05T17:43:25 IST" depends-on-methods="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingKycTest" duration-ms="21198" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- distributorBuyingGoldBars -->
-        <test-method is-config="true" signature="logoutFromDoctorApp()[pri:0, instance:Goldbharat.Two@78d6692f]" started-at="2026-11-02T17:55:26 IST" name="logoutFromDoctorApp" finished-at="2026-11-02T17:55:41 IST" duration-ms="15344" status="PASS">
+        </test-method> <!-- loginToAdminRejectingDistributorKycTest -->
+        <test-method signature="loginUpdatingRejectedKycTest()[pri:4, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:43:25 IST" name="loginUpdatingRejectedKycTest" finished-at="2026-11-05T17:44:29 IST" depends-on-methods="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminRejectingDistributorKycTest" duration-ms="63786" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- logoutFromDoctorApp -->
-        <test-method is-config="true" signature="loginToDoctorApp()[pri:0, instance:Goldbharat.Two@78d6692f]" started-at="2026-11-02T17:55:41 IST" name="loginToDoctorApp" finished-at="2026-11-02T17:55:50 IST" duration-ms="8490" status="PASS">
+        </test-method> <!-- loginUpdatingRejectedKycTest -->
+        <test-method signature="loginToAdminApproveKycAndGivingGoldAndSilverLimitTest()[pri:5, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:44:29 IST" name="loginToAdminApproveKycAndGivingGoldAndSilverLimitTest" finished-at="2026-11-05T17:46:51 IST" depends-on-methods="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingRejectedKycTest" duration-ms="141269" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginToDoctorApp -->
-        <test-method signature="adminConfirmingPaymentAndVerifyingOrder()[pri:2, instance:Goldbharat.Two@78d6692f]" started-at="2026-11-02T17:55:50 IST" name="adminConfirmingPaymentAndVerifyingOrder" finished-at="2026-11-02T17:56:51 IST" depends-on-methods="Goldbharat.Two.distributorBuyingGoldBars" duration-ms="60535" status="PASS">
+        </test-method> <!-- loginToAdminApproveKycAndGivingGoldAndSilverLimitTest -->
+        <test-method signature="distributorBookingGoldTest()[pri:6, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:46:51 IST" name="distributorBookingGoldTest" finished-at="2026-11-05T17:47:19 IST" depends-on-methods="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminApproveKycAndGivingGoldAndSilverLimitTest" duration-ms="28045" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- adminConfirmingPaymentAndVerifyingOrder -->
-        <test-method is-config="true" signature="logoutFromDoctorApp()[pri:0, instance:Goldbharat.Two@78d6692f]" started-at="2026-11-02T17:56:51 IST" name="logoutFromDoctorApp" finished-at="2026-11-02T17:57:06 IST" duration-ms="15422" status="PASS">
+        </test-method> <!-- distributorBookingGoldTest -->
+        <test-method signature="distributorBuyingGoldTest()[pri:7, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:47:19 IST" name="distributorBuyingGoldTest" finished-at="2026-11-05T17:48:43 IST" depends-on-methods="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.distributorBookingGoldTest" duration-ms="84384" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- logoutFromDoctorApp -->
-        <test-method is-config="true" signature="loginToDoctorApp()[pri:0, instance:Goldbharat.Two@78d6692f]" started-at="2026-11-02T17:57:06 IST" name="loginToDoctorApp" finished-at="2026-11-02T17:57:14 IST" duration-ms="8363" status="PASS">
+        </test-method> <!-- distributorBuyingGoldTest -->
+        <test-method signature="adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest()[pri:8, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:48:43 IST" name="adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest" finished-at="2026-11-05T17:49:16 IST" depends-on-methods="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.distributorBuyingGoldTest" duration-ms="33467" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginToDoctorApp -->
-        <test-method signature="distributorCheckingDispatchDetails()[pri:3, instance:Goldbharat.Two@78d6692f]" started-at="2026-11-02T17:57:14 IST" name="distributorCheckingDispatchDetails" finished-at="2026-11-02T17:57:19 IST" depends-on-methods="Goldbharat.Two.adminConfirmingPaymentAndVerifyingOrder" duration-ms="4639" status="PASS">
+        </test-method> <!-- adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest -->
+        <test-method signature="distributorReUploadingPaymentDetailsTest()[pri:9, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:49:16 IST" name="distributorReUploadingPaymentDetailsTest" finished-at="2026-11-05T17:49:55 IST" depends-on-methods="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest" duration-ms="38670" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- distributorCheckingDispatchDetails -->
-        <test-method is-config="true" signature="logoutFromDoctorApp()[pri:0, instance:Goldbharat.Two@78d6692f]" started-at="2026-11-02T17:57:19 IST" name="logoutFromDoctorApp" finished-at="2026-11-02T17:57:34 IST" duration-ms="15319" status="PASS">
+        </test-method> <!-- distributorReUploadingPaymentDetailsTest -->
+        <test-method signature="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest()[pri:10, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:49:55 IST" name="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest" finished-at="2026-11-05T17:50:32 IST" depends-on-methods="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.distributorReUploadingPaymentDetailsTest" duration-ms="37040" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- logoutFromDoctorApp -->
-        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:Goldbharat.Two@78d6692f]" started-at="2026-11-02T17:57:34 IST" name="closeBrowser" finished-at="2026-11-02T17:57:34 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest -->
+        <test-method signature="distributorUpdatingDeliveryDetailsTest()[pri:11, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:50:32 IST" name="distributorUpdatingDeliveryDetailsTest" finished-at="2026-11-05T17:51:04 IST" depends-on-methods="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest" duration-ms="31656" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- closeBrowser -->
-      </class> <!-- Goldbharat.Two -->
+        </test-method> <!-- distributorUpdatingDeliveryDetailsTest -->
+        <test-method signature="adminAcceptingPickerDetails()[pri:12, instance:Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest@7a220c9a]" started-at="2026-11-05T17:51:04 IST" name="adminAcceptingPickerDetails" finished-at="2026-11-05T17:51:29 IST" depends-on-methods="Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest.distributorUpdatingDeliveryDetailsTest" duration-ms="25474" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- adminAcceptingPickerDetails -->
+      </class> <!-- Goldbharat.Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
