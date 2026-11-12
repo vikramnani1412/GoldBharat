@@ -58,46 +58,7 @@ public class Four_RegisterAsLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 
     // Browser Utilities
 
-    private WebDriver createChromeDriver() {
-//    	WebDriverManager.chromedriver().setup();
-//
-//        ChromeOptions options = new ChromeOptions();
-//
-//        // Staging-only: accept untrusted/invalid certificates.
-//        // This cannot bypass a TLS/SNI hostname rejection from the server.
-//        options.setAcceptInsecureCerts(true);
-//
-//        options.addArguments(
-//                "--start-maximized",
-//                "--disable-gpu",
-    	
-//                "--window-size=1920,1080",
-//                "--disable-notifications",
-//                "--disable-popup-blocking",
-//                "--disable-infobars",
-//                "--ignore-certificate-errors"
-//        );
-//        
-//        
-//        
-//        options.addArguments(
-//                "--disable-features=HttpsUpgrades,HttpsFirstBalancedModeAutoEnable,HttpsFirstModeV2ForEngagedSites",
-//                "--unsafely-treat-insecure-origin-as-secure=http://stg.goldbharat.com"
-//        );
-//
-//        Map<String, Object> prefs = new HashMap<>();
-//        prefs.put("https_first_mode_enabled", false);
-//        options.setExperimentalOption("prefs", prefs);
-//        
-//
-//        WebDriver webDriver = new ChromeDriver(options);
-//        webDriver.manage().window().maximize();
-//        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-//        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-//
-//        return webDriver;
-    	
-    	
+    private WebDriver createChromeDriver() {    	
     	
     	WebDriverManager.chromedriver().setup();
 
@@ -119,10 +80,6 @@ public class Four_RegisterAsLtdBookingBuyingGoldCoinsFullWorkFlowTest {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         return webDriver;
-    	
-    	
-    	
-    	
     	
     	
     	
