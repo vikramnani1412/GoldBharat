@@ -11,7 +11,7 @@
           <include name="distributorBuyingGoldTest"/>
           <include name="distributorReUploadingPaymentDetailsTest"/>
           <include name="loginToAdminRejectingDistributorKycTest"/>
-          <include name="RegisteringToGoldbharathTest"/>
+          <include name="RegisteringToGoldbharathTest" invocation-numbers="0"/>
           <include name="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest"/>
           <include name="loginUpdatingRejectedKycTest"/>
           <include name="distributorUpdatingDeliveryDetailsTest"/>

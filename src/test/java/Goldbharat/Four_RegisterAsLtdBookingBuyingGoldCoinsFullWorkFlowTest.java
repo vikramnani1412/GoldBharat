@@ -14,10 +14,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import com.goldbharath.genericutilities.DriverHolder;
 import com.goldbharath.genericutilities.ExcelFileUtility;
+import com.goldbharath.genericutilities.ListenersImplementationClassWithoutBaseClass;
 import com.goldbharath.genericutilities.PropertyFileUtility;
 import com.goldbharath.genericutilities.RetryAnalyzer;
 import com.goldbharath.genericutilities.WebDriverUtility;
@@ -42,7 +46,7 @@ import com.goldbharath.objectrepository.user.whatWouldYouLikeToBuyPage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-@Listeners(com.goldbharath.genericutilities.ListenersImplementationClass.class)
+@Listeners(ListenersImplementationClassWithoutBaseClass.class)
 public class Four_RegisterAsLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 
     WebDriverUtility wUtil = new WebDriverUtility();
@@ -762,6 +766,21 @@ public class Four_RegisterAsLtdBookingBuyingGoldCoinsFullWorkFlowTest {
         }
     }
  
+    // Closes the browser after every test attempt (pass, fail or retry).
+    // TestNG calls the listener's onTestFailure/onTestSkipped BEFORE this method,
+    // so the screenshot is taken while the browser is still open.
+    @AfterMethod(alwaysRun = true)
+    public void closeBrowser() {
+        if (driver != null) {
+            try {
+                driver.quit();
+            } catch (Exception e) {
+                System.out.println("Browser close issue: " + e.getMessage());
+            }
+            driver = null;
+        }
+        DriverHolder.clear();
+    }
     
 }
 

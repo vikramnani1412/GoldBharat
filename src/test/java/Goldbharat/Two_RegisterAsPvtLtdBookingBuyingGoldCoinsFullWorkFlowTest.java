@@ -14,10 +14,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import com.goldbharath.genericutilities.DriverHolder;
 import com.goldbharath.genericutilities.ExcelFileUtility;
+import com.goldbharath.genericutilities.ListenersImplementationClassWithoutBaseClass;
 import com.goldbharath.genericutilities.PropertyFileUtility;
 import com.goldbharath.genericutilities.RetryAnalyzer;
 import com.goldbharath.genericutilities.WebDriverUtility;
@@ -42,7 +46,7 @@ import com.goldbharath.objectrepository.user.whatWouldYouLikeToBuyPage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-@Listeners(com.goldbharath.genericutilities.ListenersImplementationClass.class)
+@Listeners(ListenersImplementationClassWithoutBaseClass.class)
 public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 
     WebDriverUtility wUtil = new WebDriverUtility();
@@ -59,44 +63,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
     // Browser Utilities
 
     private WebDriver createChromeDriver() {
-//    	WebDriverManager.chromedriver().setup();
-//
-//        ChromeOptions options = new ChromeOptions();
-//
-//        // Staging-only: accept untrusted/invalid certificates.
-//        // This cannot bypass a TLS/SNI hostname rejection from the server.
-//        options.setAcceptInsecureCerts(true);
-//
-//        options.addArguments(
-//                "--start-maximized",
-//                "--disable-gpu",
-//                "--window-size=1920,1080",
-//                "--disable-notifications",
-//                "--disable-popup-blocking",
-//                "--disable-infobars",
-//                "--ignore-certificate-errors"
-//        );
-//        
-//        
-//        
-//        options.addArguments(
-//                "--disable-features=HttpsUpgrades,HttpsFirstBalancedModeAutoEnable,HttpsFirstModeV2ForEngagedSites",
-//                "--unsafely-treat-insecure-origin-as-secure=http://stg.goldbharat.com"
-//        );
-//
-//        Map<String, Object> prefs = new HashMap<>();
-//        prefs.put("https_first_mode_enabled", false);
-//        options.setExperimentalOption("prefs", prefs);
-//        
-//
-//        WebDriver webDriver = new ChromeDriver(options);
-//        webDriver.manage().window().maximize();
-//        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-//        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-//
-//        return webDriver;
-    	
-    	
+   	
     	WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
@@ -800,7 +767,21 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
         }
     }
     
-    
+    // Closes the browser after every test attempt (pass, fail or retry).
+    // TestNG calls the listener's onTestFailure/onTestSkipped BEFORE this method,
+    // so the screenshot is taken while the browser is still open.
+    @AfterMethod(alwaysRun = true)
+    public void closeBrowser() {
+        if (driver != null) {
+            try {
+                driver.quit();
+            } catch (Exception e) {
+                System.out.println("Browser close issue: " + e.getMessage());
+            }
+            driver = null;
+        }
+        DriverHolder.clear();
+    }
 }
 
 

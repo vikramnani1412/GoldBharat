@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.goldbharath.genericutilities.WebDriverUtility;
+
 public class ManageDistributorPage {
 
 	//Finding WebElements Using @FindBy Annotations
@@ -131,8 +133,14 @@ public class ManageDistributorPage {
 
 	public void clickOnRecentlyRegisteredAndKycCompletedDistributor(WebDriver driver, String MobileNumber, String OwnerName) throws InterruptedException
 	{
+		WebDriverUtility wUtil = new WebDriverUtility();
+		
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//td[.='"+MobileNumber+"']/preceding-sibling::td//b")).click();
+		WebElement distributorName = driver.findElement(By.xpath("//td[contains(normalize-space(.),'" + MobileNumber.trim() + "')]/preceding-sibling::td[1]//b"));
+		
+		wUtil.waitForElementToBeClickable(driver, distributorName);
+		
+		distributorName.click();
 	}
 	
 	public void clickOnRecentlyRegisteredDistributorEditButton(WebDriver driver, String MobileNumber) throws InterruptedException
