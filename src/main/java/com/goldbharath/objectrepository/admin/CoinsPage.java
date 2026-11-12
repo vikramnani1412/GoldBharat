@@ -40,7 +40,7 @@ public class CoinsPage {
     //Edit Button According to Gram need to dynamic
     @FindBy(xpath="//td[normalize-space()='1 gm']/following-sibling::td/button[' Edit ']")private WebElement EditBtn;
     
-  //Rule-2:Create a constructor to initilise these elements
+    //Rule-2:Create a constructor to initilise these elements
     
   	public CoinsPage(WebDriver driver)
   	{

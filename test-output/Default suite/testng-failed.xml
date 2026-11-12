@@ -7,14 +7,15 @@
         <methods>
           <include name="loginToAdminApproveKycAndGivingGoldAndSilverLimitTest"/>
           <include name="distributorBookingGoldTest"/>
-          <include name="distributorBuyingGoldTest"/>
           <include name="adminAcceptingPickerDetails"/>
+          <include name="distributorBuyingGoldTest"/>
           <include name="distributorReUploadingPaymentDetailsTest"/>
           <include name="loginToAdminRejectingDistributorKycTest"/>
           <include name="RegisteringToGoldbharathTest"/>
           <include name="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest"/>
           <include name="loginUpdatingRejectedKycTest"/>
           <include name="distributorUpdatingDeliveryDetailsTest"/>
+          <include name="closeBrowser"/>
           <include name="adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest"/>
           <include name="loginUpdatingKycTest"/>
         </methods>

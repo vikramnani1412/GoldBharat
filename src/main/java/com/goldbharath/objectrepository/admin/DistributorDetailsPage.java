@@ -88,16 +88,33 @@ public class DistributorDetailsPage {
 	
 	public void checkingRejectedStatus(WebDriver driver) throws Exception
 	{
-	    boolean isRejected;
-	    try {
-	        isRejected = new WebDriverWait(driver, Duration.ofSeconds(20))
-	                .until(ExpectedConditions.visibilityOf(RejectedStatus)).isDisplayed();
-	    } catch (org.openqa.selenium.TimeoutException e) {
-	        isRejected = false;
-	    }
+		
+		boolean isRejected;
+		try {
+		    isRejected = new WebDriverWait(driver, Duration.ofSeconds(20))
+		            .until(ExpectedConditions.visibilityOf(RejectedStatus)).isDisplayed();
+		} catch (org.openqa.selenium.TimeoutException e) {
+		    isRejected = false;
+		}
 
-	    Assert.assertTrue(isRejected, "Distributor is not rejected by ADMIN");
-	    System.out.println("Distributor Rejected By ADMIN");
+		if (isRejected) {
+		    System.out.println("Distributor Rejected By ADMIN");
+		} else {
+		    Assert.fail("Distributor is not rejected by ADMIN");
+		}
+		
+		
+		
+//	    boolean isRejected;
+//	    try {
+//	        isRejected = new WebDriverWait(driver, Duration.ofSeconds(20))
+//	                .until(ExpectedConditions.visibilityOf(RejectedStatus)).isDisplayed();
+//	    } catch (org.openqa.selenium.TimeoutException e) {
+//	        isRejected = false;
+//	    }
+//
+//	    Assert.assertTrue(isRejected, "Distributor is not rejected by ADMIN");
+//	    System.out.println("Distributor Rejected By ADMIN");
 	}
 	
 }

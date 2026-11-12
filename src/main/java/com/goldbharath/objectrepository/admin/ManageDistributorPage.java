@@ -181,7 +181,7 @@ public class ManageDistributorPage {
 	public void clickOnDistributorNameBasedOnMobileNumber(WebDriver driver, String RegisteredMobileNumber) throws Exception 
 	{
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//td[.='9998888888']/preceding-sibling::td/p/b")).click();
+		driver.findElement(By.xpath("//td[.='"+RegisteredMobileNumber+"']/preceding-sibling::td/p/b")).click();
 	}
 	
 }

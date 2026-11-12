@@ -2,7 +2,10 @@ package Goldbharat;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -56,17 +59,68 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
     // Browser Utilities
 
     private WebDriver createChromeDriver() {
-        WebDriverManager.chromedriver().setup();
+//    	WebDriverManager.chromedriver().setup();
+//
+//        ChromeOptions options = new ChromeOptions();
+//
+//        // Staging-only: accept untrusted/invalid certificates.
+//        // This cannot bypass a TLS/SNI hostname rejection from the server.
+//        options.setAcceptInsecureCerts(true);
+//
+//        options.addArguments(
+//                "--start-maximized",
+//                "--disable-gpu",
+//                "--window-size=1920,1080",
+//                "--disable-notifications",
+//                "--disable-popup-blocking",
+//                "--disable-infobars",
+//                "--ignore-certificate-errors"
+//        );
+//        
+//        
+//        
+//        options.addArguments(
+//                "--disable-features=HttpsUpgrades,HttpsFirstBalancedModeAutoEnable,HttpsFirstModeV2ForEngagedSites",
+//                "--unsafely-treat-insecure-origin-as-secure=http://stg.goldbharat.com"
+//        );
+//
+//        Map<String, Object> prefs = new HashMap<>();
+//        prefs.put("https_first_mode_enabled", false);
+//        options.setExperimentalOption("prefs", prefs);
+//        
+//
+//        WebDriver webDriver = new ChromeDriver(options);
+//        webDriver.manage().window().maximize();
+//        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+//
+//        return webDriver;
+    	
+    	
+    	WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-gpu", "--window-size=1920,1080",
                 "--disable-notifications", "--disable-popup-blocking", "--disable-infobars");
 
+        
+        options.addArguments(
+                "--disable-features=HttpsUpgrades,HttpsFirstBalancedModeAutoEnable,HttpsFirstModeV2ForEngagedSites",
+                "--unsafely-treat-insecure-origin-as-secure=http://stg.goldbharat.com"
+        );
+
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("https_first_mode_enabled", false);
+        options.setExperimentalOption("prefs", prefs);
+        
+        
         WebDriver webDriver = new ChromeDriver(options);
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         return webDriver;
+    	
+    	
     }
 
     private void waitForPageLoad() {
@@ -105,7 +159,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
     
   //Test 1: User Registration
 
-    @Test(priority = 1, dataProvider = "mobileNumbers", retryAnalyzer = RetryAnalyzer.class)
+    @Test(priority = 1, dataProvider = "mobileNumbers")
     public void RegisteringToGoldbharathTest(List<String> mobileNumbers) throws Exception {
         System.out.println("\n========== TEST 1: USER REGISTRATION ==========");
 
@@ -280,11 +334,8 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
             new UserProfilePage(driver).clickOnKycLink();
 
             
-            new KycAsPvtLtdPage(driver).PvtLtdKycAfterRejected(driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, accountHolderName, ifscCode, accountHolderName);
+            new KycAsPvtLtdPage(driver).PvtLtdKycAfterRejected(driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, acNumber, ifscCode, accountHolderName);
             
-//            new KycAsPvtLtdPage(driver).PvtLtdKycAfterRejecting(
-//                    driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, acNumber, ifscCode, accountHolderName);
-
             System.out.println("Pvt Ltd KYC re-submitted successfully after rejection. Mobile: " + registeredMobileNumber);
         } finally {
             if (driver != null) driver.quit();

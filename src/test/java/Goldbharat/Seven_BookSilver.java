@@ -20,7 +20,7 @@ public class Seven_BookSilver extends DistributorBaseClass {
 		Thread.sleep(2000);
 		
 		BookSilverPage bsPage = new BookSilverPage(driver);
-		bsPage.fetchingSilverLivePriceAndBookingSilver(driver, Quantity);
+		bsPage.fetchingSilverLivePriceAndBookingSilver(driver);
 		Thread.sleep(2000);
 		
 		dPage.getUserProfileImg().click();

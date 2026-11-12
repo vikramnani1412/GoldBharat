@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class Silver_ReviewYourSilverOrderPage {
+public class ReviewYourSilverOrderPage {
 
 	//Finding WebElements Using @FindBy Annotations
 
@@ -19,11 +19,10 @@ public class Silver_ReviewYourSilverOrderPage {
     
 	//Rule-2:Create a constructor to initilise these elements
     
-	public Silver_ReviewYourSilverOrderPage(WebDriver driver)
+	public ReviewYourSilverOrderPage(WebDriver driver)
 	{
 		PageFactory.initElements(driver, this);
 	}
-
 	
 	//Rule-3:Provide getters to access these variables
 
@@ -31,16 +30,37 @@ public class Silver_ReviewYourSilverOrderPage {
 		return AllDetailsInThisPageEle;
 	}
 
+
 	public WebElement getGrandTotalPriceEle() {
 		return GrandTotalPriceEle;
 	}
 
+
 	public WebElement getProceedPaymentBtn() {
 		return ProceedPaymentBtn;
 	}
-
+    
+	
 	public WebElement getSuccessMsg() {
 		return SuccessMsg;
+	}
+	
+	// Business Library
+
+	public void takeAllDetailsAndClickProceedBtn(WebDriver driver) throws Exception
+	{
+		Thread.sleep(2000);
+		String Details = AllDetailsInThisPageEle.getText();
+		Thread.sleep(1000);
+		ProceedPaymentBtn.click();
+
+	    if(SuccessMsg.isDisplayed())
+	    {
+	    	System.out.println("User Buy Silver Successfully" +Details);
+	    }
+	    else {
+			System.out.println("Success Msg Not Displayed");
+		}
 	}
 	
 }

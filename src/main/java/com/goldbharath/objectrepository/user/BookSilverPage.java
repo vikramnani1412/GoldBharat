@@ -21,9 +21,7 @@ public class BookSilverPage {
     
     @FindBy(xpath="//h5[normalize-space()='Book Silver']/../..//input[@placeholder='Enter your amount']")private WebElement AmountEdt;
   
-    @FindBy(xpath="//h5[normalize-space()='Book Silver']/../..//button[.='Book']")private WebElement BookBtn;
-    
-    @FindBy(xpath="//p[.='Booked Order Successfully']")private WebElement BookedOrderSuccessfullyMsg;
+    @FindBy(xpath="//h5[normalize-space()='Book Silver']/../..//button[.='Book']")private WebElement BookBtn;  
     
     
 	//Rule-2:Create a constructor to initilise these elements
@@ -32,11 +30,10 @@ public class BookSilverPage {
 	{
 		PageFactory.initElements(driver, this);
 	}
-
-
+	
+	
 	//Rule-3:Provide getters to access these variables
 	
-
 	public WebElement getCloseBtn() {
 		return CloseBtn;
 	}
@@ -62,28 +59,25 @@ public class BookSilverPage {
 	}
 
 
-	public WebElement getBookedOrderSuccessfullyMsg() {
-		return BookedOrderSuccessfullyMsg;
-	}
-
-
 	public WebElement getBookBtn() {
 		return BookBtn;
 	}
-	
+
+
 	// Business Library
 	
-	public void fetchingSilverLivePriceAndBookingSilver(WebDriver driver, String Quantity) throws Exception
+	public void fetchingSilverLivePriceAndBookingSilver(WebDriver driver) throws Exception
 	{
 	    WebDriverUtility wUtil = new WebDriverUtility();
-	    
+
+	    wUtil.handleDropdownByValue(QuantityDrpDwn, "500");
+	    Thread.sleep(2000);
+	//  wUtil.handleDropdownByIndex(AmountEdt, 5);
+
 	    Thread.sleep(2000);
 	    String CurrentLockedPrice = CurrentLivePriceEle.getText();
 	    System.out.println(CurrentLockedPrice);
 	    
-	    wUtil.handleDropdownByValue(QuantityDrpDwn, Quantity);
-	    Thread.sleep(2000);
-	//  wUtil.handleDropdownByIndex(AmountEdt, 5);
 	    
 	    // Clean the price text: strip currency symbols, commas, spaces
 	    String cleanedPrice = CurrentLockedPrice.replaceAll("[^0-9.]", "");
@@ -99,12 +93,6 @@ public class BookSilverPage {
 	    
 	    BookBtn.click();
 	    Thread.sleep(3000);
-	    
-	    if (BookedOrderSuccessfullyMsg.isDisplayed())
-	    {
-			System.out.println(BookedOrderSuccessfullyMsg.getText());
-		}
 	}
-	
 	
 }

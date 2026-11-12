@@ -3,14 +3,13 @@ package com.goldbharath.objectrepository.user;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.goldbharath.genericutilities.ExcelFileUtility;
-
 public class UploadTransactionDetailsForGoldCoinsPage {
 
-	//Finding WebElements Using @FindBy Annotations
+//Finding WebElements Using @FindBy Annotations
 	
     @FindBy(xpath="//h4[.=' Upload transaction details For Gold Coins ']/following-sibling::button[@class='btn-close']")private WebElement CloseBtn;
     
@@ -18,7 +17,13 @@ public class UploadTransactionDetailsForGoldCoinsPage {
     
 //    @FindBy(xpath="//h4[.=' Upload transaction details For Gold Coins ']/../following-sibling::div//input[@type='file']")private WebElement ChooseFileBtn;
     
-    @FindBy(xpath="//h4[.=' Upload transaction details For Gold Coins ']/../following-sibling::div//input[@placeholder='Enter transaction id']")private WebElement TransactionIdEdt;
+//    @FindBys(xpath="//h4[.=' Upload transaction details For Silver Coins ']/../following-sibling::div//input[@placeholder='Enter transaction id']||//input[@placeholder='Enter transaction id']")private WebElement TransactionIdEdt;
+    
+    @FindAll({
+        @FindBy(xpath = "//h4[normalize-space()='Upload transaction details For Gold Coins']/../following-sibling::div//input[@placeholder='Enter transaction id']"),
+        @FindBy(xpath = "//input[@placeholder='Enter transaction id']")
+    })
+    private WebElement TransactionIdEdt;
     
     @FindBy(xpath="//h4[.=' Upload transaction details For Gold Coins ']/../following-sibling::div//button[.=' Upload ']")private WebElement UploadBtn;
     
@@ -40,6 +45,8 @@ public class UploadTransactionDetailsForGoldCoinsPage {
 		return CloseBtn;
 	}
 
+	
+	
 	
 	public WebElement getChooseFileBtn() {
 		return ChooseFileBtn;
@@ -104,5 +111,5 @@ public class UploadTransactionDetailsForGoldCoinsPage {
 		}
 	}
 	
-	
 }
+//h4[.=' Upload transaction details For Gold Coins ']/../following-sibling::div//input[@formcontrolname='transation_id']
