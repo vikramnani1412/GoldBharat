@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>12/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/1/11</td>
 </tr><tr>
-<td>Started on:</td><td>Thu Nov 12 18:00:49 IST 2026</td>
+<td>Started on:</td><td>Fri Nov 13 17:39:52 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>706 seconds (706489 ms)</td>
+<tr><td>Total time:</td><td>5 seconds (5406 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,8 +67,8 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-passed'>
-<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td><b>Attribute(s)</b></td>
 <td width="30%"><b>Exception</b></td>
@@ -77,63 +77,648 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.RegisteringToGoldbharathTest()'><b>RegisteringToGoldbharathTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest<br>Parameters: [9999999999, 9999999998, 9999999988, 9999999888, 9999998888, 9999988888, 9999888888, 9998888888, 9988888888, 9888888888, 9777777777, 9666666666, 9555555555, 9444444444, 9333333333, 9222222222, 9111111111, 9888889999, 9777778888, 9666669999]</td>
-<td></td>
-<td>212</td>
+<td><div><pre>org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: unable to send message to renderer
+  (Session info: chrome=157.0.8103.51)
+Build info: version: &apos;4.51.0&apos;, revision: &apos;35c5fab 35c5fab4a58fa5878edb255eb7747b04ca51a015&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.11&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b4e7d3f060528b8974f555c518c20335, findElement {using=xpath, value=//button[normalize-space()=&apos;Register&apos;]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 157.0.8103.51, chrome: {chromedriverVersion: 157.0.8103.78 (4b3d0dabb825..., userDataDir: C:\Users\INNOVA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:61861}, goog:processID: 1776, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:61861/devtoo..., se:cdpVersion: 157.0.8103.51, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10...., webauthn:extension:cmtgKey: true, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: b4e7d3f060528b8974f555c518c20335
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:143)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:253)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:217)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:175)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:689)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:173)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:441)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:435)
+	at org.openqa.selenium.support.ui.ExpectedConditions$22.apply(ExpectedConditions.java:756)
+	at org.openqa.selenium.support.ui.ExpectedConditions$22.apply(ExpectedConditions.java:749)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:210)
+	at Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.clickRegisterButton(One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.java:101)
+	at Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.RegisteringToGoldbharathTest(One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.java:146)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:697)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:1005)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1013620810", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1013620810'><pre>org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: unable to send message to renderer
+  (Session info: chrome=157.0.8103.51)
+Build info: version: &apos;4.51.0&apos;, revision: &apos;35c5fab 35c5fab4a58fa5878edb255eb7747b04ca51a015&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.11&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [b4e7d3f060528b8974f555c518c20335, findElement {using=xpath, value=//button[normalize-space()=&apos;Register&apos;]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 157.0.8103.51, chrome: {chromedriverVersion: 157.0.8103.78 (4b3d0dabb825..., userDataDir: C:\Users\INNOVA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:61861}, goog:processID: 1776, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:61861/devtoo..., se:cdpVersion: 157.0.8103.51, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10...., webauthn:extension:cmtgKey: true, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: b4e7d3f060528b8974f555c518c20335
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:143)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:253)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:217)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:175)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:689)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:173)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:441)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:435)
+	at org.openqa.selenium.support.ui.ExpectedConditions$22.apply(ExpectedConditions.java:756)
+	at org.openqa.selenium.support.ui.ExpectedConditions$22.apply(ExpectedConditions.java:749)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:210)
+	at Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.clickRegisterButton(One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.java:101)
+	at Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.RegisteringToGoldbharathTest(One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.java:146)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:697)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:1005)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>4</td>
 <td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-skipped'>
+<tr><td colspan='4' align='center'><b>SKIPPED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
 <tr>
-<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingRejectedKycTest()'><b>loginUpdatingRejectedKycTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
-<td></td>
-<td>51</td>
+<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBuyingGoldTest()'><b>distributorBuyingGoldTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
+<td><div><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBuyingGoldTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBookingGoldTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace516040753", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace516040753'><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBuyingGoldTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBookingGoldTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
 <td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
 <tr>
 <td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest()'><b>adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
-<td></td>
-<td>33</td>
-<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
-<tr>
-<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingKycTest()'><b>loginUpdatingKycTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
-<td></td>
-<td>47</td>
+<td><div><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBuyingGoldTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1365611185", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1365611185'><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBuyingGoldTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
 <td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
 <tr>
 <td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminRejectingDistributorKycTest()'><b>loginToAdminRejectingDistributorKycTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
-<td></td>
-<td>20</td>
-<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
-<tr>
-<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorReUploadingPaymentDetailsTest()'><b>distributorReUploadingPaymentDetailsTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
-<td></td>
-<td>32</td>
-<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
-<tr>
-<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorUpdatingDeliveryDetailsTest()'><b>distributorUpdatingDeliveryDetailsTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
-<td></td>
-<td>30</td>
-<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
-<tr>
-<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminApproveKycAndGivingGoldAndSilverLimitTest()'><b>loginToAdminApproveKycAndGivingGoldAndSilverLimitTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
-<td></td>
-<td>128</td>
-<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
-<tr>
-<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBookingGoldTest()'><b>distributorBookingGoldTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
-<td></td>
-<td>27</td>
+<td><div><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminRejectingDistributorKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace2123492724", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2123492724'><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminRejectingDistributorKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
 <td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
 <tr>
 <td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminAcceptingPickerDetails()'><b>adminAcceptingPickerDetails</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
-<td></td>
-<td>15</td>
+<td><div><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminAcceptingPickerDetails() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorUpdatingDeliveryDetailsTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace953191605", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace953191605'><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminAcceptingPickerDetails() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorUpdatingDeliveryDetailsTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
+<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
+<tr>
+<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingKycTest()'><b>loginUpdatingKycTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
+<td><div><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.RegisteringToGoldbharathTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1165023158", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1165023158'><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.RegisteringToGoldbharathTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
+<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
+<tr>
+<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminApproveKycAndGivingGoldAndSilverLimitTest()'><b>loginToAdminApproveKycAndGivingGoldAndSilverLimitTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
+<td><div><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminApproveKycAndGivingGoldAndSilverLimitTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingRejectedKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace831285461", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace831285461'><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminApproveKycAndGivingGoldAndSilverLimitTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingRejectedKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
+<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
+<tr>
+<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBookingGoldTest()'><b>distributorBookingGoldTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
+<td><div><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBookingGoldTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminApproveKycAndGivingGoldAndSilverLimitTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace840737335", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace840737335'><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBookingGoldTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminApproveKycAndGivingGoldAndSilverLimitTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
+<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
+<tr>
+<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorReUploadingPaymentDetailsTest()'><b>distributorReUploadingPaymentDetailsTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
+<td><div><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorReUploadingPaymentDetailsTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1131673199", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1131673199'><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorReUploadingPaymentDetailsTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
+<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
+<tr>
+<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorUpdatingDeliveryDetailsTest()'><b>distributorUpdatingDeliveryDetailsTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
+<td><div><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorUpdatingDeliveryDetailsTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace706960270", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace706960270'><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorUpdatingDeliveryDetailsTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
+<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
+<tr>
+<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingRejectedKycTest()'><b>loginUpdatingRejectedKycTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
+<td><div><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingRejectedKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminRejectingDistributorKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace132065521", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace132065521'><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginUpdatingRejectedKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.loginToAdminRejectingDistributorKycTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
 <td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
 <tr>
 <td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest()'><b>adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
-<td></td>
-<td>46</td>
-<td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
-<tr>
-<td title='Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorBuyingGoldTest()'><b>distributorBuyingGoldTest</b><br>Test class: Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest</td>
-<td></td>
-<td>55</td>
+<td><div><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorReUploadingPaymentDetailsTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1141984159", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1141984159'><pre>java.lang.Throwable: Method Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1 depends on not successfully finished methods 
+[Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest.distributorReUploadingPaymentDetailsTest() on instance Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
 <td>Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest@1fa1cab1</td></tr>
 </table><p>
 </body>
