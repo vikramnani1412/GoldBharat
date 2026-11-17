@@ -1,10 +1,14 @@
 package com.goldbharath.objectrepository.user;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SilverCoinsOrdersHistoryPage {
 
@@ -31,6 +35,9 @@ public class SilverCoinsOrdersHistoryPage {
 		@FindBy(xpath="(//td)[10]")private WebElement OrderStatusEle;
 		
 		@FindBy(xpath="((//td)[1]/following-sibling::td)[1]")private WebElement OrderIdBasedOnSerialNumEle;
+		
+		// Silver Btn
+		@FindBy(xpath="//button[@class='coin-btn silver']")private WebElement SilverBtn;
 		
 		
 		// Want to make it Dynamic From Here
@@ -95,6 +102,11 @@ public class SilverCoinsOrdersHistoryPage {
 
 		public WebElement getOrderIdEle() {
 			return OrderIdEle;
+		}
+
+
+		public WebElement getSilverBtn() {
+			return SilverBtn;
 		}
 
 
@@ -280,9 +292,26 @@ public class SilverCoinsOrdersHistoryPage {
 		public void clickOnReUploadPaymentDocumentBtnBasedOnOrderID(WebDriver driver, String OrderID) throws InterruptedException
 		{
 			Thread.sleep(2000);
-			driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/p/button[.=' Reupload Payment Document ']")).click();
+			driver.findElement(By.xpath("//tr[.//td[normalize-space()='" + OrderID + "']]//button[contains(normalize-space(.), 'Reupload Payment Document')]")).click();
 		}
 		
+		public void clickOnReUploaddPaymentDocumentBtnBasedOnOrderID(
+		        WebDriver driver, String OrderID) {
+
+		    By reuploadButton = By.xpath("//tr[.//td[normalize-space()='" + OrderID + "']]//button[contains(normalize-space(.), 'Reupload Payment Document')]");
+
+		    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+		    WebElement button = wait.until(
+		        ExpectedConditions.elementToBeClickable(reuploadButton)
+		    );
+
+		    button.click();
+
+		    System.out.println(
+		        "Reupload Payment Document button clicked for Order ID: " + OrderID
+		    );
+		}
 		
 		public void successMsgValidation(WebDriver driver, String OrderID) throws Exception
 		{
@@ -303,4 +332,9 @@ public class SilverCoinsOrdersHistoryPage {
 			driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/p[.=' Update Delivery Details ']")).click();
 		}
 	
+		public void clickOnSilverBtnWhilePaymentDeclined() throws Exception
+		{
+			Thread.sleep(2000);
+			SilverBtn.click();
+		}
 }

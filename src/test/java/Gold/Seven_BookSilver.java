@@ -1,4 +1,4 @@
-package Goldbharat;
+package Gold;
 
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

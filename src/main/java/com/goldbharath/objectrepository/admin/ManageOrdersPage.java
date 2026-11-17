@@ -368,16 +368,35 @@ public class ManageOrdersPage {
 
   	// Business Library
   	
-	public void clickOnCoinsLnk(WebDriver driver)
-  	{
-  		WebDriverUtility wUtil = new WebDriverUtility();
-  		wUtil.waitForPageLoad(driver);
-  		System.out.println("Coins Button Displayed");
-  		wUtil.waitForElementToBeClickable(driver, CoinsBtn);
-  		CoinsBtn.click();
-  		System.out.println("Coins Button Clicked");
-  		
+//	public void clickOnCoinsLnk(WebDriver driver)
+//  	{
+//  		WebDriverUtility wUtil = new WebDriverUtility();
+//  		wUtil.waitForPageLoad(driver);
+//  		System.out.println("Coins Button Displayed");
+//  		wUtil.waitForElementToBeClickable(driver, CoinsBtn);
+//  		CoinsBtn.click();
+//  		System.out.println("Coins Button Clicked");
+//  		
+//  	}
+  	
+  	
+  	public void clickOnCoinsLnk(WebDriver driver) {
+
+  	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+  	    // Wait until loading overlay disappears
+  	    wait.until(ExpectedConditions.invisibilityOfElementLocated(
+  	        By.cssSelector(".loader-backdrop")
+  	    ));
+
+  	    // Wait until Coins button is clickable
+  	    wait.until(ExpectedConditions.elementToBeClickable(CoinsBtn));
+
+  	    CoinsBtn.click();
+
+  	    System.out.println("Coins button clicked successfully");
   	}
+  	
   	
   	//  //button[.=' Accept ']
 	
@@ -529,19 +548,13 @@ public class ManageOrdersPage {
   	    // Step 2: Refresh and wait for the page to load
   	    driver.navigate().refresh();
 
-  	    wait.until(webDriver ->
-  	        "complete".equals(
-  	            ((org.openqa.selenium.JavascriptExecutor) webDriver)
-  	                .executeScript("return document.readyState")
-  	        )
-  	    );
+  	    wait.until(webDriver ->"complete".equals(((org.openqa.selenium.JavascriptExecutor) webDriver).executeScript("return document.readyState")));
   	    
   	    Thread.sleep(2000);
   	    CoinsBtn.click();
   	    
   	    // Step 3: Locate the specific order row
-  	    By orderRow = By.xpath(
-  	        "//tr[.//td[normalize-space(.)='" + actualOrderID + "']]"
+  	    By orderRow = By.xpath("//tr[.//td[normalize-space(.)='" + actualOrderID + "']]"
   	    );
 
   	    try {
@@ -550,14 +563,11 @@ public class ManageOrdersPage {
   	        System.out.println("Current URL: " + driver.getCurrentUrl());
   	        System.out.println("Current page title: " + driver.getTitle());
 
-  	        throw new AssertionError(
-  	            "Order ID '" + actualOrderID
-  	            + "' was not found in the visible table. Check the order status, "
-  	            + "pagination, filters, and whether the correct admin page is open.",
-  	            e
-  	        );
+  	        throw new AssertionError("Order ID '" + actualOrderID + "' was not found in the visible table. Check the order status, "
+  	            + "pagination, filters, and whether the correct admin page is open.", e);
   	    }
 
+  	    Thread.sleep(2000);
   	    // Step 4: Locate Picker Details within the matching order row
   	    By pickerDetailsLocator = By.xpath(
   	        "//tr[.//td[normalize-space(.)='" + actualOrderID + "']]"
@@ -565,16 +575,14 @@ public class ManageOrdersPage {
   	        + "[contains(normalize-space(.), 'Picker Details')]"
   	    );
 
-  	    WebElement pickerDetailsBtn = wait.until(
-  	        ExpectedConditions.elementToBeClickable(pickerDetailsLocator)
-  	    );
+  	    WebElement pickerDetailsBtn = wait.until(ExpectedConditions.elementToBeClickable(pickerDetailsLocator));
 
   	    pickerDetailsBtn.click();
 
-  	    System.out.println(
-  	        "Picker Details clicked successfully for Order ID: " + actualOrderID
-  	    );
+  	    Thread.sleep(2000);
+  	    System.out.println("Picker Details clicked successfully for Order ID: " + actualOrderID);
 
+  	    Thread.sleep(2000);
   	    // Step 5: Click Send OTP
   	    wait.until(ExpectedConditions.elementToBeClickable(SendOtpBtn)).click();
 
@@ -585,10 +593,9 @@ public class ManageOrdersPage {
   	        + "//input[@autocomplete='one-time-code'])[1]"
   	    );
 
-  	    WebElement otpInput = wait.until(
-  	        ExpectedConditions.visibilityOfElementLocated(otpInputLocator)
-  	    );
+  	    WebElement otpInput = wait.until(ExpectedConditions.visibilityOfElementLocated(otpInputLocator));
 
+  	    Thread.sleep(2000);
   	    otpInput.sendKeys("123456");
 
   	    // Step 7: Verify Order Delivered for the same order
@@ -602,10 +609,8 @@ public class ManageOrdersPage {
   	        ExpectedConditions.visibilityOfElementLocated(orderDeliveredLocator)
   	    );
 
-  	    Assert.assertTrue(
-  	        orderDeliveredText.isDisplayed(),
-  	        "Order Delivered control is not displayed for Order ID: " + actualOrderID
-  	    );
+  	    Thread.sleep(2000);
+  	    Assert.assertTrue(orderDeliveredText.isDisplayed(),"Order Delivered control is not displayed for Order ID: " + actualOrderID);
 
   	    System.out.println(
   	        "Order Delivered control is displayed successfully for Order ID: "
@@ -721,6 +726,30 @@ public class ManageOrdersPage {
   			}
   		}
   		Assert.assertTrue(DispatchedConfirmMsg.isDisplayed(),
+  				"Problem occurred while dispatching the order.");
+
+  		System.out.println("Order dispatched successfully. Order ID: " + OrderID);
+  	}
+  	
+  	public void silverOrderAcceptedStatus(WebDriver driver, String OrderID) throws Exception
+  	{
+  		By OrderAcceptedMsg = By.xpath("//tr[td[normalize-space()='"+OrderID+"']]//td/p[normalize-space()='Order Accepted']");
+  		WebElement AcceptedMsg;
+  		waitForLoaderToDisappear(driver);
+  		try {
+  			AcceptedMsg = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(OrderAcceptedMsg));
+  		} catch (org.openqa.selenium.TimeoutException e) {
+  			// Table may not reflect the new status until reloaded
+  			driver.navigate().refresh();
+  			waitForDocumentReady(driver);
+  			openCoinsTab(driver);
+  			try {
+  				AcceptedMsg = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(OrderAcceptedMsg));
+  			} catch (org.openqa.selenium.TimeoutException e2) {
+  				throw new AssertionError("Dispatched status not shown for Order ID " + OrderID + ". Row: " + rowText(driver, OrderID), e2);
+  			}
+  		}
+  		Assert.assertTrue(AcceptedMsg.isDisplayed(),
   				"Problem occurred while dispatching the order.");
 
   		System.out.println("Order dispatched successfully. Order ID: " + OrderID);

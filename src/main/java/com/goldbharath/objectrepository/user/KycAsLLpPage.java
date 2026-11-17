@@ -1,9 +1,17 @@
 package com.goldbharath.objectrepository.user;
 
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.goldbharath.genericutilities.WebDriverUtility;
 
@@ -11,7 +19,11 @@ public class KycAsLLpPage {
 
 	//Finding WebElements Using @FindBy Annotations
 
-    @FindBy(xpath="//select[@class='my-select']")private WebElement TypeDrpDwn;
+    // Not an exact @class match: Angular can add ng-* classes. Also matches any <select> that has the LLP option.
+    private static final String TYPE_DRPDWN_XPATH =
+            "(//select[contains(@class,'my-select')] | //select[option[@value='LLP']])[1]";
+
+    @FindBy(xpath=TYPE_DRPDWN_XPATH)private WebElement TypeDrpDwn;
     
     @FindBy(xpath="//option[@value='LLP']")private WebElement SelectLLp;
     
@@ -144,6 +156,31 @@ public class KycAsLLpPage {
 	
 	// Business Library
 	
+	// Waits for the KYC form, then selects LLP in the business-type dropdown.
+	private void selectLLpType(WebDriver driver) throws Exception
+	{
+		try {
+			new WebDriverWait(driver, Duration.ofSeconds(20))
+					.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(TYPE_DRPDWN_XPATH)));
+		} catch (TimeoutException e) {
+			String pageText = "";
+			try { pageText = driver.findElement(By.tagName("body")).getText().replaceAll("\\s+", " "); } catch (Exception ignored) { }
+			if (pageText.length() > 300) { pageText = pageText.substring(0, 300); }
+			throw new NoSuchElementException("KYC business-type dropdown not found. URL: " + driver.getCurrentUrl()
+					+ " | Page text: " + pageText, e);
+		}
+
+		try {
+			new Select(TypeDrpDwn).selectByValue("LLP");
+		} catch (Exception e) {
+			// fallback to the original click-click approach
+			TypeDrpDwn.click();
+			Thread.sleep(2000);
+			SelectLLp.click();
+		}
+		Thread.sleep(2000);
+	}
+	
 	public void LLpKyc(WebDriver driver, String DirectorName, String MobileNo, String AadharNo, String PanNo, String GstNo, String CIN, String BankName, String AccountNo, String IfscCode, String AcHolderName) throws Exception
 	{
 		WebDriverUtility wUtil = new WebDriverUtility();
@@ -153,9 +190,7 @@ public class KycAsLLpPage {
 		
 		
 		Thread.sleep(2000);
-		TypeDrpDwn.click();
-		Thread.sleep(2000);
-		SelectLLp.click();
+		selectLLpType(driver);
 		Thread.sleep(2000);
 		DirectorNameEdt.sendKeys(DirectorName);
 		Thread.sleep(2000);
@@ -207,9 +242,7 @@ public class KycAsLLpPage {
 		Thread.sleep(2000);
 		ClickHereLnk.click();
 		Thread.sleep(2000);
-		TypeDrpDwn.click();
-		Thread.sleep(2000);
-		SelectLLp.click();
+		selectLLpType(driver);
 		Thread.sleep(2000);
 		DirectorNameEdt.sendKeys(DirectorName);
 		Thread.sleep(2000);

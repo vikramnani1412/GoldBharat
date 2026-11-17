@@ -1,4 +1,4 @@
-package Goldbharat;
+package Gold;
 
 import java.time.Duration;
 import java.util.ArrayList;

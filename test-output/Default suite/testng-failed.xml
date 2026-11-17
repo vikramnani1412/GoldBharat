@@ -3,23 +3,23 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest">
+      <class name="Silver.Four_RegisterAsLtdBookingBuyingSilverCoinsFullWorkFlowTest">
         <methods>
-          <include name="loginToAdminApproveKycAndGivingGoldAndSilverLimitTest"/>
-          <include name="distributorBookingGoldTest"/>
-          <include name="adminAcceptingPickerDetails"/>
-          <include name="distributorBuyingGoldTest"/>
+          <include name="distributorUpdatingDeliveryDetailsTest"/>
+          <include name="distributorBuyingSilverTest"/>
+          <include name="adminCheckingPurchasedQuantitySilverAndDeclinePaymentTest"/>
           <include name="distributorReUploadingPaymentDetailsTest"/>
           <include name="loginToAdminRejectingDistributorKycTest"/>
-          <include name="RegisteringToGoldbharathTest" invocation-numbers="0"/>
-          <include name="adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest"/>
+          <include name="RegisteringToGoldbharathTest"/>
+          <include name="adminAcceptingPickerDetails"/>
           <include name="loginUpdatingRejectedKycTest"/>
-          <include name="distributorUpdatingDeliveryDetailsTest"/>
+          <include name="adminCheckingPurchasedQuantitySilverAndConfirmPaymentTest"/>
           <include name="closeBrowser"/>
-          <include name="adminCheckingPurchasedQuantityGoldAndDeclinePaymentTest"/>
+          <include name="loginToAdminApproveKycAndGivingSilverLimitTest"/>
+          <include name="distributorBookingSilverTest"/>
           <include name="loginUpdatingKycTest"/>
         </methods>
-      </class> <!-- Goldbharat.One_RegisterAsProprietorBookingBuyingGoldCoinsFullWorkFlowTest -->
+      </class> <!-- Silver.Four_RegisterAsLtdBookingBuyingSilverCoinsFullWorkFlowTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

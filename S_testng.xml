@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+
+  <listeners>
+    <listener class-name="com.goldbharath.genericutilities.RetryTransformer"/>
+  </listeners>
+
+  <test name="One Proprietor">
+    <classes>
+      <class name="Silver.One_RegisterAsProprietorBookingBuyingSilverCoinsFullWorkFlowTest"/>
+    </classes>
+  </test>
+
+  <test name="Two PvtLtd">
+    <classes>
+      <class name="Silver.Two_RegisterAsPvtLtdBookingBuyingSilverCoinsFullWorkFlowTest"/>
+    </classes>
+  </test>
+
+  <test name="Three LLP">
+    <classes>
+      <class name="Silver.Three_RegisterAsLLpBookingBuyingSilverCoinsFullWorkFlowTest"/>
+    </classes>
+  </test>
+
+  <test name="Four Ltd">
+    <classes>
+      <class name="Silver.Four_RegisterAsLtdBookingBuyingSilverCoinsFullWorkFlowTest"/>
+    </classes>
+  </test>
+
+</suite>

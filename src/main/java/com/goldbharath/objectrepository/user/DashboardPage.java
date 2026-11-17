@@ -226,10 +226,29 @@ public class DashboardPage {
 	{
 		WebDriverUtility wUtil = new WebDriverUtility();
 		
-		wUtil.scrollExactToParticularWebElement(driver, BookGoldBtn);
+		wUtil.scrollExactToParticularWebElement(driver, BuyGoldBtn);
 		Thread.sleep(2000);
 		BuyGoldBtn.click();
 	}
+	
+	public void clickOnBookSilverBtn(WebDriver driver) throws Exception
+	{
+		WebDriverUtility wUtil = new WebDriverUtility();
+		
+		wUtil.scrollExactToParticularWebElement(driver, BookSilverBtn);
+		Thread.sleep(2000);
+		BookSilverBtn.click();
+	}
+	
+	public void clickOnBuySilverBtn(WebDriver driver) throws Exception
+	{
+		WebDriverUtility wUtil = new WebDriverUtility();
+		
+		wUtil.scrollExactToParticularWebElement(driver, BuySilverBtn);
+		Thread.sleep(2000);
+		BuySilverBtn.click();
+	}
+	
 	
 	public void clickOnUserProfileImageAndLogoutLink(WebDriver driver) throws Exception
 	{

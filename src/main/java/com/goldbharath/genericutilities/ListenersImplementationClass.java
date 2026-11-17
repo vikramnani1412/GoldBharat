@@ -120,7 +120,7 @@ public class ListenersImplementationClass
                 extent.attachReporter(spark);
 
                 extent.setSystemInfo(
-                        "Framework", "Selenium + TestNG");
+                        "Framework", "Selenium + Hybrid Framework(TestNG+DDT)");
 
                 extent.setSystemInfo(
                         "Browser",

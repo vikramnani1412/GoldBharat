@@ -1,4 +1,4 @@
-package Goldbharat;
+package Gold;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import com.goldbharath.objectrepository.user.BookGoldPage;
 import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 import com.goldbharath.objectrepository.user.DashboardPage;
 import com.goldbharath.objectrepository.user.GoldCoinsOrdersHistoryPage;
-import com.goldbharath.objectrepository.user.KycAsPvtLtdPage;
+import com.goldbharath.objectrepository.user.KycAsLLpPage;
 import com.goldbharath.objectrepository.user.LoginPage;
 import com.goldbharath.objectrepository.user.RegisterPage;
 import com.goldbharath.objectrepository.user.ReviewYourGoldOrderPage;
@@ -45,7 +45,7 @@ import com.goldbharath.objectrepository.user.whatWouldYouLikeToBuyPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 @Listeners(ListenersImplementationClassWithoutBaseClass.class)
-public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
+public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
 
 	
     WebDriverUtility wUtil = new WebDriverUtility();
@@ -158,27 +158,26 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
         }
     }
 
-    // Test 2: User Login and PVT LTD KYC
+    // Test 2: User Login and LLP KYC
 
     @Test(priority = 2, dependsOnMethods = "RegisteringToGoldbharathTest", retryAnalyzer = RetryAnalyzer.class)
     public void loginUpdatingKycTest() throws Exception {
-        System.out.println("\n========== TEST 2: LOGIN AND PVT LTD KYC ==========");
+        System.out.println("\n========== TEST 2: LOGIN AND LLP KYC ==========");
 
         if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
             throw new Exception("Registered mobile number is not available.");
         }
 
-        String name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
-        String mobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
-        String aadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
-        String panNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
-        String secondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
-        String gstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
-        String cinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
-        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
-        String acNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
-        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
-        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
+        String directorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 5);
+        String directorMobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 5);
+        String directorAadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 5);
+        String companyPanNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 5);
+        String companyGstNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 5);
+        String directorCinNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 5);
+        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 40, 5);
+        String accountNumber = eUtil.readDataFromExcel(SHEET_NAME, 41, 5);
+        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 42, 5);
+        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 43, 5);
         String userUrl = pUtil.readDataFromPropertyFile("userurl");
         String OTP = pUtil.readDataFromPropertyFile("userotp");
 
@@ -195,7 +194,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
             new DashboardPage(driver).clickOnUserProfileImageAndLogoutLink(driver);
             new UserProfilePage(driver).clickOnKycLink();
 
-            new KycAsPvtLtdPage(driver).PvtLtdKyc(driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, acNumber, ifscCode, accountHolderName);
+            new KycAsLLpPage(driver).LLpKyc(driver, directorName, directorMobileNumber, directorAadharNumber, companyPanNumber, companyGstNumber, directorCinNumber, bankName, accountNumber, ifscCode, accountHolderName);
             
             System.out.println("KYC completed successfully. Mobile: " + registeredMobileNumber);
         } finally {
@@ -264,23 +263,22 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
     
     @Test(priority = 4, dependsOnMethods = "loginToAdminRejectingDistributorKycTest", retryAnalyzer = RetryAnalyzer.class)
     public void loginUpdatingRejectedKycTest() throws Exception {
-        System.out.println("\n========== TEST 4: Distributor LOGIN AND Updating Rejected PVT LTD KYC ==========");
+        System.out.println("\n========== TEST 4: Distributor LOGIN AND Updating Rejected LLP KYC ==========");
 
         if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
             throw new Exception("Registered mobile number is not available.");
         }
 
-        String name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
-        String mobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
-        String aadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
-        String panNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
-        String secondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
-        String gstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
-        String cinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
-        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
-        String acNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
-        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
-        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
+        String directorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 5);
+        String directorMobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 5);
+        String directorAadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 5);
+        String companyPanNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 5);
+        String companyGstNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 5);
+        String directorCinNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 5);
+        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 40, 5);
+        String accountNumber = eUtil.readDataFromExcel(SHEET_NAME, 41, 5);
+        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 42, 5);
+        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 43, 5);
         String userUrl = pUtil.readDataFromPropertyFile("userurl");
         String OTP = pUtil.readDataFromPropertyFile("userotp");
 
@@ -297,7 +295,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
             new DashboardPage(driver).clickOnUserProfileImageAndLogoutLink(driver);
             new UserProfilePage(driver).clickOnKycLink();
 
-            new KycAsPvtLtdPage(driver).PvtLtdKycAfterRejected(driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, acNumber, ifscCode, accountHolderName);
+            new KycAsLLpPage(driver).LLpKycAfterRejected(driver, directorName, directorMobileNumber, directorAadharNumber, companyPanNumber, companyGstNumber, directorCinNumber, bankName, accountNumber, ifscCode, accountHolderName);
 
             System.out.println("KYC completed successfully. Mobile: " + registeredMobileNumber);
         } finally {
@@ -355,7 +353,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
                     driver, registeredMobileNumber);
 
             new BusinessInformationPage(driver)
-                    .editingAndGivingSilverAndGoldLimitForLtd(silverLimit, goldLimit);
+                    .editingAndGivingSilverAndGoldLimitForLLP(silverLimit, goldLimit);
 
             System.out.println("Admin flow completed successfully.");
             System.out.println("Mobile: " + registeredMobileNumber);
@@ -805,12 +803,6 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 
 
 
-
-
-
-
-
-
 //package Goldbharat;
 //
 //import java.time.Duration;
@@ -846,7 +838,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 //import com.goldbharath.objectrepository.user.DashboardPage;
 //import com.goldbharath.objectrepository.user.GoldCoinsOrdersHistoryPage;
-//import com.goldbharath.objectrepository.user.KycAsPvtLtdPage;
+//import com.goldbharath.objectrepository.user.KycAsLLpPage;
 //import com.goldbharath.objectrepository.user.LoginPage;
 //import com.goldbharath.objectrepository.user.RegisterPage;
 //import com.goldbharath.objectrepository.user.ReviewYourGoldOrderPage;
@@ -858,7 +850,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //import io.github.bonigarcia.wdm.WebDriverManager;
 //
 //@Listeners(ListenersImplementationClassWithoutBaseClass.class)
-//public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
+//public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
 //
 //	
 //    WebDriverUtility wUtil = new WebDriverUtility();
@@ -971,27 +963,26 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //        }
 //    }
 //
-//    // Test 2: User Login and PVT LTD KYC
+//    // Test 2: User Login and LLP KYC
 //
 //    @Test(priority = 2, dependsOnMethods = "RegisteringToGoldbharathTest", retryAnalyzer = RetryAnalyzer.class)
 //    public void loginUpdatingKycTest() throws Exception {
-//        System.out.println("\n========== TEST 2: LOGIN AND PVT LTD KYC ==========");
+//        System.out.println("\n========== TEST 2: LOGIN AND LLP KYC ==========");
 //
 //        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
 //            throw new Exception("Registered mobile number is not available.");
 //        }
 //
-//        String name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
-//        String mobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
-//        String aadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
-//        String panNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
-//        String secondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
-//        String gstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
-//        String cinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
-//        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
-//        String acNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
-//        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
-//        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
+//        String directorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 5);
+//        String directorMobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 5);
+//        String directorAadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 5);
+//        String companyPanNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 5);
+//        String companyGstNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 5);
+//        String directorCinNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 5);
+//        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 40, 5);
+//        String accountNumber = eUtil.readDataFromExcel(SHEET_NAME, 41, 5);
+//        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 42, 5);
+//        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 43, 5);
 //        String userUrl = pUtil.readDataFromPropertyFile("userurl");
 //        String OTP = pUtil.readDataFromPropertyFile("userotp");
 //
@@ -1008,7 +999,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //            new DashboardPage(driver).clickOnUserProfileImageAndLogoutLink(driver);
 //            new UserProfilePage(driver).clickOnKycLink();
 //
-//            new KycAsPvtLtdPage(driver).PvtLtdKyc(driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, acNumber, ifscCode, accountHolderName);
+//            new KycAsLLpPage(driver).LLpKyc(driver, directorName, directorMobileNumber, directorAadharNumber, companyPanNumber, companyGstNumber, directorCinNumber, bankName, accountNumber, ifscCode, accountHolderName);
 //            
 //            System.out.println("KYC completed successfully. Mobile: " + registeredMobileNumber);
 //        } finally {
@@ -1077,23 +1068,22 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //    
 //    @Test(priority = 4, dependsOnMethods = "loginToAdminRejectingDistributorKycTest", retryAnalyzer = RetryAnalyzer.class)
 //    public void loginUpdatingRejectedKycTest() throws Exception {
-//        System.out.println("\n========== TEST 4: Distributor LOGIN AND Updating Rejected PVT LTD KYC ==========");
+//        System.out.println("\n========== TEST 4: Distributor LOGIN AND Updating Rejected LLP KYC ==========");
 //
 //        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
 //            throw new Exception("Registered mobile number is not available.");
 //        }
 //
-//        String name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
-//        String mobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
-//        String aadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
-//        String panNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
-//        String secondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
-//        String gstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
-//        String cinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
-//        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
-//        String acNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
-//        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
-//        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
+//        String directorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 5);
+//        String directorMobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 5);
+//        String directorAadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 5);
+//        String companyPanNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 5);
+//        String companyGstNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 5);
+//        String directorCinNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 5);
+//        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 40, 5);
+//        String accountNumber = eUtil.readDataFromExcel(SHEET_NAME, 41, 5);
+//        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 42, 5);
+//        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 43, 5);
 //        String userUrl = pUtil.readDataFromPropertyFile("userurl");
 //        String OTP = pUtil.readDataFromPropertyFile("userotp");
 //
@@ -1110,7 +1100,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //            new DashboardPage(driver).clickOnUserProfileImageAndLogoutLink(driver);
 //            new UserProfilePage(driver).clickOnKycLink();
 //
-//            new KycAsPvtLtdPage(driver).PvtLtdKycAfterRejected(driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, acNumber, ifscCode, accountHolderName);
+//            new KycAsLLpPage(driver).LLpKycAfterRejected(driver, directorName, directorMobileNumber, directorAadharNumber, companyPanNumber, companyGstNumber, directorCinNumber, bankName, accountNumber, ifscCode, accountHolderName);
 //
 //            System.out.println("KYC completed successfully. Mobile: " + registeredMobileNumber);
 //        } finally {
@@ -1168,7 +1158,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //                    driver, registeredMobileNumber);
 //
 //            new BusinessInformationPage(driver)
-//                    .editingAndGivingSilverAndGoldLimitForLtd(silverLimit, goldLimit);
+//                    .editingAndGivingSilverAndGoldLimitForLLP(silverLimit, goldLimit);
 //
 //            System.out.println("Admin flow completed successfully.");
 //            System.out.println("Mobile: " + registeredMobileNumber);
@@ -1618,12 +1608,6 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //
 //
 //
-//
-//
-//
-//
-//
-//
 ////package Goldbharat;
 ////
 ////import java.time.Duration;
@@ -1660,7 +1644,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 ////import com.goldbharath.objectrepository.user.DashboardPage;
 ////import com.goldbharath.objectrepository.user.GoldCoinsOrdersHistoryPage;
-////import com.goldbharath.objectrepository.user.KycAsPvtLtdPage;
+////import com.goldbharath.objectrepository.user.KycAsLLpPage;
 ////import com.goldbharath.objectrepository.user.LoginPage;
 ////import com.goldbharath.objectrepository.user.RegisterPage;
 ////import com.goldbharath.objectrepository.user.ReviewYourGoldOrderPage;
@@ -1673,7 +1657,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////import io.github.bonigarcia.wdm.WebDriverManager;
 ////
 ////@Listeners(ListenersImplementationClassWithoutBaseClass.class)
-////public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
+////public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
 ////
 ////    WebDriverUtility wUtil = new WebDriverUtility();
 ////    PropertyFileUtility pUtil = new PropertyFileUtility();
@@ -1689,7 +1673,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////    // Browser Utilities
 ////
 ////    private WebDriver createChromeDriver() {
-////   	
+////
 ////    	WebDriverManager.chromedriver().setup();
 ////
 ////        ChromeOptions options = new ChromeOptions();
@@ -1712,6 +1696,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 ////
 ////        return webDriver;
+////    	
 ////    	
 ////    	
 ////    }
@@ -1749,7 +1734,8 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////
 ////        return new Object[][]{{mobileNumbers}};
 ////    }
-////    
+////
+////
 ////  //Test 1: User Registration
 ////
 ////    @Test(priority = 1, dataProvider = "mobileNumbers")
@@ -1784,27 +1770,26 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////        }
 ////    }
 ////
-////    // Test 2: User Login and Pvt Ltd KYC
+////    // Test 2: User Login and LLP KYC
 ////
 ////    @Test(priority = 2, dependsOnMethods = "RegisteringToGoldbharathTest", retryAnalyzer = RetryAnalyzer.class)
 ////    public void loginUpdatingKycTest() throws Exception {
-////        System.out.println("\n========== TEST 2: LOGIN AND PVT LTD KYC ==========");
+////        System.out.println("\n========== TEST 2: LOGIN AND LLP KYC ==========");
 ////
 ////        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
 ////            throw new Exception("Registered mobile number is not available.");
 ////        }
 ////
-////        String name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
-////        String mobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
-////        String aadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
-////        String panNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
-////        String secondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
-////        String gstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
-////        String cinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
-////        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
-////        String acNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
-////        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
-////        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
+////        String directorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 5);
+////        String directorMobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 5);
+////        String directorAadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 5);
+////        String companyPanNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 5);
+////        String companyGstNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 5);
+////        String directorCinNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 5);
+////        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 40, 5);
+////        String accountNumber = eUtil.readDataFromExcel(SHEET_NAME, 41, 5);
+////        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 42, 5);
+////        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 43, 5);
 ////        String userUrl = pUtil.readDataFromPropertyFile("userurl");
 ////        String OTP = pUtil.readDataFromPropertyFile("userotp");
 ////
@@ -1821,10 +1806,9 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////            new DashboardPage(driver).clickOnUserProfileImageAndLogoutLink(driver);
 ////            new UserProfilePage(driver).clickOnKycLink();
 ////
-////            new KycAsPvtLtdPage(driver).PvtLtdKyc(
-////                    driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, acNumber, ifscCode, accountHolderName);
-////
-////            System.out.println("Pvt Ltd KYC completed successfully. Mobile: " + registeredMobileNumber);
+////            new KycAsLLpPage(driver).LLpKyc(driver, directorName, directorMobileNumber, directorAadharNumber, companyPanNumber, companyGstNumber, directorCinNumber, bankName, accountNumber, ifscCode, accountHolderName);
+////            
+////            System.out.println("LLP KYC completed successfully. Mobile: " + registeredMobileNumber);
 ////        } finally {
 ////            if (driver != null) driver.quit();
 ////        }
@@ -1832,7 +1816,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////
 ////    // Test 3: Admin Rejecting Distributor KYC
 ////
-////    @Test(priority = 3, dependsOnMethods = "loginUpdatingKycTest", retryAnalyzer = RetryAnalyzer.class)
+////    @Test(priority = 3, dependsOnMethods = "loginUpdatingKycTest")
 ////    public void loginToAdminRejectingDistributorKycTest() throws Exception {
 ////        System.out.println("\n========== TEST 3: ADMIN Rejecting DISTRIBUTOR Kyc FLOW ==========");
 ////
@@ -1893,23 +1877,22 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////
 ////    @Test(priority = 4, dependsOnMethods = "loginToAdminRejectingDistributorKycTest", retryAnalyzer = RetryAnalyzer.class)
 ////    public void loginUpdatingRejectedKycTest() throws Exception {
-////        System.out.println("\n========== TEST 4: Distributor LOGIN AND Updating Rejected PVT LTD KYC ==========");
+////        System.out.println("\n========== TEST 4: Distributor LOGIN AND Updating Rejected LLP KYC ==========");
 ////
 ////        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
 ////            throw new Exception("Registered mobile number is not available.");
 ////        }
 ////
-////        String name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
-////        String mobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
-////        String aadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
-////        String panNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
-////        String secondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
-////        String gstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
-////        String cinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
-////        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
-////        String acNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
-////        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
-////        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
+////        String directorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 5);
+////        String directorMobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 5);
+////        String directorAadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 5);
+////        String companyPanNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 5);
+////        String companyGstNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 5);
+////        String directorCinNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 5);
+////        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 40, 5);
+////        String accountNumber = eUtil.readDataFromExcel(SHEET_NAME, 41, 5);
+////        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 42, 5);
+////        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 43, 5);
 ////        String userUrl = pUtil.readDataFromPropertyFile("userurl");
 ////        String OTP = pUtil.readDataFromPropertyFile("userotp");
 ////
@@ -1926,10 +1909,9 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////            new DashboardPage(driver).clickOnUserProfileImageAndLogoutLink(driver);
 ////            new UserProfilePage(driver).clickOnKycLink();
 ////
+////            new KycAsLLpPage(driver).LLpKycAfterRejected(driver, directorName, directorMobileNumber, directorAadharNumber, companyPanNumber, companyGstNumber, directorCinNumber, bankName, accountNumber, ifscCode, accountHolderName);
 ////            
-////            new KycAsPvtLtdPage(driver).PvtLtdKycAfterRejected(driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, acNumber, ifscCode, accountHolderName);
-////            
-////            System.out.println("Pvt Ltd KYC re-submitted successfully after rejection. Mobile: " + registeredMobileNumber);
+////            System.out.println("LLP KYC re-submitted successfully after rejection. Mobile: " + registeredMobileNumber);
 ////        } finally {
 ////            if (driver != null) driver.quit();
 ////        }
@@ -1985,7 +1967,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////                    driver, registeredMobileNumber);
 ////
 ////            new BusinessInformationPage(driver)
-////                    .editingAndGivingSilverAndGoldLimitForLtd(silverLimit, goldLimit);
+////                    .editingAndGivingSilverAndGoldLimitForLLP(silverLimit, goldLimit);
 ////
 ////            System.out.println("Admin flow completed successfully.");
 ////            System.out.println("Mobile: " + registeredMobileNumber);
@@ -2408,7 +2390,10 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////        }
 ////        DriverHolder.clear();
 ////    }
+////    
+////    
 ////}
+////
 ////
 ////
 ////
@@ -2460,7 +2445,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 //////import com.goldbharath.objectrepository.user.DashboardPage;
 //////import com.goldbharath.objectrepository.user.GoldCoinsOrdersHistoryPage;
-//////import com.goldbharath.objectrepository.user.KycAsPvtLtdPage;
+//////import com.goldbharath.objectrepository.user.KycAsLLpPage;
 //////import com.goldbharath.objectrepository.user.LoginPage;
 //////import com.goldbharath.objectrepository.user.RegisterPage;
 //////import com.goldbharath.objectrepository.user.ReviewYourGoldOrderPage;
@@ -2473,7 +2458,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////import io.github.bonigarcia.wdm.WebDriverManager;
 //////
 //////@Listeners(com.goldbharath.genericutilities.ListenersImplementationClass.class)
-//////public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
+//////public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
 //////
 //////    WebDriverUtility wUtil = new WebDriverUtility();
 //////    PropertyFileUtility pUtil = new PropertyFileUtility();
@@ -2535,7 +2520,8 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////
 //////        return new Object[][]{{mobileNumbers}};
 //////    }
-//////    
+//////
+//////
 //////  //Test 1: User Registration
 //////
 //////    @Test(priority = 1, dataProvider = "mobileNumbers")
@@ -2570,27 +2556,26 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////        }
 //////    }
 //////
-//////    // Test 2: User Login and Pvt Ltd KYC
+//////    // Test 2: User Login and LLP KYC
 //////
 //////    @Test(priority = 2, dependsOnMethods = "RegisteringToGoldbharathTest")
 //////    public void loginUpdatingKycTest() throws Exception {
-//////        System.out.println("\n========== TEST 2: LOGIN AND PVT LTD KYC ==========");
+//////        System.out.println("\n========== TEST 2: LOGIN AND LLP KYC ==========");
 //////
 //////        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
 //////            throw new Exception("Registered mobile number is not available.");
 //////        }
 //////
-//////        String name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
-//////        String mobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
-//////        String aadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
-//////        String panNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
-//////        String secondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
-//////        String gstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
-//////        String cinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
-//////        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
-//////        String acNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
-//////        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
-//////        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
+//////        String directorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 5);
+//////        String directorMobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 5);
+//////        String directorAadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 5);
+//////        String companyPanNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 5);
+//////        String companyGstNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 5);
+//////        String directorCinNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 5);
+//////        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 40, 5);
+//////        String accountNumber = eUtil.readDataFromExcel(SHEET_NAME, 41, 5);
+//////        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 42, 5);
+//////        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 43, 5);
 //////        String userUrl = pUtil.readDataFromPropertyFile("userurl");
 //////        String OTP = pUtil.readDataFromPropertyFile("userotp");
 //////
@@ -2607,10 +2592,10 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////            new DashboardPage(driver).clickOnUserProfileImageAndLogoutLink(driver);
 //////            new UserProfilePage(driver).clickOnKycLink();
 //////
-//////            new KycAsPvtLtdPage(driver).PvtLtdKyc(
-//////                    driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, acNumber, ifscCode, accountHolderName);
+//////            new KycAsLLpPage(driver).LLpKyc(
+//////                    driver, directorName, directorMobileNumber, directorAadharNumber, companyPanNumber, companyGstNumber, directorCinNumber, bankName, accountNumber, ifscCode, accountHolderName);
 //////
-//////            System.out.println("Pvt Ltd KYC completed successfully. Mobile: " + registeredMobileNumber);
+//////            System.out.println("LLP KYC completed successfully. Mobile: " + registeredMobileNumber);
 //////        } finally {
 //////            if (driver != null) driver.quit();
 //////        }
@@ -2679,23 +2664,22 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////
 //////    @Test(priority = 4, dependsOnMethods = "loginToAdminRejectingDistributorKycTest")
 //////    public void loginUpdatingRejectedKycTest() throws Exception {
-//////        System.out.println("\n========== TEST 4: Distributor LOGIN AND Updating Rejected PVT LTD KYC ==========");
+//////        System.out.println("\n========== TEST 4: Distributor LOGIN AND Updating Rejected LLP KYC ==========");
 //////
 //////        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
 //////            throw new Exception("Registered mobile number is not available.");
 //////        }
 //////
-//////        String name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
-//////        String mobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
-//////        String aadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
-//////        String panNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
-//////        String secondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
-//////        String gstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
-//////        String cinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
-//////        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
-//////        String acNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
-//////        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
-//////        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
+//////        String directorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 5);
+//////        String directorMobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 5);
+//////        String directorAadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 5);
+//////        String companyPanNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 5);
+//////        String companyGstNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 5);
+//////        String directorCinNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 5);
+//////        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 40, 5);
+//////        String accountNumber = eUtil.readDataFromExcel(SHEET_NAME, 41, 5);
+//////        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 42, 5);
+//////        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 43, 5);
 //////        String userUrl = pUtil.readDataFromPropertyFile("userurl");
 //////        String OTP = pUtil.readDataFromPropertyFile("userotp");
 //////
@@ -2712,13 +2696,12 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////            new DashboardPage(driver).clickOnUserProfileImageAndLogoutLink(driver);
 //////            new UserProfilePage(driver).clickOnKycLink();
 //////
+//////            new KycAsLLpPage(driver).LLpKycAfterRejected(driver, directorName, directorMobileNumber, directorAadharNumber, companyPanNumber, companyGstNumber, directorCinNumber, bankName, accountNumber, ifscCode, accountHolderName);
 //////            
-//////            new KycAsPvtLtdPage(driver).PvtLtdKycAfterRejected(driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, accountHolderName, ifscCode, accountHolderName);
-//////            
-////////            new KycAsPvtLtdPage(driver).PvtLtdKycAfterRejecting(
-////////                    driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, acNumber, ifscCode, accountHolderName);
+////////            new KycAsLLpPage(driver).LLpKycAfterRejecting(
+////////                    driver, directorName, directorMobileNumber, directorAadharNumber, companyPanNumber, companyGstNumber, directorCinNumber, bankName, accountNumber, ifscCode, accountHolderName);
 //////
-//////            System.out.println("Pvt Ltd KYC re-submitted successfully after rejection. Mobile: " + registeredMobileNumber);
+//////            System.out.println("LLP KYC re-submitted successfully after rejection. Mobile: " + registeredMobileNumber);
 //////        } finally {
 //////            if (driver != null) driver.quit();
 //////        }
@@ -2774,7 +2757,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////                    driver, registeredMobileNumber);
 //////
 //////            new BusinessInformationPage(driver)
-//////                    .editingAndGivingSilverAndGoldLimitForLtd(silverLimit, goldLimit);
+//////                    .editingAndGivingSilverAndGoldLimitForLLP(silverLimit, goldLimit);
 //////
 //////            System.out.println("Admin flow completed successfully.");
 //////            System.out.println("Mobile: " + registeredMobileNumber);
@@ -3183,14 +3166,9 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////    }
 //////    
 //////    
+//////    
+//////    
 //////}
-//////
-//////
-//////
-//////
-//////
-//////
-//////
 //////
 //////
 //////
@@ -3234,7 +3212,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////////import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 ////////import com.goldbharath.objectrepository.user.DashboardPage;
 ////////import com.goldbharath.objectrepository.user.GoldCoinsOrdersHistoryPage;
-////////import com.goldbharath.objectrepository.user.KycAsPvtLtdPage;
+////////import com.goldbharath.objectrepository.user.KycAsLLpPage;
 ////////import com.goldbharath.objectrepository.user.LoginPage;
 ////////import com.goldbharath.objectrepository.user.RegisterPage;
 ////////import com.goldbharath.objectrepository.user.ReviewYourGoldOrderPage;
@@ -3247,7 +3225,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////////import io.github.bonigarcia.wdm.WebDriverManager;
 ////////
 ////////@Listeners(com.goldbharath.genericutilities.ListenersImplementationClass.class)
-////////public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
+////////public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
 ////////
 ////////    WebDriverUtility wUtil = new WebDriverUtility();
 ////////    PropertyFileUtility pUtil = new PropertyFileUtility();
@@ -3309,7 +3287,8 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////////
 ////////        return new Object[][]{{mobileNumbers}};
 ////////    }
-////////    
+////////
+////////
 ////////  //Test 1: User Registration
 ////////
 ////////    @Test(priority = 1, dataProvider = "mobileNumbers")
@@ -3344,27 +3323,26 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////////        }
 ////////    }
 ////////
-////////    // Test 2: User Login and Pvt Ltd KYC
+////////    // Test 2: User Login and LLP KYC
 ////////
 ////////    @Test(priority = 2, dependsOnMethods = "RegisteringToGoldbharathTest")
 ////////    public void loginUpdatingKYC() throws Exception {
-////////        System.out.println("\n========== TEST 2: LOGIN AND PVT LTD KYC ==========");
+////////        System.out.println("\n========== TEST 2: LOGIN AND LLP KYC ==========");
 ////////
 ////////        if (registeredMobileNumber == null || registeredMobileNumber.trim().isEmpty()) {
 ////////            throw new Exception("Registered mobile number is not available.");
 ////////        }
 ////////
-////////        String name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
-////////        String mobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
-////////        String aadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
-////////        String panNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
-////////        String secondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
-////////        String gstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
-////////        String cinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
-////////        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
-////////        String acNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
-////////        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
-////////        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
+////////        String directorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 5);
+////////        String directorMobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 5);
+////////        String directorAadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 5);
+////////        String companyPanNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 5);
+////////        String companyGstNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 5);
+////////        String directorCinNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 5);
+////////        String bankName = eUtil.readDataFromExcel(SHEET_NAME, 40, 5);
+////////        String accountNumber = eUtil.readDataFromExcel(SHEET_NAME, 41, 5);
+////////        String ifscCode = eUtil.readDataFromExcel(SHEET_NAME, 42, 5);
+////////        String accountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 43, 5);
 ////////        String userUrl = pUtil.readDataFromPropertyFile("userurl");
 ////////        String OTP = pUtil.readDataFromPropertyFile("userotp");
 ////////
@@ -3381,10 +3359,10 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////////            new DashboardPage(driver).clickOnUserProfileImageAndLogoutLink(driver);
 ////////            new UserProfilePage(driver).clickOnKycLink();
 ////////
-////////            new KycAsPvtLtdPage(driver).PvtLtdKyc(
-////////                    driver, name, mobileNumber, aadharNumber, panNumber, secondDirectorName, gstNumber, cinNumber, bankName, acNumber, ifscCode, accountHolderName);
+////////            new KycAsLLpPage(driver).LLpKyc(
+////////                    driver, directorName, directorMobileNumber, directorAadharNumber, companyPanNumber, companyGstNumber, directorCinNumber, bankName, accountNumber, ifscCode, accountHolderName);
 ////////
-////////            System.out.println("Pvt Ltd KYC completed successfully. Mobile: " + registeredMobileNumber);
+////////            System.out.println("LLP KYC completed successfully. Mobile: " + registeredMobileNumber);
 ////////        } finally {
 ////////            if (driver != null) driver.quit();
 ////////        }
@@ -3439,7 +3417,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////////                    driver, registeredMobileNumber);
 ////////
 ////////            new BusinessInformationPage(driver)
-////////                    .editingAndGivingSilverAndGoldLimitForLtd(silverLimit, goldLimit);
+////////                    .editingAndGivingSilverAndGoldLimitForLLP(silverLimit, goldLimit);
 ////////
 ////////            System.out.println("Admin flow completed successfully.");
 ////////            System.out.println("Mobile: " + registeredMobileNumber);
@@ -3848,16 +3826,9 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 ////////    }
 ////////    
 ////////    
+////////    
+////////    
 ////////}
-////////
-////////
-////////
-////////
-////////
-////////
-////////
-////////
-////////
 ////////
 ////////
 ////////
@@ -3892,7 +3863,6 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////
 //////////import org.openqa.selenium.By;
 //////////import org.openqa.selenium.WebDriver;
-//////////import org.openqa.selenium.WebElement;
 //////////import org.openqa.selenium.chrome.ChromeDriver;
 //////////import org.openqa.selenium.chrome.ChromeOptions;
 //////////import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -3904,19 +3874,17 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////
 //////////import com.goldbharath.genericutilities.ExcelFileUtility;
 //////////import com.goldbharath.genericutilities.PropertyFileUtility;
+//////////import com.goldbharath.genericutilities.RetryAnalyzer;
 //////////import com.goldbharath.genericutilities.WebDriverUtility;
 //////////import com.goldbharath.objectrepository.admin.BusinessInformationPage;
 //////////import com.goldbharath.objectrepository.admin.DistributorDetailsPage;
 //////////import com.goldbharath.objectrepository.admin.LogoutPage;
 //////////import com.goldbharath.objectrepository.admin.ManageDistributorPage;
-//////////import com.goldbharath.objectrepository.admin.ManageOrdersPage;
 //////////import com.goldbharath.objectrepository.user.BookGoldPage;
 //////////import com.goldbharath.objectrepository.user.BuildYourGoldCoinCombinationPage;
 //////////import com.goldbharath.objectrepository.user.DashboardPage;
 //////////import com.goldbharath.objectrepository.user.GoldCoinsOrdersHistoryPage;
 //////////import com.goldbharath.objectrepository.user.KycAsLLpPage;
-//////////import com.goldbharath.objectrepository.user.KycAsLtdPage;
-//////////import com.goldbharath.objectrepository.user.KycAsPvtLtdPage;
 //////////import com.goldbharath.objectrepository.user.LoginPage;
 //////////import com.goldbharath.objectrepository.user.RegisterPage;
 //////////import com.goldbharath.objectrepository.user.ReviewYourGoldOrderPage;
@@ -3929,9 +3897,9 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////import io.github.bonigarcia.wdm.WebDriverManager;
 //////////
 //////////@Listeners(com.goldbharath.genericutilities.ListenersImplementationClass.class)
-//////////public class Five_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
-//////////	
-//////////	WebDriverUtility wUtil = new WebDriverUtility();
+//////////public class Three_RegisterAsLLpBookingBuyingGoldCoinsFullWorkFlowTest {
+//////////
+//////////    WebDriverUtility wUtil = new WebDriverUtility();
 //////////    PropertyFileUtility pUtil = new PropertyFileUtility();
 //////////    ExcelFileUtility eUtil = new ExcelFileUtility();
 //////////
@@ -3997,7 +3965,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////    }
 //////////
 //////////    // TEST 1: USER REGISTRATION
-//////////    @Test(priority = 1, dataProvider = "mobileNumbers")
+//////////    @Test(priority = 1, dataProvider = "mobileNumbers", retryAnalyzer = RetryAnalyzer.class)
 //////////    public void RegisteringToGoldbharathTest(List<String> mobileNumbers) throws Exception {
 //////////        System.out.println("\n==================================================");
 //////////        System.out.println("TEST 1 : GOLDBHARATH USER REGISTRATION");
@@ -4034,8 +4002,8 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////        }
 //////////    }
 //////////
-//////////    // TEST 2: LOGIN + Pvt Ltd KYC
-//////////    @Test(priority = 2, dependsOnMethods = "RegisteringToGoldbharathTest")
+//////////    // TEST 2: LOGIN + LLP KYC
+//////////    @Test(priority = 2, dependsOnMethods = "RegisteringToGoldbharathTest", retryAnalyzer = RetryAnalyzer.class)
 //////////    public void loginUpdatingKYC() throws Exception {
 //////////        System.out.println("\n==================================================");
 //////////        System.out.println("TEST 2 : LOGIN + LLP KYC");
@@ -4047,17 +4015,16 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////
 //////////        System.out.println("LOGIN MOBILE : " + registeredMobileNumber);
 //////////
-//////////        String Name = eUtil.readDataFromExcel(SHEET_NAME, 34, 11);
-//////////        String MobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 11);
-//////////        String AadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 11);
-//////////        String PANNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 11);
-//////////        String SecondDirectorName = eUtil.readDataFromExcel(SHEET_NAME, 38, 11);
-//////////        String GstNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 11);
-//////////        String CinNumber = eUtil.readDataFromExcel(SHEET_NAME, 40, 11);
-//////////        String BankName = eUtil.readDataFromExcel(SHEET_NAME, 41, 11);
-//////////        String AcNumber = eUtil.readDataFromExcel(SHEET_NAME, 42, 11);
-//////////        String IFSCCode = eUtil.readDataFromExcel(SHEET_NAME, 43, 11);
-//////////        String AccountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 44, 11);
+//////////        String DirectorName = eUtil.readDataFromExcel(SHEET_NAME, 34, 5);
+//////////        String DirectorMobileNumber = eUtil.readDataFromExcel(SHEET_NAME, 35, 5);
+//////////        String DirectorAadharNumber = eUtil.readDataFromExcel(SHEET_NAME, 36, 5);
+//////////        String CompanyPANNumber = eUtil.readDataFromExcel(SHEET_NAME, 37, 5);
+//////////        String CompanyGSTNumber = eUtil.readDataFromExcel(SHEET_NAME, 38, 5);
+//////////        String DirectorCINNumber = eUtil.readDataFromExcel(SHEET_NAME, 39, 5);
+//////////        String BankName = eUtil.readDataFromExcel(SHEET_NAME, 40, 5);
+//////////        String ACNumber = eUtil.readDataFromExcel(SHEET_NAME, 41, 5);
+//////////        String IFSCCode = eUtil.readDataFromExcel(SHEET_NAME, 42, 5);
+//////////        String AccountHolderName = eUtil.readDataFromExcel(SHEET_NAME, 43, 5);
 //////////        String userUrl = pUtil.readDataFromPropertyFile("userurl");
 //////////
 //////////        driver = createChromeDriver();
@@ -4080,13 +4047,14 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////
 //////////            UserProfilePage userProfilePage = new UserProfilePage(driver);
 //////////            userProfilePage.clickOnKycLink();
-//////////            
-//////////            KycAsPvtLtdPage kycPage = new KycAsPvtLtdPage(driver);
-//////////            kycPage.PvtLtdKyc(driver, Name, MobileNumber, AadharNumber, PANNumber, SecondDirectorName, GstNumber, CinNumber, BankName, AcNumber, IFSCCode, AccountHolderName);
-//////////            
+//////////
+//////////            KycAsLLpPage kycPage = new KycAsLLpPage(driver);
+//////////            kycPage.LLpKyc(driver, DirectorName, DirectorMobileNumber, DirectorAadharNumber,
+//////////                    CompanyPANNumber, CompanyGSTNumber, DirectorCINNumber, BankName,
+//////////                    ACNumber, IFSCCode, AccountHolderName);
 //////////
 //////////            System.out.println("--------------------------------------------------");
-//////////            System.out.println("Ltd KYC COMPLETED SUCCESSFULLY");
+//////////            System.out.println("LLP KYC COMPLETED SUCCESSFULLY");
 //////////            System.out.println("MOBILE : " + registeredMobileNumber);
 //////////            System.out.println("--------------------------------------------------");
 //////////        } 
@@ -4097,7 +4065,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////    }
 //////////
 //////////    // TEST 3: ADMIN APPROVAL + GOLD/SILVER LIMITS
-//////////    @Test(priority = 3, dependsOnMethods = "loginUpdatingKYC")
+//////////    @Test(priority = 3, dependsOnMethods = "loginUpdatingKYC", retryAnalyzer = RetryAnalyzer.class)
 //////////    public void loginToAdminApproveKycAndGivingGoldAndSilverLimit() throws Exception {
 //////////        System.out.println("\n==================================================");
 //////////        System.out.println("TEST 3 : ADMIN DISTRIBUTOR FLOW");
@@ -4153,7 +4121,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////                    driver, registeredMobileNumber);
 //////////
 //////////            BusinessInformationPage businessInformationPage = new BusinessInformationPage(driver);
-//////////            businessInformationPage.editingAndGivingSilverAndGoldLimitForLtd(silverLimit, goldLimit);
+//////////            businessInformationPage.editingAndGivingSilverAndGoldLimitForLLP(silverLimit, goldLimit);
 //////////
 //////////            System.out.println("\n==================================================");
 //////////            System.out.println("GOLDBHARATH ADMIN DISTRIBUTOR FLOW COMPLETED");
@@ -4172,7 +4140,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////    }
 //////////
 //////////    // TEST 4: DISTRIBUTOR GOLD BOOKING
-//////////    @Test(priority = 4, dependsOnMethods = "loginToAdminApproveKycAndGivingGoldAndSilverLimit")
+//////////    @Test(priority = 4, dependsOnMethods = "loginToAdminApproveKycAndGivingGoldAndSilverLimit", retryAnalyzer = RetryAnalyzer.class)
 //////////    public void distributorBookingGoldTest() throws Exception {
 //////////        System.out.println("\n==================================================");
 //////////        System.out.println("TEST 4 : DISTRIBUTOR GOLD BOOKING");
@@ -4220,7 +4188,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////    }
 //////////
 //////////    // TEST 5: DISTRIBUTOR GOLD BUYING
-//////////    @Test(priority = 5, dependsOnMethods = "distributorBookingGoldTest")
+//////////    @Test(priority = 5, dependsOnMethods = "distributorBookingGoldTest", retryAnalyzer = RetryAnalyzer.class)
 //////////    public void distributorBuyingGoldTest() throws Exception {
 //////////        final String serialNo = "1";
 //////////        final String transactionImage = System.getProperty("user.dir")
@@ -4321,7 +4289,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////    }
 //////////
 //////////    // TEST 6: ADMIN CHECK PURCHASED GOLD + CONFIRM PAYMENT
-//////////    @Test(priority = 6, dependsOnMethods = "distributorBuyingGoldTest")
+//////////    @Test(priority = 6, dependsOnMethods = "distributorBuyingGoldTest", retryAnalyzer = RetryAnalyzer.class)
 //////////    public void adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest() throws Exception {
 //////////        System.out.println("\n==================================================");
 //////////        System.out.println("TEST 6 : ADMIN CHECK PURCHASED GOLD & CONFIRM PAYMENT");
@@ -4368,11 +4336,10 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////            Thread.sleep(2000);
 //////////                   
 //////////            moPage.allActionsInConfirmDispatchPageInLLpPage(DeliveryMsg, DaysToDeliver);
+//////////            Thread.sleep(2000);
 //////////            
-//////////            WebElement OrderStatus = driver.findElement(By.xpath("//td[.='"+OrderID+"']/following-sibling::td/button[.=' Dispatched ']"));
-//////////            
-//////////            Assert.assertTrue(OrderStatus.isDisplayed(), "Problem Occurred While Dispatching Order");
-//////////      		System.out.println("Order Dispatched Successfully");
+//////////            moPage.checkingDispatchStatus(driver, OrderID);
+//////////            Thread.sleep(2000);
 //////////            
 //////////            System.out.println("\n==================================================");
 //////////            System.out.println("ADMIN GOLD PAYMENT FLOW COMPLETED");
@@ -4386,7 +4353,7 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////        }
 //////////    }
 //////////    
-//////////    @Test(priority = 7, dependsOnMethods = "adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest")
+//////////    @Test(priority = 7, dependsOnMethods = "adminCheckingPurchasedQuantityGoldAndConfirmPaymentTest", retryAnalyzer = RetryAnalyzer.class)
 //////////    public void distributorUpdatingDeliveryDetailsTest() throws Exception {
 //////////
 //////////        System.out.println("\n==================================================");
@@ -4454,9 +4421,9 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////             if (driver != null) driver.quit();
 //////////        }
 //////////    }
-//////////	
-////////// // TEST 8: ADMIN CHECK PICKER DETAILS
-//////////    @Test(priority = 8, dependsOnMethods = "distributorUpdatingDeliveryDetailsTest")
+//////////    
+//////////    // TEST 8: ADMIN CHECK PICKER DETAILS
+//////////    @Test(priority = 8, dependsOnMethods = "distributorUpdatingDeliveryDetailsTest", retryAnalyzer = RetryAnalyzer.class)
 //////////    public void adminCheckingPickerDetailsTest() throws Exception {
 //////////
 //////////        System.out.println("\n==================================================");
@@ -4522,5 +4489,5 @@ public class Two_RegisterAsPvtLtdBookingBuyingGoldCoinsFullWorkFlowTest {
 //////////            }
 //////////        }
 //////////    }
-//////////    
+//////////     
 //////////}

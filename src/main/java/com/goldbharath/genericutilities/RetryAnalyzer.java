@@ -20,7 +20,7 @@ import org.testng.ITestResult;
 public class RetryAnalyzer implements IRetryAnalyzer {
 
 	private final AtomicInteger count = new AtomicInteger(0);
-	private static final int RETRY_COUNT = 3;
+	private static final int RETRY_COUNT = 1;
 
 	@Override
 	public boolean retry(ITestResult result) {

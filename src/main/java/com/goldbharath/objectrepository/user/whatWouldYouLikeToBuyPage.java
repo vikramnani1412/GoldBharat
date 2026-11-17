@@ -15,6 +15,12 @@ public class whatWouldYouLikeToBuyPage {
     
     @FindBy(xpath="//h6[.='Gold Bars']")private WebElement GoldBarsEle;
     
+//    @FindBy(xpath="(//h5[.='What would you like to buy?']/following-sibling::button[@aria-label='Close'])[1]")private WebElement CloseBtn;
+    
+    @FindBy(xpath="//h6[.='Silver Coins']")private WebElement SilverCoinsEle;
+    
+    @FindBy(xpath="//h6[.='Silver Bars']")private WebElement SilverBarsEle;
+    
     
 	//Rule-2:Create a constructor to initilise these elements
     
@@ -29,6 +35,16 @@ public class whatWouldYouLikeToBuyPage {
 
 	public WebElement getCloseBtn() {
 		return CloseBtn;
+	}
+
+
+	public WebElement getSilverCoinsEle() {
+		return SilverCoinsEle;
+	}
+
+
+	public WebElement getSilverBarsEle() {
+		return SilverBarsEle;
 	}
 
 
